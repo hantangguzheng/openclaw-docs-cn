@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提示词指南 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw 提示词编写完全指南，从入门到精通。掌握高质量 Prompt 的核心技巧，提升 AI 生成效果。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .guide-page{max-width:800px;margin:0 auto;padding:0 24px 80px}
+    .prompt-syntax{background:#0d1117;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin:16px 0;font-family:'SF Mono','Fira Code',monospace;font-size:13px;color:#c9d1d9;line-height:1.8;white-space:pre-wrap}
+    .prompt-syntax .tag{color:var(--primary)}
+    .prompt-syntax .val{color:#a8e6cf}
+    .prompt-syntax .cmt{color:#6b7280}
+    .tip-box{background:rgba(255,107,53,0.08);border-left:4px solid var(--primary);padding:16px 20px;margin:16px 0;border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+    .tip-box h4{color:var(--primary);margin-bottom:8px;font-size:15px}
+    .tip-box p{color:var(--text-secondary);font-size:14px;margin:0}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="pages/info.html">综合信息</a></li>
+      <li><a href="pages/prompt-tool.html">Prompt工具</a></li>
+      <li><a href="pages/showcase.html">案例展示</a></li>
+      <li><a href="pages/compare.html">对比评测</a></li>
+      <li><a href="pages/industry.html">行业应用</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="guide-page">
+  <div class="page-header" style="padding:140px 24px 40px;">
+    <h1>📝 提示词编写指南</h1>
+    <p>从入门到精通，掌握 OpenClaw 提示词的核心技巧</p>
+  </div>
+
+  <h2>什么是 Prompt？</h2>
+  <p style="color:var(--text-secondary);">Prompt（提示词）是与 AI 沟通的指令。高质量的 Prompt 可以让 AI 准确理解你的需求，生成你想要的结果。</p>
+
+  <h2>基础语法</h2>
+
+  <div class="prompt-syntax">Generate a video of:
+  [主体描述]
+  , [环境/场景]
+  , [风格]
+  , [镜头运动]
+  , [质量修饰]</div>
+
+  <div class="tip-box">
+    <h4>💡 黄金法则</h4>
+    <p>用英文写 Prompt！虽然 OpenClaw 支持中文理解，但 AI 模型在英文语境下训练更充分，英文 Prompt 效果更好。</p>
+  </div>
+
+  <h2>主体描述（Subject）</h2>
+  <p style="color:var(--text-secondary);">描述你想要的主要对象。使用具体、细节的词汇。</p>
+
+  <h3>✅ 好的示例</h3>
+  <div class="prompt-syntax">a professional basketball player performing a powerful slam dunk,
+jumping high above the rim, white jersey number 23,
+muscles tensed, intense focused expression,
+dynamic pose mid-air</div>
+
+  <h3>❌ 差的示例</h3>
+  <div class="prompt-syntax">a person playing basketball</div>
+
+  <h2>环境与场景（Environment）</h2>
+  <p style="color:var(--text-secondary);">描述主体所处的环境、光线和氛围。</p>
+
+  <div class="prompt-syntax"># 环境描述示例
+modern indoor basketball arena
+spotlight dramatic lighting from above
+crowd cheering loudly in the background
+confetti falling from the ceiling
+clean polished hardwood floor</div>
+
+  <h2>视觉风格（Style）</h2>
+
+  <table class="comparison-table">
+    <tr><th>风格</th><th>关键词</th><th>适用场景</th></tr>
+    <tr><td>电影感</td><td>cinematic, film still, anamorphic lens</td><td>故事叙述、广告</td></tr>
+    <tr><td>纪录片</td><td>documentary, handheld, natural lighting</td><td>纪实、新闻</td></tr>
+    <tr><td>动漫风</td><td>anime, Studio Ghibli, cel shading</td><td>二次元、创意</td></tr>
+    <tr><td>写实</td><td>photorealistic, hyperrealistic, 8K</td><td>产品、专业</td></tr>
+    <tr><td>赛博朋克</td><td>cyberpunk, neon, Blade Runner</td><td>科技、未来</td></tr>
+    <tr><td>复古</td><td>vintage, 35mm film, Kodak Portra</td><td>怀旧、文艺</td></tr>
+  </table>
+
+  <h2>镜头运动（Camera Movement）</h2>
+
+  <div class="prompt-syntax"># 镜头运动关键词
+dynamic camera movement, tracking shot     → 动感追踪
+slow motion, 240fps, time freeze           → 慢动作
+aerial drone shot, bird's eye view         → 航拍
+extreme close-up, macro detail             → 特写
+wide establishing shot, panoramic          → 全景
+dolly tracking shot                        → 跟拍</div>
+
+  <h2>质量修饰词（Quality Modifiers）</h2>
+  <p style="color:var(--text-secondary);">添加这些词可以提升生成质量：</p>
+
+  <div class="prompt-syntax">8K, hyperrealistic, studio lighting
+volumetric lighting, ray tracing
+RAW photo, Canon EOS R5
+Fujifilm color science
+color grading, film grain
+award winning photography</div>
+
+  <h2>完整示例</h2>
+
+  <div class="prompt-syntax">Generate a video of a professional basketball player performing
+a powerful slam dunk, leaping high above the rim, white jersey
+number 23, muscles tensed, intense focused expression, dynamic
+pose mid-air, in a modern indoor basketball arena, spotlight
+dramatic lighting from above, crowd cheering loudly in the
+background, cinematic, film still, anamorphic lens flare,
+dynamic camera movement, tracking shot following the player,
+8K, hyperrealistic, studio lighting, color grading</div>
+
+  <h2>进阶技巧</h2>
+
+  <div class="tip-box">
+    <h4>🔢 使用数字量化</h4>
+    <p>用数字描述动作速度和效果："player running at full sprint speed" 比 "player running fast" 更有效。</p>
+  </div>
+
+  <div class="tip-box">
+    <h4>🎨 善用参考</h4>
+    <p>提到你喜欢的电影或艺术家风格："in the style of Christopher Nolan's cinematography" 可以帮助 AI 理解你想要的效果。</p>
+  </div>
+
+  <div class="tip-box">
+    <h4>⏱️ 控制时长</h4>
+    <p>对于视频，指定时长有助于 AI 合理分配内容节奏："first 3 seconds: intro, next 5 seconds: action, last 2 seconds: climax"。</p>
+  </div>
+
+  <div class="tip-box">
+    <h4>🔗 组合多个元素</h4>
+    <p>不要只描述一个主体，可以加入多个元素互动："a basketball player dodging a defender while another teammate sets a screen"。</p>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:32px;">
+    <strong>🚀 快速生成：</strong>使用我们的 <a href="pages/prompt-tool.html" style="color:inherit;">Prompt 工具</a>，可视化选择各项参数，一键生成高质量 Prompt！
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="pages/info.html">综合信息</a>
+      <a href="pages/prompt-tool.html">Prompt工具</a>
+      <a href="pages/showcase.html">案例展示</a>
+      <a href="pages/compare.html">对比评测</a>
+      <a href="pages/industry.html">行业应用</a>
+      <a href="pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

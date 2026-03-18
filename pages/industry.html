@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行业应用 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw AI 在广告营销、短视频创作、教育等垂直领域的最佳实践指南。">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .industry-page{max-width:900px;margin:0 auto;padding:0 24px 80px}
+    .industry-section{margin-bottom:60px}
+    .industry-section h2{margin-top:48px;margin-bottom:16px;padding-top:16px;border-top:1px solid var(--border);font-size:28px}
+    .industry-section h2:first-child{margin-top:0;border-top:none}
+    .workflow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:24px 0}
+    .workflow-step{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all 0.2s}
+    .workflow-step:hover{border-color:var(--primary);transform:translateY(-2px)}
+    .workflow-step .step-num{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:700;font-size:14px}
+    .workflow-step h4{font-size:14px;margin-bottom:6px}
+    .workflow-step p{font-size:13px;color:var(--text-muted)}
+    .prompt-box{background:#0d1117;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin:16px 0;font-family:'SF Mono','Fira Code',monospace;font-size:13px;color:#c9d1d9;line-height:1.7;white-space:pre-wrap;position:relative}
+    .prompt-box .copy-btn{position:absolute;top:12px;right:12px;padding:4px 10px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;color:var(--text-secondary);cursor:pointer;font-size:12px;transition:all 0.2s}
+    .prompt-box .copy-btn:hover{border-color:var(--primary);color:var(--primary)}
+    .tips-list{list-style:none;padding:0;margin:16px 0}
+    .tips-list li{position:relative;padding-left:28px;margin-bottom:10px;color:var(--text-secondary);font-size:15px;line-height:1.6}
+    .tips-list li::before{content:'💡';position:absolute;left:0;top:0}
+    .case-study{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin:16px 0}
+    .case-study h4{font-size:16px;margin-bottom:8px;color:var(--primary)}
+    .case-study .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:12px}
+    .case-study .stat{text-align:center}
+    .case-study .stat .num{font-size:24px;font-weight:800;color:var(--accent-green)}
+    .case-study .stat .label{font-size:12px;color:var(--text-muted)}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../features.html">功能特性</a></li>
+      <li><a href="info.html">综合信息</a></li>
+      <li><a href="prompt-tool.html">Prompt工具</a></li>
+      <li><a href="showcase.html">案例展示</a></li>
+      <li><a href="compare.html">对比评测</a></li>
+      <li><a href="industry.html" class="active">行业应用</a></li>
+      <li><a href="../security.html">安全</a></li>
+      <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>🏢 垂直领域应用</h1>
+    <p>OpenClaw 在广告营销、短视频创作、教育等行业的最佳实践指南</p>
+  </div>
+</div>
+
+<div class="industry-page article-content">
+
+  <!-- 广告营销 -->
+  <div class="industry-section">
+    <h2>📢 广告营销</h2>
+    <p>使用 OpenClaw 批量生成广告素材，降低制作成本，提升创意效率。</p>
+
+    <div class="workflow">
+      <div class="workflow-step"><div class="step-num">1</div><h4>需求分析</h4><p>确定广告目标、产品卖点、受众画像</p></div>
+      <div class="workflow-step"><div class="step-num">2</div><h4>Prompt 生成</h4><p>使用 Prompt 工具生成广告文案和视觉脚本</p></div>
+      <div class="workflow-step"><div class="step-num">3</div><h4>视频生成</h4><p>批量生成多版本广告视频</p></div>
+      <div class="workflow-step"><div class="step-num">4</div><h4>人工筛选</h4><p>精选最优版本，微调后投放</p></div>
+    </div>
+
+    <h3>广告视频生成 Prompt 示例</h3>
+    <div class="prompt-box" id="ad-prompt">Generate a commercial advertisement for [产品名称], featuring [核心卖点], ultra-high production value, brand quality, smooth motion graphics, [目标受众], cinematic lighting, [时长] seconds<span class="copy-btn" onclick="copyText(this.parentElement)">复制</span></div>
+
+    <h3>广告文案生成 Prompt</h3>
+    <div class="prompt-box" id="ad-copy">Write compelling advertising copy for [产品名称] targeting [受众群体]. Focus on [核心卖点]. Tone: [风格：激励/温馨/高端/趣味]. Include a strong CTA. Max 100 characters per line.<span class="copy-btn" onclick="copyText(this.parentElement)">复制</span></div>
+
+    <ul class="tips-list">
+      <li><strong>多版本测试：</strong>为同一产品生成 5-10 个不同风格的版本，通过 A/B 测试找到最佳效果</li>
+      <li><strong>品牌一致性：</strong>在 Prompt 中明确品牌色彩、字体风格、logo 位置等元素</li>
+      <li><strong>平台适配：</strong>根据投放平台调整视频尺寸（抖音竖屏 9:16、YouTube 横屏 16:9）</li>
+      <li><strong>本地化：</strong>针对不同地区市场，使用对应语言和文化元素生成内容</li>
+    </ul>
+
+    <div class="case-study">
+      <h4>📊 案例：某电商月销增长 300%</h4>
+      <p style="color:var(--text-secondary);font-size:14px;">某服装电商使用 OpenClaw 批量生成产品展示视频，每周产出 50+ 条广告素材，投放抖音和小红书。</p>
+      <div class="stats">
+        <div class="stat"><div class="num">50+</div><div class="label">每周产出视频</div></div>
+        <div class="stat"><div class="num">80%</div><div class="label">成本降低</div></div>
+        <div class="stat"><div class="num">3x</div><div class="label">销量增长</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 短视频创作 -->
+  <div class="industry-section">
+    <h2>🎬 短视频创作</h2>
+    <p>创作者使用 OpenClaw 实现批量内容生产，从选题到成片全流程加速。</p>
+
+    <div class="workflow">
+      <div class="workflow-step"><div class="step-num">1</div><h4>选题策划</h4><p>AI 分析热点，生成内容选题</p></div>
+      <div class="workflow-step"><div class="step-num">2</div><h4>脚本生成</h4><p>AI 生成文案脚本和分镜</p></div>
+      <div class="workflow-step"><div class="step-num">3</div><h4>视频生成</h4><p>AI 生成视频片段和转场</p></div>
+      <div class="workflow-step"><div class="step-num">4</div><h4>自动配音</h4><p>AI 生成配音和背景音乐</p></div>
+      <div class="workflow-step"><div class="step-num">5</div><h4>字幕合成</h4><p>AI 自动识别语音生成字幕</p></div>
+    </div>
+
+    <h3>短视频脚本生成 Prompt</h3>
+    <div class="prompt-box" id="short-video">Generate a short video script for [平台: 抖音/快手/视频号] about [主题]. Duration: [时长]. Style: [风格: 搞笑/知识/情感/资讯]. Target audience: [受众]. Include hook (0-3s), core content (3-30s), and CTA (last 5s).<span class="copy-btn" onclick="copyText(this.parentElement)">复制</span></div>
+
+    <ul class="tips-list">
+      <li><strong>黄金 3 秒：</strong>使用强视觉冲击或悬念式开头，抓住观众注意力</li>
+      <li><strong>节奏把控：</strong>每 5-8 秒切换镜头或画面，避免视觉疲劳</li>
+      <li><strong>音乐卡点：</strong>选择节奏感强的 BGM，剪辑与音乐节拍同步</li>
+      <li><strong>系列化运营：</strong>建立统一的内容模板和视觉风格，培养粉丝期待</li>
+    </ul>
+  </div>
+
+  <!-- 教育行业 -->
+  <div class="industry-section">
+    <h2>📚 教育行业</h2>
+    <p>教师和教育机构使用 OpenClaw 自动化教学内容制作，提升教学质量和工作效率。</p>
+
+    <div class="workflow">
+      <div class="workflow-step"><div class="step-num">1</div><h4>课程设计</h4><p>AI 辅助设计课程大纲和教学计划</p></div>
+      <div class="workflow-step"><div class="step-num">2</div><h4>课件生成</h4><p>AI 生成演示文稿和教学视频</p></div>
+      <div class="workflow-step"><div class="step-num">3</div><h4>习题生成</h4><p>AI 自动生成练习题和测验</p></div>
+      <div class="workflow-step"><div class="step-num">4</div><h4>作业批改</h4><p>AI 辅助批改学生作业</p></div>
+    </div>
+
+    <h3>教学视频生成 Prompt</h3>
+    <div class="prompt-box" id="edu-video">Generate an educational video about [知识点] for [年级/水平] students. Duration: [时长]. Style: engaging and clear with visual examples. Include [具体要求]. Narration tone: friendly and professional.<span class="copy-btn" onclick="copyText(this.parentElement)">复制</span></div>
+
+    <h3>习题生成 Prompt</h3>
+    <div class="prompt-box" id="edu-quiz">Generate [数量] quiz questions about [知识点] for [年级/水平] students. Include: [题型: 选择题/填空题/简答题]. Difficulty: [难度]. Format: JSON with question, options (for multiple choice), answer, and explanation.<span class="copy-btn" onclick="copyText(this.parentElement)">复制</span></div>
+
+    <ul class="tips-list">
+      <li><strong>分步讲解：</strong>复杂概念拆分为多个短视频，每个 3-5 分钟，保持学生注意力</li>
+      <li><strong>可视化：</strong>使用 AI 生成图表、动画和示意图，让抽象概念具象化</li>
+      <li><strong>互动设计：</strong>在视频中嵌入思考问题，引导学生主动参与</li>
+      <li><strong>个性化：</strong>根据学生学习数据，AI 自动调整内容难度和进度</li>
+    </ul>
+
+    <div class="case-study">
+      <h4>📊 案例：某在线教育平台教师效率提升 3 倍</h4>
+      <p style="color:var(--text-secondary);font-size:14px;">某在线教育机构使用 OpenClaw 辅助教学视频制作，教师从每天制作 1 小时内容提升到 3 小时，教学质量反而更高。</p>
+      <div class="stats">
+        <div class="stat"><div class="num">3x</div><div class="label">内容产出增加</div></div>
+        <div class="stat"><div class="num">60%</div><div class="label">工作时间节省</div></div>
+        <div class="stat"><div class="num">25%</div><div class="label">学生满意度提升</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 最佳实践 -->
+  <div class="industry-section">
+    <h2>✅ 最佳实践指南</h2>
+
+    <div class="faq-item" style="margin-bottom:16px;">
+      <h4>🎯 如何写出高质量 Prompt？</h4>
+      <p>使用我们的 <a href="prompt-tool.html" style="color:var(--primary);">Prompt 工具</a>，通过可视化界面选择场景、风格和参数，自动生成最优 Prompt。参考案例库中的热门 Prompt 也是不错的选择。</p>
+    </div>
+
+    <div class="faq-item" style="margin-bottom:16px;">
+      <h4>⚡ 如何提升生成速度？</h4>
+      <p>使用本地 GPU 可大幅提升生成速度。推荐配置：NVIDIA RTX 3090 或更高，24GB+ 显存。也可以使用 MiniMax 等高速 API 服务。</p>
+    </div>
+
+    <div class="faq-item" style="margin-bottom:16px;">
+      <h4>💰 如何控制成本？</h4>
+      <p>使用开源模型（如 Llama）进行本地部署，零 API 费用。使用付费 API 时，合理设置生成参数，避免过度生成。</p>
+    </div>
+
+    <div class="faq-item" style="margin-bottom:16px;">
+      <h4>🔄 如何实现自动化工作流？</h4>
+      <p>使用 OpenClaw 的技能系统串联多个任务。例如：RSS 监控 → 内容抓取 → AI 处理 → 自动发布。查看我们的 <a href="../tutorial.html" style="color:var(--primary);">教程中心</a> 获取详细指南。</p>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:32px;">
+      <strong>想了解更多？</strong> 查看我们的 <a href="showcase.html" style="color:inherit;">案例展示社区</a>，或加入 Discord 与其他用户交流经验。
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="../index.html">首页</a>
+      <a href="info.html">综合信息</a>
+      <a href="prompt-tool.html">Prompt工具</a>
+      <a href="showcase.html">案例展示</a>
+      <a href="compare.html">对比评测</a>
+      <a href="industry.html">行业应用</a>
+      <a href="../pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function copyText(el) {
+  const text = el.textContent.replace('复制', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.querySelector('.copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '已复制!';
+    btn.style.color = 'var(--accent-green)';
+    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
+  });
+}
+</script>
+
+</body>
+</html>

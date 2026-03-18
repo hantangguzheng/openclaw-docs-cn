@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教程中心 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw 完整教程，从安装配置到高级技巧，循序渐进掌握 AI 个人助手。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .tutorial-page{max-width:900px;margin:0 auto;padding:0 24px 80px}
+    .tutorial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px;transition:all 0.2s;cursor:pointer}
+    .tutorial-card:hover{border-color:var(--primary);transform:translateX(4px)}
+    .tutorial-card .tier{display:inline-block;padding:2px 10px;border-radius:50px;font-size:11px;font-weight:700;margin-bottom:12px}
+    .tier-beginner{background:rgba(74,222,128,0.15);color:var(--accent-green)}
+    .tier-intermediate{background:rgba(251,191,36,0.15);color:var(--accent-yellow)}
+    .tier-advanced{background:rgba(239,68,68,0.15);color:#ef4444}
+    .tutorial-card h3{font-size:18px;margin-bottom:8px}
+    .tutorial-card p{color:var(--text-secondary);font-size:14px;line-height:1.6}
+    .tutorial-card .meta{display:flex;gap:16px;margin-top:12px;font-size:13px;color:var(--text-muted)}
+    .tutorial-series{margin-top:60px}
+    .series-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden}
+    .series-header{background:rgba(255,107,53,0.08);padding:24px;border-bottom:1px solid var(--border)}
+    .series-header h3{font-size:20px;margin-bottom:6px}
+    .series-header p{color:var(--text-secondary);font-size:14px}
+    .series-lessons{padding:0}
+    .series-lessons li{display:flex;align-items:center;gap:16px;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary);font-size:14px;transition:all 0.2s}
+    .series-lessons li:last-child{border-bottom:none}
+    .series-lessons li:hover{background:rgba(255,107,53,0.05);color:var(--text-primary)}
+    .series-lessons .lesson-num{width:28px;height:28px;background:var(--bg-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--text-muted);flex-shrink:0}
+    .series-lessons .lesson-title{flex:1}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="pages/info.html">综合信息</a></li>
+      <li><a href="pages/prompt-tool.html">Prompt工具</a></li>
+      <li><a href="pages/showcase.html">案例展示</a></li>
+      <li><a href="pages/compare.html">对比评测</a></li>
+      <li><a href="pages/industry.html">行业应用</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="tutorial-page">
+  <div class="page-header" style="padding:140px 24px 40px;">
+    <h1>📖 教程中心</h1>
+    <p>从零开始，循序渐进掌握 OpenClaw</p>
+  </div>
+
+  <!-- 快速入门 -->
+  <h2 style="margin-top:16px;padding-top:0;">🚀 快速入门系列</h2>
+  <div class="tutorial-card" onclick="location.href='setup.html'">
+    <span class="tier tier-beginner">入门</span>
+    <h3>第一课：5 分钟安装 OpenClaw</h3>
+    <p>一行命令完成安装，连接你的第一个消息平台，开始与 AI 对话。</p>
+    <div class="meta"><span>⏱️ 5 分钟</span><span>🖥️ 全部系统</span><span>免费</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-beginner">入门</span>
+    <h3>第二课：配置 AI 模型</h3>
+    <p>连接 Claude、GPT 或 MiniMax 等 AI 模型，设置默认模型和 API Key。</p>
+    <div class="meta"><span>⏱️ 5 分钟</span><span>⚙️ 配置</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-beginner">入门</span>
+    <h3>第三课：连接消息平台</h3>
+    <p>将 Telegram、Discord 或 WhatsApp 连接到 OpenClaw，随时随地与 AI 对话。</p>
+    <div class="meta"><span>⏱️ 10 分钟</span><span>💬 消息平台</span></div>
+  </div>
+
+  <!-- 进阶系列 -->
+  <h2 style="margin-top:48px;padding-top:16px;border-top:1px solid var(--border);">⚡ 进阶技巧系列</h2>
+  <div class="tutorial-card">
+    <span class="tier tier-intermediate">进阶</span>
+    <h3>第四课：配置长期记忆</h3>
+    <p>让 AI 记住你的偏好和习惯，实现真正的个性化助手体验。</p>
+    <div class="meta"><span>⏱️ 10 分钟</span><span>🧠 记忆系统</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-intermediate">进阶</span>
+    <h3>第五课：安装和使用技能</h3>
+    <p>从 ClawHub 安装天气、提醒、搜索等技能，快速扩展 AI 能力。</p>
+    <div class="meta"><span>⏱️ 10 分钟</span><span>🔌 技能市场</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-intermediate">进阶</span>
+    <h3>第六课：浏览器自动化</h3>
+    <p>让 AI 自动浏览网页、填写表单、提取数据，自动化各种在线任务。</p>
+    <div class="meta"><span>⏱️ 15 分钟</span><span>🌐 浏览器</span></div>
+  </div>
+
+  <!-- 专业系列 -->
+  <h2 style="margin-top:48px;padding-top:16px;border-top:1px solid var(--border);">🏆 专业开发系列</h2>
+  <div class="tutorial-card">
+    <span class="tier tier-advanced">专业</span>
+    <h3>第七课：编写自定义技能</h3>
+    <p>使用 OpenClaw 的技能系统开发自定义功能，让 AI 自动编写新技能。</p>
+    <div class="meta"><span>⏱️ 20 分钟</span><span>💻 开发</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-advanced">专业</span>
+    <h3>第八课：API 开发与集成</h3>
+    <p>通过 REST API 将 OpenClaw 能力集成到你的应用中。</p>
+    <div class="meta"><span>⏱️ 20 分钟</span><span>🔌 API</span></div>
+  </div>
+  <div class="tutorial-card">
+    <span class="tier tier-advanced">专业</span>
+    <h3>第九课：本地模型部署</h3>
+    <p>部署 Llama 等开源模型，实现完全离线的 AI 助手。</p>
+    <div class="meta"><span>⏱️ 30 分钟</span><span>🦙 本地模型</span></div>
+  </div>
+
+  <!-- 专题教程 -->
+  <h2 style="margin-top:48px;padding-top:16px;border-top:1px solid var(--border);">🎯 专题教程</h2>
+
+  <div class="series-card">
+    <div class="series-header">
+      <h3>🎬 视频生成专题</h3>
+      <p>从零掌握 OpenClaw 视频生成能力，生成专业级视频内容</p>
+    </div>
+    <ol class="series-lessons">
+      <li><div class="lesson-num">1</div><div class="lesson-title">视频生成基础：理解 Prompt 结构</div></li>
+      <li><div class="lesson-num">2</div><div class="lesson-title">体育视频生成：最佳实践与技巧</div></li>
+      <li><div class="lesson-num">3</div><div class="lesson-title">电影风格：分镜与叙事技巧</div></li>
+      <li><div class="lesson-num">4</div><div class="lesson-title">广告视频：商业级内容生产</div></li>
+      <li><div class="lesson-num">5</div><div class="lesson-title">音视频同步：配乐与音效技巧</div></li>
+    </ol>
+  </div>
+
+  <div class="series-card">
+    <div class="series-header">
+      <h3>🧠 自动化工作流专题</h3>
+      <p>使用 OpenClaw 自动化日常任务，打造个人效率引擎</p>
+    </div>
+    <ol class="series-lessons">
+      <li><div class="lesson-num">1</div><div class="lesson-title">定时提醒：设置每日提醒和日程管理</div></li>
+      <li><div class="lesson-num">2</div><div class="lesson-title">RSS 监控：自动抓取和整理资讯</div></li>
+      <li><div class="lesson-num">3</div><div class="lesson-title">邮件自动化：智能分类和自动回复</div></li>
+      <li><div class="lesson-num">4</div><div class="lesson-title">文件处理：批量整理和格式转换</div></li>
+      <li><div class="lesson-num">5</div><div class="lesson-title">工作流串联：多技能协作自动化</div></li>
+    </ol>
+  </div>
+
+  <div class="series-card">
+    <div class="series-header">
+      <h3>🔐 安全与隐私专题</h3>
+      <p>深度配置 OpenClaw 安全策略，保护你的数据和隐私</p>
+    </div>
+    <ol class="series-lessons">
+      <li><div class="lesson-num">1</div><div class="lesson-title">权限管理：精细化控制 AI 能力边界</div></li>
+      <li><div class="lesson-num">2</div><div class="lesson-title">数据隔离：多用户环境配置</div></li>
+      <li><div class="lesson-num">3</div><div class="lesson-title">日志审计：追踪 AI 操作记录</div></li>
+      <li><div class="lesson-num">4</div><div class="lesson-title">完全离线：构建零网络依赖的 AI 助手</div></li>
+    </ol>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:40px;">
+    <strong>找不到想要的教程？</strong> 查看 <a href="pages/info.html" style="color:inherit;">综合信息页面</a> 或加入 Discord 社区提问！
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="pages/info.html">综合信息</a>
+      <a href="pages/prompt-tool.html">Prompt工具</a>
+      <a href="pages/showcase.html">案例展示</a>
+      <a href="pages/compare.html">对比评测</a>
+      <a href="pages/industry.html">行业应用</a>
+      <a href="pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

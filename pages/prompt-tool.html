@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt 工具 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw 傻瓜式 Prompt 生成器，选择场景和风格，自动生成高质量英文 Prompt。">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .prompt-builder { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+    .prompt-builder .form-group { margin-bottom: 28px; }
+    .prompt-builder label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); font-size: 15px; }
+    .prompt-builder .help-text { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+    .prompt-builder select, .prompt-builder textarea, .prompt-builder input {
+      width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--text-primary); padding: 12px 16px; font-size: 15px; font-family: inherit;
+      transition: border-color 0.2s; appearance: none;
+    }
+    .prompt-builder select:focus, .prompt-builder textarea:focus, .prompt-builder input:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .prompt-builder textarea { resize: vertical; min-height: 100px; }
+    .prompt-builder .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .prompt-builder .radio-option {
+      padding: 10px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      cursor: pointer; transition: all 0.2s; font-size: 14px; color: var(--text-secondary);
+    }
+    .prompt-builder .radio-option:hover { border-color: var(--primary); color: var(--text-primary); }
+    .prompt-builder .radio-option.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .prompt-builder .output-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; margin-top: 24px; position: relative;
+    }
+    .prompt-builder .output-label { font-weight: 700; margin-bottom: 12px; font-size: 15px; }
+    .prompt-builder .output-text {
+      background: #0d1117; border-radius: var(--radius-sm); padding: 20px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px;
+      line-height: 1.7; color: #c9d1d9; white-space: pre-wrap; word-break: break-all; min-height: 120px;
+    }
+    .prompt-builder .output-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .prompt-builder .copy-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px;
+      background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .prompt-builder .copy-btn:hover { background: var(--primary-dark); }
+    .prompt-builder .copy-btn.copied { background: var(--accent-green); }
+    .prompt-builder .preview-toggle {
+      display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px;
+      background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .prompt-builder .preview-toggle:hover { border-color: var(--primary); }
+    .prompt-builder .preview-frame {
+      border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 16px;
+      background: #fff; min-height: 200px; color: #333; padding: 20px;
+    }
+    .prompt-builder .preview-loading { text-align: center; padding: 60px; color: var(--text-muted); }
+    .prompt-builder .preview-placeholder {
+      text-align: center; padding: 60px; color: var(--text-muted); font-size: 14px;
+    }
+    .prompt-builder .prompt-history { margin-top: 40px; }
+    .prompt-builder .history-item {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s;
+    }
+    .prompt-builder .history-item:hover { border-color: var(--primary); }
+    .prompt-builder .history-meta { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+    .preset-prompts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+    .preset-btn {
+      padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s;
+      text-align: left; font-size: 14px; color: var(--text-secondary);
+    }
+    .preset-btn:hover { border-color: var(--primary); color: var(--text-primary); transform: translateY(-2px); }
+    .preset-btn strong { display: block; margin-bottom: 4px; color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../features.html">功能特性</a></li>
+      <li><a href="info.html">综合信息</a></li>
+      <li><a href="prompt-tool.html" class="active">Prompt工具</a></li>
+      <li><a href="showcase.html">案例展示</a></li>
+      <li><a href="compare.html">对比评测</a></li>
+      <li><a href="industry.html">行业应用</a></li>
+      <li><a href="../security.html">安全</a></li>
+      <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>✍️ Prompt 工具</h1>
+    <p>选择场景和风格，自动生成高质量英文 Prompt，支持预览和一键复制</p>
+  </div>
+</div>
+
+<div class="prompt-builder">
+  <!-- 场景选择 -->
+  <div class="form-group">
+    <label>🎯 选择应用场景</label>
+    <select id="scenario" onchange="generatePrompt()">
+      <option value="video-sports">🎬 视频生成 - 体育运动</option>
+      <option value="video-movie">🎬 视频生成 - 电影风格</option>
+      <option value="video-ad">🎬 视频生成 - 广告创意</option>
+      <option value="video-animation">🎬 视频生成 - 动画风格</option>
+      <option value="video-lifestyle">🎬 视频生成 - 生活方式</option>
+      <option value="video-nature">🎬 视频生成 - 自然风光</option>
+      <option value="image-portrait">🖼️ 图片生成 - 人物肖像</option>
+      <option value="image-landscape">🖼️ 图片生成 - 风景建筑</option>
+      <option value="image-product">🖼️ 图片生成 - 产品展示</option>
+      <option value="image-abstract">🖼️ 图片生成 - 抽象艺术</option>
+      <option value="music-upbeat">🎵 音乐生成 - 活力节奏</option>
+      <option value="music-ambient">🎵 音乐生成 - 氛围轻音乐</option>
+    </select>
+  </div>
+
+  <!-- 风格选择 -->
+  <div class="form-group">
+    <label>🎨 选择视觉/艺术风格</label>
+    <div class="radio-group" id="style-options">
+      <div class="radio-option selected" onclick="selectStyle(this, 'cinematic')">🎥 电影感</div>
+      <div class="radio-option" onclick="selectStyle(this, 'documentary')">📽️ 纪录片风</div>
+      <div class="radio-option" onclick="selectStyle(this, 'anime')">🎌 动漫风</div>
+      <div class="radio-option" onclick="selectStyle(this, 'realistic')">📸 写实风格</div>
+      <div class="radio-option" onclick="selectStyle(this, 'vintage')">📷 复古胶片</div>
+      <div class="radio-option" onclick="selectStyle(this, 'neon')">🌃 赛博朋克</div>
+      <div class="radio-option" onclick="selectStyle(this, 'minimal')">⬜ 极简主义</div>
+      <div class="radio-option" onclick="selectStyle(this, 'impressionist')">🖌️ 印象派</div>
+    </div>
+    <p class="help-text">点击选择风格，多选无效</p>
+  </div>
+
+  <!-- 对话风格 -->
+  <div class="form-group">
+    <label>💬 对话/旁白风格</label>
+    <div class="radio-group" id="tone-options">
+      <div class="radio-option selected" onclick="selectTone(this, 'professional')">💼 专业正式</div>
+      <div class="radio-option" onclick="selectTone(this, 'casual')">😊 轻松随意</div>
+      <div class="radio-option" onclick="selectTone(this, 'dramatic')">🎭 戏剧感</div>
+      <div class="radio-option" onclick="selectTone(this, 'energetic')">⚡ 活力四射</div>
+      <div class="radio-option" onclick="selectTone(this, 'calm')">🧘 平静舒缓</div>
+    </div>
+  </div>
+
+  <!-- 人物/主体描述 -->
+  <div class="form-group">
+    <label>👤 主体描述</label>
+    <textarea id="subject" placeholder="描述你想要的主体，例如：a professional basketball player performing a slam dunk, wearing red jersey number 23" oninput="generatePrompt()"></textarea>
+    <p class="help-text">用英文描述主体外貌、动作、服装、表情等细节</p>
+  </div>
+
+  <!-- 环境/场景 -->
+  <div class="form-group">
+    <label>🌍 环境与氛围</label>
+    <textarea id="environment" placeholder="描述场景环境，例如：modern indoor basketball arena, dramatic spotlight lighting, crowd cheering in background" oninput="generatePrompt()"></textarea>
+  </div>
+
+  <!-- 相机/镜头 -->
+  <div class="form-group">
+    <label>📷 镜头运动</label>
+    <div class="radio-group" id="camera-options">
+      <div class="radio-option selected" onclick="selectCamera(this, 'dynamic')">🎥 动感运镜</div>
+      <div class="radio-option" onclick="selectCamera(this, 'slow-motion')">🐢 慢动作</div>
+      <div class="radio-option" onclick="selectCamera(this, 'aerial')">🚁 航拍视角</div>
+      <div class="radio-option" onclick="selectCamera(this, 'close-up')">🔍 特写镜头</div>
+      <div class="radio-option" onclick="selectCamera(this, 'wide')">🌄 宽幅全景</div>
+      <div class="radio-option" onclick="selectCamera(this, 'tracking')">📍 跟拍追踪</div>
+    </div>
+  </div>
+
+  <!-- 质量修饰词 -->
+  <div class="form-group">
+    <label>✨ 质量修饰词</label>
+    <div class="radio-group">
+      <div class="radio-option selected" onclick="this.classList.toggle('selected')">8K</div>
+      <div class="radio-option selected" onclick="this.classList.toggle('selected')">Hyperrealistic</div>
+      <div class="radio-option selected" onclick="this.classList.toggle('selected')">Studio lighting</div>
+      <div class="radio-option" onclick="this.classList.toggle('selected')">Volumetric lighting</div>
+      <div class="radio-option" onclick="this.classList.toggle('selected')">RAW photo</div>
+      <div class="radio-option" onclick="this.classList.toggle('selected')">Fujifilm</div>
+      <div class="radio-option" onclick="this.classList.toggle('selected')">Cinematic grade</div>
+      <div class="radio-option" onclick="this.classList.toggle('selected')">Photorealistic</div>
+    </div>
+  </div>
+
+  <!-- 生成结果 -->
+  <div class="output-box">
+    <div class="output-label">📋 生成的英文 Prompt</div>
+    <div class="output-text" id="prompt-output">请在左侧填写内容，Prompt 将自动生成...</div>
+    <div class="output-actions">
+      <button class="copy-btn" onclick="copyPrompt()">
+        <span id="copy-icon">📋</span> <span id="copy-text">复制 Prompt</span>
+      </button>
+      <button class="preview-toggle" onclick="togglePreview()">
+        👁️ 预览效果
+      </button>
+      <button class="preview-toggle" onclick="regenerate()">
+        🔄 重新生成
+      </button>
+    </div>
+
+    <!-- 预览区域 -->
+    <div id="preview-area" style="display: none; margin-top: 20px;">
+      <div class="preview-label" style="font-weight: 600; margin-bottom: 8px; font-size: 14px;">🎬 效果预览</div>
+      <div class="preview-frame" id="preview-frame">
+        <div class="preview-placeholder">
+          <p>⬆️ 点击上方"预览效果"按钮，用 AI 生成预览图</p>
+          <p style="font-size: 12px; margin-top: 8px; color: #999;">预览功能需要连接 OpenClaw API</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 历史记录 -->
+  <div class="prompt-history">
+    <h3 style="margin-bottom: 16px;">📜 最近生成的 Prompt</h3>
+    <div id="history-list">
+      <p style="color: var(--text-muted); font-size: 14px;">暂无历史记录，生成 Prompt 后会自动保存到这里。</p>
+    </div>
+  </div>
+
+  <!-- 预设 Prompt -->
+  <div style="margin-top: 40px;">
+    <h3 style="margin-bottom: 16px;">⚡ 热门预设 Prompt</h3>
+    <div class="preset-prompts">
+      <div class="preset-btn" onclick="loadPreset('sports-slam')">
+        <strong>🏀 篮球暴扣</strong>
+        体育运动类视频，球星暴扣精彩瞬间
+      </div>
+      <div class="preset-btn" onclick="loadPreset('movie-trailer')">
+        <strong>🎬 电影预告片</strong>
+        电影感叙事，戏剧性转场
+      </div>
+      <div class="preset-btn" onclick="loadPreset('ad-product')">
+        <strong>📢 产品广告</strong>
+        商业广告风格，突出产品卖点
+      </div>
+      <div class="preset-btn" onclick="loadPreset('anime-fight')">
+        <strong>⚔️ 动漫打斗</strong>
+        日系动漫风格，动作场景
+      </div>
+      <div class="preset-btn" onclick="loadPreset('nature-doc')">
+        <strong>🌿 自然纪录片</strong>
+        BBC 纪录片风格，自然风光
+      </div>
+      <div class="preset-btn" onclick="loadPreset('cyberpunk')">
+        <strong>🌃 赛博朋克</strong>
+        霓虹未来城市，赛博美学
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="../index.html">首页</a>
+      <a href="info.html">综合信息</a>
+      <a href="prompt-tool.html">Prompt工具</a>
+      <a href="showcase.html">案例展示</a>
+      <a href="compare.html">对比评测</a>
+      <a href="industry.html">行业应用</a>
+      <a href="../pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// 全局状态
+let currentStyle = 'cinematic';
+let currentTone = 'professional';
+let currentCamera = 'dynamic';
+let promptHistory = JSON.parse(localStorage.getItem('promptHistory') || '[]');
+
+function selectStyle(el, val) {
+  document.querySelectorAll('#style-options .radio-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  currentStyle = val;
+  generatePrompt();
+}
+
+function selectTone(el, val) {
+  document.querySelectorAll('#tone-options .radio-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  currentTone = val;
+  generatePrompt();
+}
+
+function selectCamera(el, val) {
+  document.querySelectorAll('#camera-options .radio-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  currentCamera = val;
+  generatePrompt();
+}
+
+function getScenarioConfig() {
+  const scenario = document.getElementById('scenario').value;
+  const configs = {
+    'video-sports': { prefix: 'Generate a video of', medium: 'video', suffix: 'shot on professional sports broadcast camera' },
+    'video-movie': { prefix: 'Cinematic video scene of', medium: 'video', suffix: 'shot with an ARRI Alexa camera, film grain, anamorphic lens flare' },
+    'video-ad': { prefix: 'Commercial advertisement for', medium: 'video', suffix: 'high production value, brand quality, smooth motion graphics' },
+    'video-animation': { prefix: 'Animated video of', medium: 'animation', suffix: 'Pixar-style 3D render, smooth animation, vivid colors' },
+    'video-lifestyle': { prefix: 'Lifestyle video of', medium: 'video', suffix: 'natural lighting, shallow depth of field, organic movement' },
+    'video-nature': { prefix: 'Nature documentary footage of', medium: 'video', suffix: 'shot on RED camera, BBC natural history quality, macro lens' },
+    'image-portrait': { prefix: '', medium: 'portrait photo', suffix: 'shot with Canon EOS R5, 85mm lens, studio lighting' },
+    'image-landscape': { prefix: '', medium: 'landscape photograph', suffix: 'shot during golden hour, wide-angle lens, Fujifilm colors' },
+    'image-product': { prefix: '', medium: 'product photography of', suffix: 'on white background, studio lighting, commercial photography quality' },
+    'image-abstract': { prefix: '', medium: 'abstract digital art of', suffix: 'ultra-detailed, 8K resolution, vibrant colors, artistic composition' },
+    'music-upbeat': { prefix: 'Generate upbeat energetic music featuring', medium: '', suffix: 'tempo 120-140 BPM, major key, driving percussion' },
+    'music-ambient': { prefix: 'Generate ambient calm music featuring', medium: '', suffix: 'tempo 60-80 BPM, minor key, soft pads, minimal percussion' },
+  };
+  return configs[scenario] || configs['video-sports'];
+}
+
+function getStyleDesc() {
+  const map = {
+    'cinematic': 'cinematic, film still, dramatic lighting, shallow depth of field, color grading',
+    'documentary': 'documentary style, handheld camera, natural lighting, authentic, raw footage',
+    'anime': 'anime style, Studio Ghibli inspired, hand-drawn, cel shading, Japanese animation aesthetic',
+    'realistic': 'hyperrealistic, photorealistic, ultra detailed, 8K, RAW photo',
+    'vintage': 'vintage film, 35mm, grain, warm tones, Kodak Portra, nostalgic atmosphere',
+    'neon': 'cyberpunk aesthetic, neon lighting, rain-slicked streets, futuristic, Blade Runner inspired',
+    'minimal': 'minimalist, clean composition, negative space, modern, Scandinavian design',
+    'impressionist': 'impressionist painting, soft brushstrokes, pastel palette, Monet-inspired, artistic',
+  };
+  return map[currentStyle] || map['cinematic'];
+}
+
+function getToneDesc() {
+  const map = {
+    'professional': 'narration voice: deep, authoritative, corporate',
+    'casual': 'narration voice: friendly, conversational, approachable',
+    'dramatic': 'narration voice: dramatic, intense, epic',
+    'energetic': 'narration voice: energetic, upbeat, motivational',
+    'calm': 'narration voice: calm, soothing, meditative',
+  };
+  return map[currentTone] || map['professional'];
+}
+
+function getCameraDesc() {
+  const map = {
+    'dynamic': 'dynamic camera movement, tracking shot, smooth motion',
+    'slow-motion': 'slow motion, 240fps, dramatic effect, time freeze',
+    'aerial': 'aerial drone shot, bird\'s eye view, sweeping movement',
+    'close-up': 'extreme close-up, macro detail, intimate framing',
+    'wide': 'wide establishing shot, epic scale, panoramic view',
+    'tracking': 'tracking shot following the subject, dolly movement',
+  };
+  return map[currentCamera] || map['dynamic'];
+}
+
+function getQualityModifiers() {
+  const mods = [];
+  document.querySelectorAll('#camera-options').forEach(g => {});
+  // 从质量修饰词行收集选中的
+  const qualRow = document.querySelectorAll('.form-group')[5]; // 第6个form-group
+  if (qualRow) {
+    qualRow.querySelectorAll('.radio-option.selected').forEach(o => {
+      mods.push(o.textContent.trim());
+    });
+  }
+  return mods.length ? ', ' + mods.join(', ') : ', 8K, hyperrealistic, studio lighting';
+}
+
+function generatePrompt() {
+  const config = getScenarioConfig();
+  const subject = document.getElementById('subject').value.trim();
+  const env = document.getElementById('environment').value.trim();
+  const style = getStyleDesc();
+  const tone = getToneDesc();
+  const camera = getCameraDesc();
+  const quality = getQualityModifiers();
+
+  if (!subject) {
+    document.getElementById('prompt-output').textContent = '请在左侧填写主体描述，Prompt 将自动生成...';
+    return;
+  }
+
+  let prompt = '';
+  if (config.prefix) {
+    prompt = config.prefix + ' ';
+  }
+
+  prompt += subject;
+
+  if (env) {
+    prompt += ', ' + env;
+  }
+
+  prompt += ', ' + style;
+  prompt += ', ' + camera;
+  prompt += quality;
+
+  if (config.suffix && !prompt.includes(config.suffix)) {
+    prompt += ', ' + config.suffix;
+  }
+
+  if (config.medium && !prompt.includes(config.medium)) {
+    prompt = prompt + ' [' + config.medium + ']';
+  }
+
+  document.getElementById('prompt-output').textContent = prompt;
+}
+
+function copyPrompt() {
+  const text = document.getElementById('prompt-output').textContent;
+  if (text.includes('请在左侧填写')) return;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const icon = document.getElementById('copy-icon');
+    const label = document.getElementById('copy-text');
+    icon.textContent = '✅';
+    label.textContent = '已复制!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      icon.textContent = '📋';
+      label.textContent = '复制 Prompt';
+      btn.classList.remove('copied');
+    }, 2000);
+
+    // 保存到历史
+    saveToHistory(text);
+  });
+}
+
+function saveToHistory(text) {
+  const entry = { text, time: new Date().toLocaleString('zh-CN') };
+  promptHistory.unshift(entry);
+  if (promptHistory.length > 10) promptHistory.pop();
+  localStorage.setItem('promptHistory', JSON.stringify(promptHistory));
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  if (!promptHistory.length) {
+    list.innerHTML = '<p style="color: var(--text-muted); font-size: 14px;">暂无历史记录。</p>';
+    return;
+  }
+  list.innerHTML = promptHistory.map((h, i) => `
+    <div class="history-item" onclick="loadFromHistory(${i})">
+      <div style="font-size: 13px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${h.text}</div>
+      <div class="history-meta">${h.time}</div>
+    </div>
+  `).join('');
+}
+
+function loadFromHistory(idx) {
+  document.getElementById('prompt-output').textContent = promptHistory[idx].text;
+}
+
+function togglePreview() {
+  const area = document.getElementById('preview-area');
+  const frame = document.getElementById('preview-frame');
+  if (area.style.display === 'none') {
+    area.style.display = 'block';
+    frame.innerHTML = '<div class="preview-loading">⏳ 正在连接 OpenClaw API 生成预览...</div>';
+    // 这里可以调用实际 API
+    setTimeout(() => {
+      frame.innerHTML = '<div class="preview-placeholder"><p>🎬 预览功能演示</p><p style="font-size: 12px; margin-top: 8px;">实际使用时，OpenClaw 会根据 Prompt 生成真实预览图</p></div>';
+    }, 1500);
+  } else {
+    area.style.display = 'none';
+  }
+}
+
+function regenerate() {
+  generatePrompt();
+}
+
+const presets = {
+  'sports-slam': {
+    scenario: 'video-sports',
+    subject: 'a professional basketball player performing a powerful slam dunk, leaping above the rim, muscles flexed, white jersey number 23, intense expression',
+    env: 'modern indoor basketball arena, spotlight dramatic lighting, crowd roaring and cheering in the background, confetti falling',
+  },
+  'movie-trailer': {
+    scenario: 'video-movie',
+    subject: 'a mysterious figure walking through a rain-soaked neon city street at night, trench coat flowing, looking over shoulder',
+    env: 'cyberpunk megacity, holographic advertisements, flying vehicles in the distance, cinematic atmosphere',
+  },
+  'ad-product': {
+    scenario: 'video-ad',
+    subject: 'a sleek sports car speeding through a mountain road, dynamic motion blur, sunlight reflecting off the metallic paint',
+    env: 'alpine mountain pass, golden hour lighting, winding asphalt road, dramatic scenery',
+  },
+  'anime-fight': {
+    scenario: 'video-animation',
+    subject: 'two anime warriors in mid-air combat, glowing energy auras clashing, dramatic expressions, dynamic action poses',
+    env: 'floating islands above the clouds, cherry blossom petals swirling in the wind, epic sky background',
+  },
+  'nature-doc': {
+    scenario: 'video-nature',
+    subject: 'a majestic eagle soaring through mountain peaks, wings spread wide, eyes focused on prey below',
+    env: 'dramatic mountain landscape at sunrise, morning mist in the valleys, golden light breaking through clouds',
+  },
+  'cyberpunk': {
+    scenario: 'video-movie',
+    subject: 'a female mercenary walking through a crowded neon-lit street market at night, cybernetic arm glowing',
+    env: 'futuristic Asian megacity, rain falling on neon signs, steam rising from street vents, holographic billboards',
+  },
+};
+
+function loadPreset(key) {
+  const p = presets[key];
+  if (!p) return;
+  document.getElementById('scenario').value = p.scenario;
+  document.getElementById('subject').value = p.subject;
+  document.getElementById('environment').value = p.env || '';
+  generatePrompt();
+}
+
+// Init
+renderHistory();
+generatePrompt();
+</script>
+
+</body>
+</html>

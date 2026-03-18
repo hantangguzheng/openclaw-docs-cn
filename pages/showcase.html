@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例展示 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw 精选案例展示：体育、电影、广告、动画等精彩作品欣赏。">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .showcase-page { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; background: var(--bg-card); border-radius: var(--radius); padding: 12px; border: 1px solid var(--border); }
+    .filter-btn { padding: 8px 18px; background: transparent; border: 1px solid transparent; border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; color: var(--text-secondary); transition: all 0.2s; font-weight: 500; }
+    .filter-btn:hover { color: var(--text-primary); }
+    .filter-btn.active { background: var(--primary); color: #fff; }
+    .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .showcase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; }
+    .showcase-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card-thumb { height: 200px; background: linear-gradient(135deg, #1a2332, #2d3748); display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; overflow: hidden; }
+    .card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%); }
+    .card-tag { position: absolute; top: 12px; left: 12px; z-index: 1; background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+    .card-official { position: absolute; top: 12px; right: 12px; z-index: 1; background: var(--accent-purple); color: #fff; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600; }
+    .card-body { padding: 20px; }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-muted); }
+    .card-likes { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .card-likes:hover { color: var(--primary); }
+    .comment-section { padding: 16px 20px; border-top: 1px solid var(--border); }
+    .comment-count { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; cursor: pointer; }
+    .comment-list { max-height: 150px; overflow-y: auto; }
+    .comment-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .comment-author { font-size: 13px; font-weight: 600; color: var(--primary); }
+    .comment-text { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .comment-input-wrap { display: flex; gap: 8px; margin-top: 12px; }
+    .comment-input { flex: 1; background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; color: var(--text-primary); font-size: 13px; font-family: inherit; }
+    .comment-input:focus { outline: none; border-color: var(--primary); }
+    .comment-submit { padding: 8px 16px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; font-weight: 600; }
+    .comment-submit:hover { background: var(--primary-dark); }
+    .submit-section { background: var(--bg-card); border: 2px dashed var(--border); border-radius: var(--radius); padding: 40px; text-align: center; margin-top: 40px; cursor: pointer; transition: all 0.2s; }
+    .submit-section:hover { border-color: var(--primary); }
+    .submit-section h3 { font-size: 18px; margin-bottom: 8px; }
+    .submit-section p { color: var(--text-secondary); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../features.html">功能特性</a></li>
+      <li><a href="info.html">综合信息</a></li>
+      <li><a href="prompt-tool.html">Prompt工具</a></li>
+      <li><a href="showcase.html" class="active">案例展示</a></li>
+      <li><a href="compare.html">对比评测</a></li>
+      <li><a href="industry.html">行业应用</a></li>
+      <li><a href="../security.html">安全</a></li>
+      <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>🎬 案例展示社区</h1>
+    <p>精选官方演示和用户 UGC 作品，分类浏览，互动评论</p>
+  </div>
+</div>
+
+<div class="showcase-page">
+  <!-- 分类筛选 -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCategory('all', this)">全部</button>
+    <button class="filter-btn" onclick="filterCategory('official', this)">官方演示</button>
+    <button class="filter-btn" onclick="filterCategory('sports', this)">🏀 体育</button>
+    <button class="filter-btn" onclick="filterCategory('movie', this)">🎬 电影</button>
+    <button class="filter-btn" onclick="filterCategory('ad', this)">📢 广告</button>
+    <button class="filter-btn" onclick="filterCategory('anime', this)">🎌 动画</button>
+    <button class="filter-btn" onclick="filterCategory('nature', this)">🌿 自然</button>
+    <button class="filter-btn" onclick="filterCategory('music', this)">🎵 音乐</button>
+  </div>
+
+  <!-- 案例卡片列表 -->
+  <div class="showcase-grid" id="showcase-grid">
+    <!-- 官方演示 -->
+    <div class="showcase-card" data-category="official movie">
+      <div class="card-thumb">🎬<span class="card-tag">视频</span><span class="card-official">官方</span></div>
+      <div class="card-body">
+        <div class="card-title">OpenClaw 官方宣传片</div>
+        <div class="card-desc">官方发布的 OpenClaw 完整功能演示视频合集，展示最新 AI 视频生成能力。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">❤️ <span class="like-count">2.3k</span></span>
+          <span class="card-views">👁️ 15.8k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 12 条评论</div>
+        <div class="comment-list" id="comments-0"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(0,this)">
+          <button class="comment-submit" onclick="submitComment(0, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 体育案例 -->
+    <div class="showcase-card" data-category="sports">
+      <div class="card-thumb">🏀<span class="card-tag">体育</span></div>
+      <div class="card-body">
+        <div class="card-title">NBA 球星暴扣集锦</div>
+        <div class="card-desc">AI 生成的篮球明星暴扣精彩瞬间，真实感极强，肌肉线条完美。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">892</span></span>
+          <span class="card-views">👁️ 5.2k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 8 条评论</div>
+        <div class="comment-list" id="comments-1"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(1,this)">
+          <button class="comment-submit" onclick="submitComment(1, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 电影风格 -->
+    <div class="showcase-card" data-category="movie">
+      <div class="card-thumb">🎥<span class="card-tag">电影</span></div>
+      <div class="card-body">
+        <div class="card-title">赛博朋克城市追逐</div>
+        <div class="card-desc">电影感十足的赛博朋克风格追逐场景，霓虹灯光渲染细腻。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">1.5k</span></span>
+          <span class="card-views">👁️ 9.3k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 15 条评论</div>
+        <div class="comment-list" id="comments-2"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(2,this)">
+          <button class="comment-submit" onclick="submitComment(2, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 广告案例 -->
+    <div class="showcase-card" data-category="ad">
+      <div class="card-thumb">📢<span class="card-tag">广告</span></div>
+      <div class="card-body">
+        <div class="card-title">汽车广告 - 极速飞驰</div>
+        <div class="card-desc">商业广告级汽车宣传视频，光影效果堪比真实拍摄。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">654</span></span>
+          <span class="card-views">👁️ 3.8k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 5 条评论</div>
+        <div class="comment-list" id="comments-3"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(3,this)">
+          <button class="comment-submit" onclick="submitComment(3, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 动画风格 -->
+    <div class="showcase-card" data-category="anime">
+      <div class="card-thumb">⚔️<span class="card-tag">动画</span></div>
+      <div class="card-body">
+        <div class="card-title">日漫风格 - 天空之城</div>
+        <div class="card-desc">宫崎骏风格的奇幻动画场景，漂浮岛屿与龙猫飞船。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">2.1k</span></span>
+          <span class="card-views">👁️ 12.4k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 23 条评论</div>
+        <div class="comment-list" id="comments-4"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(4,this)">
+          <button class="comment-submit" onclick="submitComment(4, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自然风光 -->
+    <div class="showcase-card" data-category="nature">
+      <div class="card-thumb">🌿<span class="card-tag">自然</span></div>
+      <div class="card-body">
+        <div class="card-title">BBC 纪录片风格 - 极地冰川</div>
+        <div class="card-desc">极地冰川航拍镜头，BBC 纪录片级品质，壮阔震撼。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">978</span></span>
+          <span class="card-views">👁️ 6.1k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 7 条评论</div>
+        <div class="comment-list" id="comments-5"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(5,this)">
+          <button class="comment-submit" onclick="submitComment(5, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 音乐生成 -->
+    <div class="showcase-card" data-category="music">
+      <div class="card-thumb">🎵<span class="card-tag">音乐</span></div>
+      <div class="card-body">
+        <div class="card-title">AI 生成 - 史诗级配乐</div>
+        <div class="card-desc">由 OpenClaw 生成的史诗管弦乐配乐，适合大片预告片使用。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">1.2k</span></span>
+          <span class="card-views">👁️ 8.7k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 11 条评论</div>
+        <div class="comment-list" id="comments-6"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(6,this)">
+          <button class="comment-submit" onclick="submitComment(6, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 更多案例 -->
+    <div class="showcase-card" data-category="ad">
+      <div class="card-thumb">☕<span class="card-tag">广告</span></div>
+      <div class="card-body">
+        <div class="card-title">咖啡品牌广告</div>
+        <div class="card-desc">温暖治愈系咖啡广告，蒸汽与光影的绝妙搭配。</div>
+        <div class="card-meta">
+          <span class="card-likes" onclick="toggleLike(this)">🤍 <span class="like-count">432</span></span>
+          <span class="card-views">👁️ 2.9k</span>
+        </div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-count" onclick="toggleComments(this)">💬 3 条评论</div>
+        <div class="comment-list" id="comments-7"></div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" placeholder="发表你的看法..." onkeypress="if(event.key==='Enter')submitComment(7,this)">
+          <button class="comment-submit" onclick="submitComment(7, this.previousElementSibling)">发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提交作品 -->
+  <div class="submit-section" onclick="alert('请通过 yqcq 登录后提交你的作品！')">
+    <h3>📤 分享你的作品</h3>
+    <p>登录后即可上传你的 OpenClaw 生成作品，与社区共享</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="../index.html">首页</a>
+      <a href="info.html">综合信息</a>
+      <a href="prompt-tool.html">Prompt工具</a>
+      <a href="showcase.html">案例展示</a>
+      <a href="compare.html">对比评测</a>
+      <a href="industry.html">行业应用</a>
+      <a href="../pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// 评论数据（localStorage 持久化）
+const defaultComments = {
+  0: [
+    { author: '创作者小王', text: '效果太震撼了！期待更多功能' },
+    { author: 'AI爱好者', text: '音视频同步做得真的很棒' },
+  ],
+  1: [
+    { author: '篮球迷', text: '肌肉线条生成得太真实了' },
+  ],
+  2: [
+    { author: '影视达人', text: '霓虹渲染效果比很多专业软件都好' },
+  ],
+};
+
+function loadComments() {
+  const stored = localStorage.getItem('openclaw_comments');
+  return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(defaultComments));
+}
+
+function saveComments(data) {
+  localStorage.setItem('openclaw_comments', JSON.stringify(data));
+}
+
+function toggleComments(el) {
+  const list = el.nextElementSibling;
+  list.style.display = list.style.display === 'none' ? 'block' : 'none';
+}
+
+function submitComment(idx, input) {
+  const text = input.value.trim();
+  if (!text) return;
+  const data = loadComments();
+  if (!data[idx]) data[idx] = [];
+  data[idx].push({ author: '访客用户', text });
+  saveComments(data);
+  input.value = '';
+  renderComments(idx, data[idx]);
+}
+
+function renderComments(idx, comments) {
+  const list = document.getElementById('comments-' + idx);
+  if (!list) return;
+  list.style.display = 'block';
+  list.innerHTML = comments.map(c => `
+    <div class="comment-item">
+      <div class="comment-author">${c.author}</div>
+      <div class="comment-text">${c.text}</div>
+    </div>
+  `).join('');
+}
+
+function toggleLike(el) {
+  const icon = el.querySelector('span:first-child');
+  const countEl = el.querySelector('.like-count');
+  let count = parseInt(countEl.textContent.replace('k', '')) * (countEl.textContent.includes('k') ? 1000 : 1);
+  if (icon.textContent === '🤍') {
+    icon.textContent = '❤️';
+    count++;
+    countEl.textContent = count >= 1000 ? (count/1000).toFixed(1) + 'k' : count;
+  } else {
+    icon.textContent = '🤍';
+    count--;
+    countEl.textContent = count >= 1000 ? (count/1000).toFixed(1) + 'k' : count;
+  }
+}
+
+function filterCategory(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.showcase-card');
+  cards.forEach(card => {
+    if (cat === 'all' || card.dataset.category.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// 初始化评论
+document.addEventListener('DOMContentLoaded', () => {
+  const data = loadComments();
+  Object.keys(data).forEach(idx => renderComments(idx, data[idx]));
+});
+</script>
+
+</body>
+</html>

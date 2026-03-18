@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API 接口文档 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw API 接口文档，支持视频生成、图片生成、音乐生成等 REST API 调用。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .api-page{max-width:900px;margin:0 auto;padding:0 24px 80px}
+    .api-page h2{margin-top:48px;padding-top:16px;border-top:1px solid var(--border)}
+    .api-endpoint{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin:16px 0;font-size:14px}
+    .api-endpoint .method{display:inline-block;padding:4px 10px;border-radius:6px;font-weight:700;font-size:13px;margin-right:12px}
+    .api-endpoint .method.post{background:rgba(74,222,128,0.15);color:var(--accent-green)}
+    .api-endpoint .method.get{background:rgba(77,166,255,0.15);color:var(--accent-blue)}
+    .api-endpoint .url{font-family:'SF Mono','Fira Code',monospace;color:var(--text-primary)}
+    .api-endpoint .desc{color:var(--text-secondary);margin-top:8px;font-size:13px}
+    .api-params{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+    .api-params th{background:rgba(255,255,255,0.03);padding:10px 12px;text-align:left;font-weight:600;font-size:13px;color:var(--text-muted)}
+    .api-params td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-secondary)}
+    .api-params td:first-child{font-family:'SF Mono',monospace;color:var(--primary)}
+    .api-params .required{color:#ef4444;font-size:11px}
+    .api-params .type{color:var(--accent-purple);font-size:12px}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="pages/info.html">综合信息</a></li>
+      <li><a href="pages/prompt-tool.html">Prompt工具</a></li>
+      <li><a href="pages/showcase.html">案例展示</a></li>
+      <li><a href="pages/compare.html">对比评测</a></li>
+      <li><a href="pages/industry.html">行业应用</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="api-page">
+  <div class="page-header" style="padding:140px 24px 40px;">
+    <h1>🔌 API 接口文档</h1>
+    <p>OpenClaw 提供完整的 REST API，支持视频生成、图片生成、音乐生成等能力</p>
+  </div>
+
+  <h2>快速开始</h2>
+  <p style="color:var(--text-secondary);">OpenClaw API 基于 HTTP REST 协议，认证方式为 API Key。</p>
+
+  <div class="code-block"># 安装 OpenClaw CLI
+npm i -g openclaw
+
+# 配置 API Key
+openclaw config set api-key YOUR_API_KEY
+
+# 测试连接
+openclaw api ping</div>
+
+  <div class="alert alert-info">
+    <strong>Base URL：</strong>所有 API 请求均发送至 <code>https://api.openclaw.ai/v1</code>
+  </div>
+
+  <h2>认证</h2>
+  <p style="color:var(--text-secondary);">在请求头中携带 API Key：</p>
+  <div class="code-block">Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json</div>
+
+  <h2>🎬 视频生成</h2>
+
+  <div class="api-endpoint">
+    <span class="method post">POST</span>
+    <span class="url">/v1/video/generate</span>
+    <p class="desc">根据文本描述生成视频</p>
+  </div>
+
+  <table class="api-params">
+    <tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>prompt</td><td class="type">string</td><td class="required">是</td><td>英文视频描述 Prompt</td></tr>
+    <tr><td>duration</td><td class="type">number</td><td>否</td><td>视频时长（秒），默认 5，最大 60</td></tr>
+    <tr><td>aspect_ratio</td><td class="type">string</td><td>否</td><td>宽高比：16:9 / 9:16 / 1:1，默认 16:9</td></tr>
+    <tr><td>style</td><td class="type">string</td><td>否</td><td>风格：cinematic / anime / realistic，默认 cinematic</td></tr>
+    <tr><td>model</td><td class="type">string</td><td>否</td><td>模型：openclaw-video / minimax-v3，默认 openclaw-video</td></tr>
+  </table>
+
+  <div class="code-block"># 请求示例
+curl -X POST https://api.openclaw.ai/v1/video/generate \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "a professional basketball player performing a slam dunk, dramatic lighting, cinematic",
+    "duration": 5,
+    "aspect_ratio": "16:9",
+    "style": "cinematic"
+  }'
+
+# 响应示例
+{
+  "id": "vid_abc123",
+  "status": "processing",
+  "estimated_time": 30,
+  "urls": null
+}</div>
+
+  <h2>🖼️ 图片生成</h2>
+
+  <div class="api-endpoint">
+    <span class="method post">POST</span>
+    <span class="url">/v1/image/generate</span>
+    <p class="desc">根据文本描述生成图片</p>
+  </div>
+
+  <table class="api-params">
+    <tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>prompt</td><td class="type">string</td><td class="required">是</td><td>英文图片描述 Prompt</td></tr>
+    <tr><td>size</td><td class="type">string</td><td>否</td><td>尺寸：1024x1024 / 1792x1024 / 1024x1792，默认 1024x1024</td></tr>
+    <tr><td>n</td><td class="type">number</td><td>否</td><td>生成数量，默认 1，最大 4</td></tr>
+    <tr><td>model</td><td class="type">string</td><td>否</td><td>模型：dalle-3 / seedream，默认 dalle-3</td></tr>
+  </table>
+
+  <h2>🎵 音乐生成</h2>
+
+  <div class="api-endpoint">
+    <span class="method post">POST</span>
+    <span class="url">/v1/audio/generate</span>
+    <p class="desc">根据描述生成音乐</p>
+  </div>
+
+  <table class="api-params">
+    <tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>prompt</td><td class="type">string</td><td class="required">是</td><td>音乐描述 Prompt</td></tr>
+    <tr><td>duration</td><td class="type">number</td><td>否</td><td>时长（秒），默认 30，最大 180</td></tr>
+    <tr><td>format</td><td class="type">string</td><td>否</td><td>格式：mp3 / wav，默认 mp3</td></tr>
+  </table>
+
+  <h2>📋 任务状态查询</h2>
+
+  <div class="api-endpoint">
+    <span class="method get">GET</span>
+    <span class="url">/v1/tasks/{task_id}</span>
+    <p class="desc">查询异步任务的处理状态和结果</p>
+  </div>
+
+  <div class="code-block"># 查询视频生成状态
+curl https://api.openclaw.ai/v1/tasks/vid_abc123 \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# 响应
+{
+  "id": "vid_abc123",
+  "status": "completed",
+  "urls": {
+    "video": "https://cdn.openclaw.ai/videos/abc123.mp4",
+    "thumbnail": "https://cdn.openclaw.ai/thumbnails/abc123.jpg"
+  },
+  "metadata": {
+    "duration": 5,
+    "model": "openclaw-video"
+  }
+}</div>
+
+  <h2>错误代码</h2>
+
+  <table class="api-params">
+    <tr><th>代码</th><th>说明</th></tr>
+    <tr><td>400</td><td>请求参数错误</td></tr>
+    <tr><td>401</td><td>API Key 无效或已过期</td></tr>
+    <tr><td>402</td><td>余额不足</td></tr>
+    <tr><td>429</td><td>请求频率超限，请降低调用频率</td></tr>
+    <tr><td>500</td><td>服务器内部错误</td></tr>
+    <tr><td>503</td><td>服务暂时不可用，请稍后重试</td></tr>
+  </table>
+
+  <div class="alert alert-info" style="margin-top:32px;">
+    <strong>SDK 支持：</strong>我们提供 Python、JavaScript、Go 等语言的 SDK，详见 <a href="https://github.com/openclaw/openclaw" style="color:inherit;" target="_blank">GitHub</a>。
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="pages/info.html">综合信息</a>
+      <a href="pages/prompt-tool.html">Prompt工具</a>
+      <a href="pages/showcase.html">案例展示</a>
+      <a href="pages/compare.html">对比评测</a>
+      <a href="pages/industry.html">行业应用</a>
+      <a href="pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

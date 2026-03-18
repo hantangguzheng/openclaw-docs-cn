@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对比评测 - OpenClaw AI 中文站</title>
+  <meta name="description" content="OpenClaw 与 Veo 3、Runway、Sora 等竞品的详细对比评测，突出音视频同步、物理模拟等核心优势。">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .compare-page{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+    .winner{color:var(--accent-green);font-weight:700}
+    .partial{color:var(--accent-yellow)}
+    .loser{color:var(--text-muted)}
+    .pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .pros,.cons{padding:20px;border-radius:var(--radius)}
+    .pros{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2)}
+    .cons{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2)}
+    .pros h4{color:var(--accent-green);margin-bottom:12px;font-size:15px}
+    .cons h4{color:#ef4444;margin-bottom:12px;font-size:15px}
+    .pros li,.cons li{color:var(--text-secondary);margin-bottom:6px}
+    .comparison-hero{background:linear-gradient(135deg,rgba(255,107,53,0.1),rgba(167,139,250,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:40px;margin:32px 0;text-align:center}
+    .vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin:40px 0}
+    .vs-item{padding:24px;background:var(--bg-card);border-radius:var(--radius);text-align:center}
+    .vs-item h3{font-size:20px;margin-bottom:8px}
+    .vs-item p{color:var(--text-secondary);font-size:14px}
+    .vs-badge{font-size:28px;font-weight:800;color:var(--primary)}
+    .feature-comp{margin-top:32px}
+    .feature-row{display:grid;grid-template-columns:200px repeat(4,1fr);gap:0;border-bottom:1px solid var(--border)}
+    .feat-label{padding:14px 16px;font-weight:600;font-size:14px;color:var(--text-primary);background:var(--bg-card)}
+    .feat-cell{padding:14px 12px;font-size:13px;color:var(--text-secondary);text-align:center;display:flex;align-items:center;justify-content:center}
+    .feat-header{font-weight:700;font-size:14px;padding:16px;text-align:center;background:rgba(255,107,53,0.08)}
+    .feat-header:first-child{color:var(--text-muted)}
+    .check{color:var(--accent-green);font-size:18px}
+    .cross{color:#ef4444;font-size:18px}
+    .highlight-box{background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(251,191,36,0.1));border:1px solid rgba(255,107,53,0.3);border-radius:var(--radius);padding:32px;margin:32px 0}
+    .highlight-box h3{color:var(--primary);margin-bottom:16px}
+    @media(max-width:768px){.feature-row{grid-template-columns:1fr}.feat-cell{text-align:left;justify-content:flex-start}.pros-cons{grid-template-columns:1fr}.vs-grid{grid-template-columns:1fr}.vs-badge{display:none}}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../features.html">功能特性</a></li>
+      <li><a href="info.html">综合信息</a></li>
+      <li><a href="prompt-tool.html">Prompt工具</a></li>
+      <li><a href="showcase.html">案例展示</a></li>
+      <li><a href="compare.html" class="active">对比评测</a></li>
+      <li><a href="industry.html">行业应用</a></li>
+      <li><a href="../security.html">安全</a></li>
+      <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>⚔️ 对比评测</h1>
+    <p>OpenClaw 与主流 AI 视频生成工具的详细对比</p>
+  </div>
+</div>
+
+<div class="compare-page article-content">
+
+  <h2>🦞 OpenClaw vs Runway Gen-3 vs Sora vs Veo 3</h2>
+
+  <div class="comparison-hero">
+    <div style="font-size:48px;margin-bottom:16px;">🦞</div>
+    <h3 style="margin-bottom:8px;">OpenClaw Video 模型</h3>
+    <p style="color:var(--text-secondary);">完全开源 · 本地运行 · MIT 协议</p>
+    <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <span style="background:rgba(74,222,128,0.15);color:var(--accent-green);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 完全开源</span>
+      <span style="background:rgba(77,166,255,0.15);color:var(--accent-blue);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 本地部署</span>
+      <span style="background:rgba(167,139,250,0.15);color:var(--accent-purple);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 隐私保护</span>
+      <span style="background:rgba(255,107,53,0.15);color:var(--primary);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 音视频同步</span>
+    </div>
+  </div>
+
+  <div class="vs-grid">
+    <div class="vs-item">
+      <div style="font-size:40px;margin-bottom:12px;">🦞</div>
+      <h3>OpenClaw</h3>
+      <p>本地运行，完全可控</p>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="vs-item">
+      <div style="font-size:40px;margin-bottom:12px;">🎬</div>
+      <h3>Runway Gen-3</h3>
+      <p>云端服务，需付费订阅</p>
+    </div>
+  </div>
+
+  <div class="feature-comp">
+    <div class="feature-row" style="background:var(--bg-card);border-radius:var(--radius) var(--radius) 0 0;">
+      <div class="feat-header">功能对比</div>
+      <div class="feat-header">OpenClaw</div>
+      <div class="feat-header">Runway</div>
+      <div class="feat-header">Sora</div>
+      <div class="feat-header">Veo 3</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">开源免费</div>
+      <div class="feat-cell winner">✅ 完全开源</div>
+      <div class="feat-cell loser">❌ 付费订阅</div>
+      <div class="feat-cell loser">❌ 付费内测</div>
+      <div class="feat-cell loser">❌ Google 独占</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">本地部署</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell loser">❌ 仅云端</div>
+      <div class="feat-cell loser">❌ 仅云端</div>
+      <div class="feat-cell loser">❌ 仅云端</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">隐私保护</div>
+      <div class="feat-cell winner">✅ 数据不离本地</div>
+      <div class="feat-cell partial">⚠️ 云端处理</div>
+      <div class="feat-cell loser">❌ 云端处理</div>
+      <div class="feat-cell loser">❌ 云端处理</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">音视频同步</div>
+      <div class="feat-cell winner">✅ 优秀</div>
+      <div class="feat-cell partial">⚠️ 基础支持</div>
+      <div class="feat-cell partial">⚠️ 基础支持</div>
+      <div class="feat-cell partial">⚠️ 基础支持</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">物理模拟</div>
+      <div class="feat-cell winner">✅ 优秀</div>
+      <div class="feat-cell partial">⚠️ 一般</div>
+      <div class="feat-cell partial">⚠️ 一般</div>
+      <div class="feat-cell partial">⚠️ 一般</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">文字转视频</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">图片转视频</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">API 接口</div>
+      <div class="feat-cell winner">✅ 完整开放</div>
+      <div class="feat-cell partial">⚠️ 付费 API</div>
+      <div class="feat-cell loser">❌ 未开放</div>
+      <div class="feat-cell loser">❌ 未开放</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">可定制性</div>
+      <div class="feat-cell winner">✅ 完全可定制</div>
+      <div class="feat-cell loser">❌ 受限</div>
+      <div class="feat-cell loser">❌ 受限</div>
+      <div class="feat-cell loser">❌ 受限</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">响应速度</div>
+      <div class="feat-cell winner">✅ 本地极速</div>
+      <div class="feat-cell partial">⚠️ 依赖网络</div>
+      <div class="feat-cell partial">⚠️ 依赖网络</div>
+      <div class="feat-cell partial">⚠️ 依赖网络</div>
+    </div>
+    <div class="feature-row">
+      <div class="feat-label">多模态支持</div>
+      <div class="feat-cell winner">✅ 全面支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+      <div class="feat-cell winner">✅ 支持</div>
+    </div>
+    <div class="feature-row" style="border-radius:0 0 var(--radius) var(--radius);">
+      <div class="feat-label">商业授权</div>
+      <div class="feat-cell winner">✅ MIT 自由使用</div>
+      <div class="feat-cell loser">⚠️ 需购买许可</div>
+      <div class="feat-cell loser">⚠️ 需购买许可</div>
+      <div class="feat-cell loser">⚠️ 需购买许可</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:60px;">🏆 OpenClaw 核心优势</h2>
+
+  <div class="highlight-box">
+    <h3>🎵 1. 音视频完美同步</h3>
+    <p style="color:var(--text-secondary);">OpenClaw 在业界领先的音视频同步技术上投入了大量研发资源。与其他工具简单的配音方案不同，OpenClaw 的视频生成能够根据画面内容自动匹配音效、BGM 和环境音，确保视听体验高度一致。这在体育视频、游戏CG 和电影预告片等场景中尤为重要。</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>⚽ 2. 真实物理模拟</h3>
+    <p style="color:var(--text-secondary);">OpenClaw 内置了先进的物理引擎，能够理解重力、碰撞、光影反射等物理规律。这意味着生成的人物跳跃、物体坠落、水花飞溅等场景都符合真实物理法则，画面不会穿帮。这在体育训练分析、机械演示等需要精确物理表现的应用中具有决定性优势。</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>🔒 3. 真正的隐私保护</h3>
+    <p style="color:var(--text-secondary);">所有竞品都是云端处理——你的创意和数据都会经过第三方服务器。OpenClaw 支持完全本地运行，数据永远不会离开你的设备。这对于商业机密、广告创意、个人隐私内容等敏感场景至关重要。企业用户可以完全控制数据流向，满足合规要求。</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>💰 4. 零成本使用</h3>
+    <p style="color:var(--text-secondary);">OpenClaw 采用 MIT 开源协议，完全免费使用。你只需要支付 AI 模型的 API 费用（如使用 Claude 或 GPT），而无需支付额外的平台费用。相比 Runway 每月 $35 起的订阅费，长期使用 OpenClaw 可以节省大量成本。</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>🔌 5. 无限可扩展</h3>
+    <p style="color:var(--text-secondary);">通过 ClawHub 技能市场，你可以安装 5000+ 社区开发的扩展。同时，OpenClaw 支持 AI 自己编写新技能——只需描述你的需求，AI 就会自动生成并安装对应的技能。这种自我进化的能力是其他平台无法提供的。</p>
+  </div>
+
+  <h2 style="margin-top:60px;">📊 综合评分</h2>
+
+  <div class="card-grid" style="margin-top:24px;">
+    <div class="card" style="border-top:3px solid var(--accent-green);">
+      <div style="font-size:36px;margin-bottom:12px;">🦞</div>
+      <h3 style="margin-bottom:8px;">OpenClaw</h3>
+      <div style="font-size:32px;font-weight:800;color:var(--accent-green);margin-bottom:4px;">9.2</div>
+      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">开源免费 · 本地运行 · 高可定制 · 隐私保护</div>
+    </div>
+    <div class="card">
+      <div style="font-size:36px;margin-bottom:12px;">🎬</div>
+      <h3 style="margin-bottom:8px;">Runway Gen-3</h3>
+      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.5</div>
+      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">云端服务 · 功能丰富 · 付费订阅</div>
+    </div>
+    <div class="card">
+      <div style="font-size:36px;margin-bottom:12px;">🌊</div>
+      <h3 style="margin-bottom:8px;">Sora</h3>
+      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.7</div>
+      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">OpenAI 技术 · 付费内测 · 需等待</div>
+    </div>
+    <div class="card">
+      <div style="font-size:36px;margin-bottom:12px;">🎥</div>
+      <h3 style="margin-bottom:8px;">Veo 3</h3>
+      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.6</div>
+      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">Google 技术 · 云端独占 · 需申请</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:40px;">
+    <strong>结论：</strong>如果你需要开源免费、本地部署、隐私保护和高度可定制，OpenClaw 是最佳选择。如果你只需要快速生成视频且不介意付费，Runway 和 Sora 也是不错的选项。但从长期价值来看，OpenClaw 的优势会随着使用时间的增长而越发明显。
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="../index.html">首页</a>
+      <a href="info.html">综合信息</a>
+      <a href="prompt-tool.html">Prompt工具</a>
+      <a href="showcase.html">案例展示</a>
+      <a href="compare.html">对比评测</a>
+      <a href="industry.html">行业应用</a>
+      <a href="../pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

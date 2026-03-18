@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 价格 - 开源免费 · 零成本使用</title>
+  <meta name="description" content="OpenClaw 完全免费使用，MIT 开源协议。了解各 AI 模型的 API 费用对比，找到最适合你的方案。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
+  <style>
+    .pricing-page{max-width:900px;margin:0 auto;padding:0 24px 80px}
+    .pricing-hero{text-align:center;padding:60px 0 40px}
+    .pricing-hero h1{font-size:clamp(32px,5vw,48px);font-weight:800;margin-bottom:16px}
+    .pricing-hero p{color:var(--text-secondary);font-size:18px;max-width:600px;margin:0 auto}
+    .pricing-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);color:var(--accent-green);padding:8px 20px;border-radius:50px;font-size:14px;font-weight:600;margin-bottom:24px}
+    .pricing-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;transition:all 0.3s;max-width:400px;margin:40px auto}
+    .pricing-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:0 8px 32px rgba(255,107,53,0.2)}
+    .pricing-card .price{font-size:56px;font-weight:800;color:var(--accent-green);line-height:1}
+    .pricing-card .price-label{color:var(--text-muted);font-size:14px;margin-top:8px}
+    .pricing-card .desc{color:var(--text-secondary);margin:20px 0;font-size:15px;line-height:1.7}
+    .pricing-card .features{list-style:none;padding:0;text-align:left;margin:24px 0}
+    .pricing-card .features li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-secondary);font-size:14px;display:flex;align-items:center;gap:10px}
+    .pricing-card .features li::before{content:'✅';font-size:16px}
+    .pricing-table{width:100%;border-collapse:collapse;background:var(--bg-card);border-radius:var(--radius);overflow:hidden;margin:40px 0;font-size:14px}
+    .pricing-table th{background:rgba(255,107,53,0.1);color:var(--primary);padding:16px 20px;text-align:left;font-weight:700}
+    .pricing-table td{padding:14px 20px;border-bottom:1px solid var(--border);color:var(--text-secondary)}
+    .pricing-table tr:last-child td{border-bottom:none}
+    .pricing-table td:first-child{color:var(--text-primary);font-weight:600}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🦞</span><span class="logo-text">OpenClaw</span></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="pages/info.html">综合信息</a></li>
+      <li><a href="pages/prompt-tool.html">Prompt工具</a></li>
+      <li><a href="pages/showcase.html">案例展示</a></li>
+      <li><a href="pages/compare.html">对比评测</a></li>
+      <li><a href="pages/industry.html">行业应用</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="pricing-page">
+  <div class="pricing-hero">
+    <div class="pricing-badge">🎉 完全免费 · 开源 MIT 协议</div>
+    <h1>OpenClaw 价格</h1>
+    <p>OpenClaw 软件本身完全免费。你可以自由使用、修改和商业化。只需为所使用的 AI 模型 API 付费。</p>
+  </div>
+
+  <div class="pricing-card">
+    <div style="font-size:40px;margin-bottom:16px;">🦞</div>
+    <h3 style="font-size:20px;margin-bottom:8px;">OpenClaw</h3>
+    <div class="price">¥0</div>
+    <div class="price-label">永久免费 · MIT 协议</div>
+    <p class="desc">OpenClaw 本身零成本。你可以完全控制代码、数据和部署方式。</p>
+    <ul class="features">
+      <li>OpenClaw 软件永久免费</li>
+      <li>支持本地部署，零服务器费用</li>
+      <li>可修改源码，定制化开发</li>
+      <li>可商业使用，无需授权费</li>
+      <li>5000+ 社区技能免费安装</li>
+      <li>无使用次数限制</li>
+    </ul>
+    <a href="setup.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:14px 28px;border-radius:var(--radius);text-decoration:none;font-weight:600;font-size:16px;">⚡ 立即安装</a>
+  </div>
+
+  <h2 style="margin-top:60px;padding-top:16px;border-top:1px solid var(--border);">🤖 AI 模型费用对比</h2>
+  <p style="color:var(--text-secondary);margin-bottom:16px;">使用 OpenClaw 时，你需要为 AI 模型 API 付费。以下是各主流模型的费用对比：</p>
+
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th>模型</th>
+        <th>费用</th>
+        <th>特点</th>
+        <th>推荐场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MiniMax-M2.5</td>
+        <td style="color:var(--accent-green);font-weight:700;">¥0.1/千tokens</td>
+        <td>高速 · 中文优化 · 低成本</td>
+        <td>日常对话 · 内容创作</td>
+      </tr>
+      <tr>
+        <td>Claude 3.5 Sonnet</td>
+        <td style="color:var(--accent-yellow);">$3/百万tokens</td>
+        <td>最强推理 · 长上下文</td>
+        <td>复杂分析 · 编程</td>
+      </tr>
+      <tr>
+        <td>GPT-4o</td>
+        <td style="color:var(--accent-yellow);">$5/百万tokens</td>
+        <td>多模态 · 通用强</td>
+        <td>通用任务 · 创意写作</td>
+      </tr>
+      <tr>
+        <td>Gemini 1.5 Pro</td>
+        <td style="color:var(--accent-green);">$0.125/百万tokens</td>
+        <td>100万上下文 · 低成本</td>
+        <td>长文档分析 · 多模态</td>
+      </tr>
+      <tr>
+        <td>Llama 4 (本地)</td>
+        <td style="color:var(--accent-green);font-weight:700;">¥0</td>
+        <td>开源免费 · 完全离线</td>
+        <td>隐私敏感 · 离线环境</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:60px;padding-top:16px;border-top:1px solid var(--border);">💡 如何最小化成本？</h2>
+
+  <div class="card-grid" style="margin-top:24px;">
+    <div class="card">
+      <div class="card-icon">🌟</div>
+      <h3>使用 MiniMax</h3>
+      <p>¥0.1/千 tokens 的超低价格，比 Claude 便宜 30 倍。中文场景下性能优秀。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🦙</div>
+      <h3>使用本地模型</h3>
+      <p>Llama 等开源模型完全免费。一次购买 GPU，终身免费使用。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>批量处理</h3>
+      <p>使用 OpenClaw 的技能系统批量处理任务，减少重复 API 调用。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>精准 Prompt</h3>
+      <p>写好 Prompt 减少无效重试。一次成功比多次尝试更省钱。</p>
+    </div>
+  </div>
+
+  <div class="alert alert-success" style="margin-top:40px;">
+    <strong>结论：</strong>使用 OpenClaw + MiniMax 模型，每月 API 费用可低至 ¥10-50 元（处理 100 万 tokens），而 Runway 最低档订阅就要 $35/月（约 ¥250/月）。选择 OpenClaw，每月可节省 80% 以上的成本！
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="pages/info.html">综合信息</a>
+      <a href="pages/prompt-tool.html">Prompt工具</a>
+      <a href="pages/showcase.html">案例展示</a>
+      <a href="pages/compare.html">对比评测</a>
+      <a href="pages/industry.html">行业应用</a>
+      <a href="pricing.html">价格</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
