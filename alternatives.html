@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>竞品对比 - OpenClaw AI 中文文档</title>
+  <meta name="description" content="OpenClaw 竞品对比：ZeroClaw、TinyClaw、NanoClaw、PicoClaw、Nanobot、IronClaw 等自托管 AI 助手方案。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html">安装指南</a></li>
+      <li><a href="alternatives.html" class="active">竞品对比</a></li>
+      <li><a href="troubleshooting.html">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header" style="background: linear-gradient(180deg, rgba(167,139,250,0.05) 0%, transparent 100%);">
+  <div class="container">
+    <h1>竞品对比</h1>
+    <p>轻量级和性能优先的自托管 AI 助手方案</p>
+  </div>
+</header>
+
+<div class="article-content">
+
+  <p>OpenClaw 是一个功能完整的强大平台——但它不是运行自托管 AI 助手的唯一方式。根据你的需求，你可能更喜欢更轻量、更快，或不同权衡取舍的方案。本文介绍主要竞品：每种方案何时有意义、如何比较，以及切换时你会获得或放弃什么。</p>
+
+  <div class="alert alert-info">
+    注意：下面列出的项目是独立的第三方竞品。本站不认可或维护它们——我们提供它们用于发现。在使用前始终审查每个项目的文档和安全实践。
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 何时选择 -->
+  <h2>🤔 何时选择哪个</h2>
+  <p>在深入了解各个项目之前，这里是快速决策指南：</p>
+  <ul>
+    <li><strong>继续使用 OpenClaw</strong> — 如果你想要最丰富的生态系统：ClawHub 上数百种技能、浏览器自动化、Canvas、语音、多 Agent 团队，以及对每个主要渠道的一流支持。最适合构建功能完整的个人助手或团队设置。</li>
+    <li><strong>考虑 ZeroClaw</strong> — 如果你需要极低资源使用（低于 5MB 内存）、亚 10ms 启动、边缘部署，或更严格的安全默认值。基于 Rust，包含从 OpenClaw 迁移的工具。适合树莓派 Zero、无服务器或成本敏感场景。</li>
+    <li><strong>考虑 TinyClaw</strong> — 如果你想要围绕 Claude Code 的最小化包装——仅 Discord 和 WhatsApp，约 400 行，基于文件的队列。最适合简单的 24/7 助手，不需要完整的 OpenClaw 堆栈。</li>
+    <li><strong>考虑 NanoClaw、PicoClaw 或 Nanobot</strong> — 不同程度的极简主义：NanoClaw（约 700 行）、PicoClaw（基于 Go）、Nanobot（约 4k 行 Python）。每种都牺牲功能换取简单性和更小的代码库。</li>
+    <li><strong>考虑 IronClaw（NEAR AI）</strong> — 如果你需要企业级安全：WASM 沙箱、TEE 部署、加密保险库。不同架构；最适合安全关键用例。</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 对比表 -->
+  <h2>📊 一览对比</h2>
+
+  <div style="overflow-x: auto;">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th>语言</th>
+          <th>资源占用</th>
+          <th>支持的渠道</th>
+          <th>最佳场景</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>OpenClaw</strong></td>
+          <td>Node.js/TypeScript</td>
+          <td>~28MB + Node 运行时，&gt;1GB 内存</td>
+          <td>WhatsApp, Telegram, Discord, Slack, Signal, iMessage, Teams, WebChat, Matrix, Zalo 等</td>
+          <td>完整生态系统、技能、浏览器、语音、多 Agent</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#zeroclaw">ZeroClaw</a></strong></td>
+          <td>Rust</td>
+          <td>3.4MB 二进制文件，&lt;5MB 内存</td>
+          <td>22+ 提供商，Telegram, Discord, Slack, WhatsApp</td>
+          <td>边缘、树莓派、无服务器、安全关键</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#tinyclaw">TinyClaw</a></strong></td>
+          <td>Python</td>
+          <td>约 400 行，最小化</td>
+          <td>Discord, WhatsApp（可扩展）</td>
+          <td>简单的 Claude Code 包装，24/7 助手</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#nanoclaw">NanoClaw</a></strong></td>
+          <td>Node.js</td>
+          <td>5 个核心文件，最小化</td>
+          <td>WhatsApp, Agent 群体</td>
+          <td>安全优先，容器隔离</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#picoclaw">PicoClaw</a></strong></td>
+          <td>Go</td>
+          <td>&lt;10MB 内存，&lt;1s 启动</td>
+          <td>Telegram, Discord, QQ, LINE, Slack</td>
+          <td>边缘/嵌入式，$10 RISC-V 开发板</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#nanobot">Nanobot</a></strong></td>
+          <td>Python</td>
+          <td>约 4k 行</td>
+          <td>Telegram, Discord, WhatsApp, Slack 等</td>
+          <td>Agent 循环、MCP、审计性</td>
+        </tr>
+        <tr>
+          <td><strong><a href="#ironclaw">IronClaw</a></strong></td>
+          <td>NEAR AI</td>
+          <td>TEE, WASM 沙箱</td>
+          <td>MCP, 多渠道</td>
+          <td>企业、安全关键</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ZeroClaw -->
+  <h2 id="zeroclaw">⚡ ZeroClaw — Rust 驱动，99% 更少内存</h2>
+
+  <p>ZeroClaw 是最成熟的 OpenClaw 竞品，适合需要最小占用和最大性能的用户。完全用 Rust 编写，内存使用低于 5MB（对比 OpenClaw 的 1GB+），亚 10ms 启动，作为单个 3.4MB 可执行文件发布，无运行时依赖。它包含迁移工具来传输 OpenClaw 配置和记忆，支持 22+ AI 提供商和多个渠道，并有更严格的安全默认值（白名单、仅本地绑定、工作区作用域文件访问）。零已知 CVE（对比 OpenClaw 的四个）。</p>
+
+  <p>适合：树莓派 Zero、无服务器函数和成本优化部署。</p>
+
+  <div class="content-block">
+    <h3>ZeroClaw 核心数据</h3>
+    <ul>
+      <li><strong>语言：</strong>Rust</li>
+      <li><strong>二进制大小：</strong>3.4MB</li>
+      <li><strong>内存使用：</strong>&lt;5MB</li>
+      <li><strong>启动时间：</strong>亚 10ms</li>
+      <li><strong>依赖：</strong>无运行时依赖</li>
+      <li><strong>AI 提供商：</strong>22+</li>
+      <li><strong>已知 CVE：</strong>0</li>
+      <li><strong>迁移工具：</strong>内置从 OpenClaw 迁移</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TinyClaw -->
+  <h2 id="tinyclaw">🪶 TinyClaw — 最小化 Claude Code 包装</h2>
+
+  <p>TinyClaw 是一个围绕 Claude Code 的轻量级包装，作为 24/7 个人助手运行。约 400 行代码，通过机器人令牌连接 Discord，通过 QR 码连接 WhatsApp，使用基于文件的队列来避免竞态条件，并在 tmux 中运行。该项目将 OpenClaw 作为灵感来源，支持多渠道——可以添加 Telegram 和 Slack。如果你想要一个简单的助手，不需要完整的 OpenClaw 堆栈（无技能、无浏览器、无复杂配置），TinyClaw 正合适。</p>
+
+  <p>适合：喜欢最小依赖和小型、可理解代码库的开发者。</p>
+
+  <div class="content-block">
+    <h3>TinyClaw 核心数据</h3>
+    <ul>
+      <li><strong>语言：</strong>Python</li>
+      <li><strong>代码行数：</strong>约 400</li>
+      <li><strong>Discord：</strong>通过机器人令牌</li>
+      <li><strong>WhatsApp：</strong>通过 QR 码</li>
+      <li><strong>队列：</strong>基于文件</li>
+      <li><strong>运行方式：</strong>tmux</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- NanoClaw -->
+  <h2 id="nanoclaw">🔒 NanoClaw — 安全优先，容器隔离</h2>
+
+  <p>NanoClaw 是一个安全优先的方案，只有 5 个核心 Node.js 文件（对比 OpenClaw 的 52+ 模块）。Agent 在隔离的 Docker 或 Apple Container 中运行，提供文件系统隔离——解决了对无限制主机访问的担忧。功能包括 WhatsApp、Agent 群体、定时任务，以及通过 Claude Agent SDK 的网络搜索。仅支持 Claude；比 OpenClaw 更轻量、更可审计。</p>
+
+  <div class="content-block">
+    <h3>NanoClaw 核心数据</h3>
+    <ul>
+      <li><strong>语言：</strong>Node.js</li>
+      <li><strong>核心文件：</strong>5 个</li>
+      <li><strong>隔离：</strong>Docker / Apple Container</li>
+      <li><strong>AI 模型：</strong>仅 Claude</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PicoClaw -->
+  <h2 id="picoclaw">🚀 PicoClaw — Go 编写，超高效边缘计算</h2>
+
+  <p>PicoClaw 由 Sipeed 用 Go 构建，目标是 $10 RISC-V 开发板和旧智能手机。内存低于 10MB，亚秒级启动，二进制文件低于 10MB。支持 Telegram、Discord、QQ、钉钉、LINE、Slack，以及离线 PicoLM 1B 和硬件 I/O（I2C、SPI、GPIO）用于物联网。Pre-v1.0；最适合边缘/嵌入式实验。</p>
+
+  <div class="content-block">
+    <h3>PicoClaw 核心数据</h3>
+    <ul>
+      <li><strong>语言：</strong>Go</li>
+      <li><strong>内存：</strong>&lt;10MB</li>
+      <li><strong>启动：</strong>&lt;1 秒</li>
+      <li><strong>二进制：</strong>&lt;10MB</li>
+      <li><strong>目标：</strong>$10 RISC-V 开发板</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Nanobot -->
+  <h2 id="nanobot">🤖 Nanobot — 约 4k 行 Python，Agent 循环</h2>
+
+  <p>Nanobot 是一个超轻量级 Python 助手（HKUDS），具有 Agent 循环、规划、工具、记忆、cron 和 MCP。支持 Telegram、Discord、WhatsApp、Slack、飞书、钉钉、邮件、QQ。优先考虑可读性和审计性——适合想要更小、可理解代码库的开发者。</p>
+
+  <div class="content-block">
+    <h3>Nanobot 核心数据</h3>
+    <ul>
+      <li><strong>语言：</strong>Python</li>
+      <li><strong>代码行数：</strong>约 4k</li>
+      <li><strong>特点：</strong>Agent 循环、MCP、cron</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- IronClaw -->
+  <h2 id="ironclaw">🛡️ IronClaw — 安全优先，NEAR AI</h2>
+
+  <p>IronClaw 是 NEAR AI 的安全优先 AI Agent 平台。WASM 沙箱、加密保险库、NEAR AI Cloud 上的 TEE 部署。MCP 支持，自我扩展工具。最适合企业和安全关键部署。</p>
+
+  <div class="content-block">
+    <h3>IronClaw 核心数据</h3>
+    <ul>
+      <li><strong>技术：</strong>NEAR AI、WASM 沙箱、TEE</li>
+      <li><strong>安全：</strong>加密保险库、TEE 部署</li>
+      <li><strong>目标：</strong>企业、安全关键</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 迁移注意事项 -->
+  <h2>🔄 迁移注意事项</h2>
+
+  <p>如果你已经在使用 OpenClaw 并考虑切换：</p>
+  <ul>
+    <li><strong>ZeroClaw</strong> 提供内置迁移工具用于配置和记忆。参见迁移指南。自定义技能和第三方凭据需要手动设置。</li>
+    <li><strong>TinyClaw</strong> 和类似方案没有迁移路径——你从零开始。需要重新配置渠道和任何自定义逻辑。</li>
+    <li><strong>功能对等性</strong> 差异很大。OpenClaw 的技能生态系统、浏览器自动化和多 Agent 路由在大多数竞品中没有直接等价物。</li>
+    <li><strong>社区和文档：</strong>OpenClaw 有最大的社区、最多的教程和最丰富的生态系统。竞品以简单性或性能换取这些。</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 后续步骤 -->
+  <h2>🎯 后续步骤</h2>
+  <p>准备好深入了解？探索各个指南：</p>
+  <ul>
+    <li><a href="#zeroclaw">ZeroClaw vs OpenClaw</a> — 完整对比、迁移和何时选择 ZeroClaw</li>
+    <li><a href="#tinyclaw">TinyClaw 指南</a> — 设置、渠道和最小化助手工作流</li>
+    <li><a href="#nanoclaw">NanoClaw</a> — 约 700 行，最小化设置</li>
+    <li><a href="#picoclaw">PicoClaw</a> — Go 编写，小二进制文件</li>
+    <li><a href="#nanobot">Nanobot</a> — Python，约 4k 行，Agent 循环</li>
+    <li><a href="index.html">OpenClaw 主页</a> — 继续使用完整平台</li>
+    <li><a href="setup.html">OpenClaw 安装</a> — 开始使用 OpenClaw</li>
+  </ul>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文文档站 · 基于 openclaw-ai.online 翻译 · MIT 开源协议</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

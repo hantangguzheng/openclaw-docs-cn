@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安装指南 - OpenClaw AI 中文文档</title>
+  <meta name="description" content="OpenClaw 完整安装指南：macOS、Linux、Windows WSL2 一键安装，安装向导使用说明。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html" class="active">安装指南</a></li>
+      <li><a href="alternatives.html">竞品对比</a></li>
+      <li><a href="troubleshooting.html">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header" style="background: linear-gradient(180deg, rgba(255,107,53,0.05) 0%, transparent 100%);">
+  <div class="container">
+    <h1>安装指南</h1>
+    <p>几分钟内让 OpenClaw 运行起来——有引导脚本、可执行命令，无需猜测。</p>
+  </div>
+</header>
+
+<div class="article-content">
+
+  <!-- 安装向导 -->
+  <h2>🧙 安装向导</h2>
+  <p>OpenClaw 安装向导是一个免费的浏览器应用，引导你完成安装、配置、渠道添加和技能安装。选择你的目标和平台，按照清晰的步骤操作，然后下载或复制你需要的脚本或配置。无需注册，无需账号——直接打开向导即可。</p>
+
+  <div style="text-align: center; margin: 32px 0;">
+    <a href="https://openclaw-ai.online/setup-wizard/app/" target="_blank" class="btn-primary" style="font-size: 18px; padding: 16px 36px;">
+      🚀 打开安装向导
+    </a>
+  </div>
+
+  <h3>向导如何工作</h3>
+  <p>打开向导，选择你想做什么：安装 OpenClaw、配置（AI 提供商和认证）、添加渠道（如 Telegram 或 Discord）、或添加技能。对于安装，你需要选择操作系统（macOS、Linux、Windows WSL2、Docker 或一键安装脚本）；对于渠道和技能，你会获得分步说明以及可用的配置或脚本。你可以从页面下载或复制脚本，或使用"在我的机器上运行"让向导将脚本发送到你的 OpenClaw 伴侣。</p>
+
+  <h3>向导适合谁</h3>
+  <ul>
+    <li>首次安装 OpenClaw，想要一个针对你系统的脚本</li>
+    <li>添加新渠道（消息应用），需要确切的配置和 token 步骤</li>
+    <li>添加技能，想要一个也重启 OpenClaw 的安装脚本</li>
+    <li>寻找故障排除帮助，更喜欢从应用内搜索文档</li>
+    <li>不想手动编辑 openclaw.json：向导生成可合并的渠道 JSON 和 AI 提供商的完整配置片段</li>
+  </ul>
+
+  <h3>为什么使用向导？</h3>
+  <ul class="check-list">
+    <li>一个地方搞定一切——安装、配置、添加渠道、添加技能</li>
+    <li>为你生成的脚本——获取针对你平台的就绪脚本和渠道配置 JSON</li>
+    <li>分步说明——每个渠道和技能都有简短清晰的步骤，不会迷路</li>
+    <li>搜索文档——从应用内打开内置文档搜索，查找安装、配置或故障排除答案</li>
+    <li>你的机器，你的数据——所有脚本和配置在浏览器中生成；不发送到任何服务器</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 系统要求 -->
+  <h2>💻 系统要求</h2>
+  <ul>
+    <li><strong>运行时环境：</strong>Node.js 22.12.0 或更高版本（包含重要的安全修复；支持 npm、pnpm 或 bun）</li>
+    <li><strong>支持的平台：</strong>macOS、Linux、Windows（WSL2 推荐用于 Windows 用户）</li>
+  </ul>
+
+  <div class="alert alert-info">
+    推荐使用一键安装脚本——它会自动安装 Node.js（如需要）和所有依赖项。
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 一键安装 -->
+  <h2>⚡ 一键安装</h2>
+  <p>一行命令搞定。安装向导生成针对你操作系统量身定制的脚本，自动处理 Node.js 和依赖项。</p>
+
+  <h3>macOS / Linux</h3>
+  <div class="code-block">curl -fsSL https://openclaw.ai/install.sh | bash
+openclaw onboard</div>
+
+  <h3>Windows (PowerShell)</h3>
+  <div class="code-block">iwr -useb https://openclaw.ai/install.ps1 | iex
+openclaw onboard</div>
+
+  <h3>Windows (CMD)</h3>
+  <div class="code-block">curl -fsSL https://openclaw.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+openclaw onboard</div>
+
+  <div class="alert alert-info">
+    <strong>macOS + Ollama 0.17+？</strong>最快路径：<code>ollama launch openclaw --model kimi-k2.5:cloud</code>。一条命令安装和配置一切。参见 <a href="https://openclaw-ai.online/tutorials/ollama-setup/" target="_blank">Ollama + OpenClaw 教程</a>。
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- npm/pnpm 安装 -->
+  <h2>📦 npm 或 pnpm 安装</h2>
+  <p>如果你已经有 Node.js 22.12.0+：</p>
+  <div class="code-block">npm i -g openclaw
+# 或：pnpm add -g openclaw
+openclaw onboard</div>
+
+  <div class="divider"></div>
+
+  <!-- macOS 应用 -->
+  <h2>🍎 macOS 伴侣应用</h2>
+  <p>下载 macOS 版（菜单栏访问，与 CLI 并行工作）。需要 macOS 14+。</p>
+  <p>最新版本：<a href="https://github.com/openclaw/openclaw/releases/latest" target="_blank">GitHub Releases</a></p>
+
+  <div class="divider"></div>
+
+  <!-- 配置 -->
+  <h2>⚙️ 配置</h2>
+
+  <h3>基础配置</h3>
+  <p>最小配置：<code>~/.openclaw/openclaw.json</code>（较新安装）或 <code>~/.clawdbot/moltbot.json</code>（旧版兼容）。工作区根目录是 <code>~/.openclaw/workspace</code> 或 <code>~/clawd</code>（取决于安装方式）。CLI 是 <code>openclaw</code>；<code>moltbot</code> 和 <code>clawdbot</code> 保留作为兼容别名。</p>
+
+  <div class="code-block"><span class="tag">"agent"</span>: {
+  <span class="key">"model"</span>: <span class="string">"anthropic/claude-opus-4-6"</span>
+}</div>
+
+  <h3>语言模型选项与认证</h3>
+  <p>推荐配置：Anthropic Pro/Max 订阅（100/200）配合 Opus 4.6 以增强上下文处理和更好的提示注入攻击防护。</p>
+
+  <p><strong>基于 OAuth 的订阅：</strong></p>
+  <ul>
+    <li>Anthropic（Claude Pro/Max 计划）</li>
+    <li>OpenAI（ChatGPT Plus/Codex 访问）</li>
+  </ul>
+
+  <p>虽然平台支持各种语言模型，但 Anthropic Pro/Max 配合 Opus 4.6 是推荐选择。你可以配置自动模型故障转移和认证配置文件轮换（在 OAuth 和 API 密钥方法之间切换）以及备份选项。</p>
+
+  <div class="divider"></div>
+
+  <!-- 渠道集成 -->
+  <h2>💬 消息渠道集成</h2>
+
+  <p>OpenClaw 支持所有主流消息平台。对于分步指导和使用可合并配置的引导流程，使用安装向导（添加渠道）。</p>
+
+  <h3>支持的平台</h3>
+  <ul>
+    <li><strong>WhatsApp</strong> — 通过 Baileys 库集成，QR 码认证</li>
+    <li><strong>Telegram</strong> — 配置为 Telegram 机器人，使用 grammY 框架</li>
+    <li><strong>Discord</strong> — 完整的 Discord 机器人功能，支持斜杠命令</li>
+    <li><strong>Slack</strong> — 工作区集成，使用机器人令牌和应用令牌</li>
+    <li><strong>Signal</strong> — 安全消息集成，需要安装 signal-cli</li>
+    <li><strong>iMessage</strong> — macOS 专属，需要已登录 Messages 应用</li>
+    <li><strong>Microsoft Teams</strong> — 通过 Microsoft Bot Framework 集成</li>
+    <li><strong>Google Chat</strong> — 工作区集成</li>
+    <li><strong>WebChat</strong> — 通过网关 WebSocket 访问的本机 Web 界面</li>
+  </ul>
+
+  <h3>快速设置示例（WhatsApp）</h3>
+  <ul>
+    <li>设备认证：<code>openclaw channels login</code>（凭据保存到 <code>~/.clawdbot/credentials</code>）</li>
+    <li>配置访问控制：设置 <code>channels.whatsapp.allowFrom</code> 指定授权联系人</li>
+    <li>群组访问：配置 <code>channels.whatsapp.groups</code> 作为群组白名单；使用 <code>"*"</code> 允许所有群组</li>
+  </ul>
+
+  <div class="alert alert-info">
+    注意：WhatsApp 认证需要 QR 码配对。所有凭据本地加密存储。配置目录路径 <code>~/.clawdbot/</code> 为早期版本（Clawdbot 和 Moltbot）的向后兼容而保留。
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Docker -->
+  <h2>🐳 Docker 安装</h2>
+  <div class="code-block">docker run -it --rm \
+  -v ~/.openclaw:/app/data \
+  -p 18789:18789 \
+  openclaw/openclaw:latest</div>
+  <p>官方镜像以非 root 用户运行。额外加固：<code>--read-only --cap-drop=ALL</code>。</p>
+
+  <div class="divider"></div>
+
+  <!-- 工作区结构 -->
+  <h2>📁 工作区结构与技能</h2>
+
+  <p>OpenClaw 在专用工作区目录中组织所有数据：</p>
+  <ul>
+    <li><strong>工作区位置：</strong><code>~/.openclaw/workspace</code> 或 <code>~/clawd</code>（可通过 <code>agents.defaults.workspace</code> 配置）</li>
+    <li><strong>核心提示文件：</strong><code>AGENTS.md</code>、<code>SOUL.md</code>、<code>TOOLS.md</code></li>
+    <li><strong>技能存储：</strong><code>~/clawd/skills/&lt;skill-name&gt;/SKILL.md</code></li>
+    <li><strong>记忆存储：</strong>OpenClaw 自动生成的每日 Markdown 格式笔记</li>
+  </ul>
+
+  <p>工作区由你系统上的标准文件夹和 Markdown 文件组成。这些可以直接编辑，可以使用 Raycast 等工具搜索，或与 Obsidian 等应用同步。</p>
+
+  <div class="divider"></div>
+
+  <!-- 后续步骤 -->
+  <h2>🎯 后续步骤</h2>
+  <ul>
+    <li><a href="features.html">了解功能</a> — 了解 OpenClaw 能做什么</li>
+    <li><a href="security.html">安全配置</a> — 保护你的安装</li>
+    <li><a href="troubleshooting.html">故障排除</a> — 如果遇到问题</li>
+  </ul>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文文档站 · 基于 openclaw-ai.online 翻译 · MIT 开源协议</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

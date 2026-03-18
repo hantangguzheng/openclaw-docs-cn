@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw AI - 私有化部署的个人 AI 助手</title>
+  <meta name="description" content="OpenClaw 是完全本地运行的个人 AI 助手，支持 WhatsApp、Telegram、Discord 等多平台，保护隐私，功能强大。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html">安装指南</a></li>
+      <li><a href="alternatives.html">竞品对比</a></li>
+      <li><a href="troubleshooting.html">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero 区域 -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span>🔥</span> 完全开源 · 本地运行 · MIT 协议
+    </div>
+
+    <h1>
+      你的私有化<br>
+      <span class="gradient-text">AI 个人助手</span>
+    </h1>
+
+    <p class="hero-sub">
+      OpenClaw 在你自己的设备上运行 AI 助手——不在任何第三方云端。支持 WhatsApp、Telegram、Discord、iMessage 等所有主流平台。隐私优先，功能完整。
+    </p>
+
+    <div class="hero-actions">
+      <a href="setup.html" class="btn-primary">
+        <span>⚡</span> 立即安装
+      </a>
+      <a href="features.html" class="btn-secondary">
+        <span>📖</span> 了解更多
+      </a>
+    </div>
+
+    <div class="hero-code">
+      curl -fsSL https://openclaw.ai/install.sh | bash && openclaw onboard
+    </div>
+  </div>
+</section>
+
+<!-- 什么是 OpenClaw -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>什么是 OpenClaw？</h2>
+      <p>私有化部署的个人 AI 助手平台，在你的设备上运行，不依赖任何云服务。</p>
+    </div>
+
+    <div class="card-grid" style="margin-top: 40px;">
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>本地优先架构</h3>
+        <p>所有对话、配置、记忆都存储在你的本地设备上。数据永不离开你的控制，支持 Anthropic、OpenAI 或本地模型。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>全平台消息支持</h3>
+        <p>通过你最熟悉的聊天工具与 AI 对话：WhatsApp、Telegram、Discord、Slack、Signal、iMessage、Microsoft Teams 等。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h3>长期记忆</h3>
+        <p>AI 会记住你的偏好和习惯，越用越懂你。记忆以 Markdown 文件存储，可编辑、可搜索、与 Obsidian 同步。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔌</div>
+        <h3>可扩展技能平台</h3>
+        <p>从 ClawHub 安装 5000+ 社区技能，或让 AI 自己编写新技能。支持浏览器自动化、画布交互、语音对话等。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心功能 -->
+<section class="section" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="section-title">
+      <h2>为什么选择 OpenClaw？</h2>
+      <p>为你的个人 AI 助手提供完整的功能套件</p>
+    </div>
+
+    <div class="feature-grid" style="margin-top: 48px;">
+      <div class="feature-card">
+        <div class="feature-icon fi-orange">💻</div>
+        <h3>私有化部署</h3>
+        <p>兼容 macOS、Linux、Windows（WSL2）。支持 Anthropic、OpenAI 或本地语言模型。隐私优先设计，数据完全由你掌控。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-blue">💬</div>
+        <h3>全平台消息</h3>
+        <p>通过 WhatsApp、Telegram、Discord、Slack、Signal 或 iMessage 与 AI 对话。支持私聊和群聊两种模式。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-green">🧠</div>
+        <h3>长期记忆</h3>
+        <p>AI 会逐步了解你的偏好和习惯，保持上下文连贯。以 Markdown 文件存储，可搜索、可编辑、可与 Obsidian 同步。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-purple">🌐</div>
+        <h3>网络自动化</h3>
+        <p>自动浏览网页、填写表单、提取信息。完整的浏览器自动化能力，帮你处理各种在线任务。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-yellow">⚙️</div>
+        <h3>系统集成</h3>
+        <p>读写文件、执行命令、运行脚本、设置定时任务、自动化复杂工作流。可选择完全访问或沙箱隔离模式。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-pink">🔌</div>
+        <h3>可扩展平台</h3>
+        <p>安装社区开发的技能或创建自己的扩展。AI 本身也能编写新技能——告诉它你的需求，它会自动生成代码。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 集成 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>支持所有你常用的工具</h2>
+      <p>连接到 50+ 平台、渠道和模型</p>
+    </div>
+
+    <div class="integrations-grid">
+      <div class="integration-item"><span class="int-icon">💬</span>WhatsApp</div>
+      <div class="integration-item"><span class="int-icon">📱</span>Telegram</div>
+      <div class="integration-item"><span class="int-icon">💬</span>Discord</div>
+      <div class="integration-item"><span class="int-icon">💼</span>Slack</div>
+      <div class="integration-item"><span class="int-icon">🔐</span>Signal</div>
+      <div class="integration-item"><span class="int-icon">💌</span>iMessage</div>
+      <div class="integration-item"><span class="int-icon">🤖</span>Claude</div>
+      <div class="integration-item"><span class="int-icon">🧠</span>GPT</div>
+      <div class="integration-item"><span class="int-icon">🎵</span>Spotify</div>
+      <div class="integration-item"><span class="int-icon">💡</span>Hue</div>
+      <div class="integration-item"><span class="int-icon">📝</span>Obsidian</div>
+      <div class="integration-item"><span class="int-icon">🐦</span>Twitter</div>
+      <div class="integration-item"><span class="int-icon">🌐</span>浏览器</div>
+      <div class="integration-item"><span class="int-icon">📧</span>Gmail</div>
+      <div class="integration-item"><span class="int-icon">💻</span>GitHub</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <a href="features.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">查看全部 50+ 集成 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 快速安装 -->
+<section class="section" style="background: rgba(255,107,53,0.04);">
+  <div class="container">
+    <div class="section-title">
+      <h2>快速安装指南</h2>
+      <p>一行命令完成安装，自动处理所有依赖</p>
+    </div>
+
+    <div class="content-block" style="max-width: 700px; margin: 40px auto 0;">
+      <h3>macOS / Linux</h3>
+      <div class="code-block">curl -fsSL https://openclaw.ai/install.sh | bash
+openclaw onboard</div>
+
+      <h3>Windows (WSL2)</h3>
+      <div class="code-block">iwr -useb https://openclaw.ai/install.ps1 | iex
+openclaw onboard</div>
+
+      <h3>已有 Node.js？</h3>
+      <div class="code-block">npm i -g openclaw
+# 或：pnpm add -g openclaw
+openclaw onboard</div>
+
+      <div class="alert alert-info" style="margin-top: 24px;">
+        <strong>系统要求：</strong>Node.js 22.12.0 或更高版本。安装脚本会自动处理依赖，推荐使用一键安装方式。
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="setup.html" class="btn-primary">打开安装向导 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 用户评价 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>用户怎么说</h2>
+      <p>来自开发者和用户社区的真实评价</p>
+    </div>
+
+    <div class="card-grid" style="margin-top: 40px;">
+      <div class="card">
+        <p style="font-style: italic; color: var(--text-secondary); font-size: 16px; line-height: 1.8;">"OpenClaw 代表了可定制、可适应软件的巅峰。我对它的能力有完全的控制权，对它的运作有完全的透明度。"</p>
+        <cite style="display: block; margin-top: 16px; font-size: 14px; color: var(--text-muted);">— Federico Viticci, MacStories</cite>
+      </div>
+      <div class="card">
+        <p style="font-style: italic; color: var(--text-secondary); font-size: 16px; line-height: 1.8;">"这就是 Siri 从一开始应该有的样子。功能远超我最初的想象。"</p>
+        <cite style="display: block; margin-top: 16px; font-size: 14px; color: var(--text-muted);— 开发者</cite>
+      </div>
+      <div class="card">
+        <p style="font-style: italic; color: var(--text-secondary); font-size: 16px; line-height: 1.8;">"OpenClaw 表明我们才刚刚触及语言模型作为个人助手所能实现的可能性表面。一旦体验了这种级别的能力，就再也回不去了。"</p>
+        <cite style="display: block; margin-top: 16px; font-size: 14px; color: var(--text-muted);— MacStories 评测</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数据统计 -->
+<section class="section" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">55.3k+</div>
+        <div class="stat-label">GitHub 星标</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1.1k+</div>
+        <div class="stat-label">贡献者</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">MIT</div>
+        <div class="stat-label">开源协议</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5000+</div>
+        <div class="stat-label">社区技能</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 CTA -->
+<section class="section">
+  <div class="container" style="text-align: center;">
+    <h2 style="font-size: clamp(28px, 4vw, 40px); font-weight: 700; margin-bottom: 16px;">
+      准备好开始了吗？
+    </h2>
+    <p style="color: var(--text-secondary); font-size: 18px; margin-bottom: 32px;">
+      加入成千上万使用 OpenClaw 简化日常工作的用户。
+    </p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="setup.html" class="btn-primary">⚡ 立即安装</a>
+      <a href="features.html" class="btn-secondary">📖 了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 由 Peter Steinberger 和社区为太空龙虾 AI 助手 🦞 构建。MIT 开源协议 · 免费使用。</p>
+    <div class="footer-links">
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+      <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>故障排除 - OpenClaw AI 中文文档</title>
+  <meta name="description" content="OpenClaw 常见问题解决方案：网关无法启动、渠道无法连接、Agent 无响应等。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html">安装指南</a></li>
+      <li><a href="alternatives.html">竞品对比</a></li>
+      <li><a href="troubleshooting.html" class="active">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header" style="background: linear-gradient(180deg, rgba(251,191,36,0.05) 0%, transparent 100%);">
+  <div class="container">
+    <h1>故障排除</h1>
+    <p>修复常见问题，解决你可能遇到的障碍</p>
+  </div>
+</header>
+
+<div class="article-content">
+
+  <p>大多数 OpenClaw 问题分为几类：网关无法启动、渠道无法连接、或 Agent 没有响应。本文涵盖这些以及通常有效的修复方法。遇到问题先运行 <code>openclaw doctor</code>——它能捕获很多问题。</p>
+
+  <div class="alert alert-info">
+    <strong>快速参考 - 常用命令：</strong>
+    <ul style="margin: 8px 0 0;">
+      <li><code>openclaw restart</code> 或 <code>openclaw gateway restart</code> — 重启网关</li>
+      <li><code>openclaw doctor --fix</code> — 健康检查并自动修复常见问题（权限、配置、缺失目录）</li>
+    </ul>
+  </div>
+
+  <p>寻求帮助前：运行 <code>openclaw doctor</code>（或 <code>openclaw doctor --fix</code>），查看 <a href="faq.html">FAQ</a> 了解你的症状，报告 bug 时请包含你的 OpenClaw 版本（<code>openclaw --version</code>）。</p>
+
+  <div class="divider"></div>
+
+  <!-- 快速修复 -->
+  <h2>⚡ 快速修复</h2>
+
+  <h3>如何重启 OpenClaw / 网关重启</h3>
+  <p>OpenClaw 网关重启——使用以下之一：</p>
+  <ul>
+    <li><code>openclaw restart</code> — 快速重启</li>
+    <li><code>openclaw gateway restart</code> — 显式网关重启</li>
+  </ul>
+
+  <p>如果 OpenClaw 作为服务运行：</p>
+  <ul>
+    <li><strong>Linux (systemd)：</strong><code>systemctl --user restart openclaw-gateway</code>（服务名称可能不同，用 <code>systemctl --user list-units | grep openclaw</code> 检查）</li>
+    <li><strong>macOS (launchd)：</strong>从 OpenClaw 菜单栏应用重启，或 <code>launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist</code> 然后重新启动</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 常见问题 -->
+  <h2>🔧 常见问题</h2>
+
+  <!-- 网关无法启动 -->
+  <h3>网关无法启动</h3>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>Node.js 版本过旧（需要 ≥22）</li>
+    <li>端口 18789 已被占用</li>
+    <li>配置文件有语法错误</li>
+    <li>缺失依赖项</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>运行 <code>openclaw doctor</code> 检查配置问题</li>
+    <li>验证 Node.js 版本：<code>node --version</code></li>
+    <li>检查端口是否被占用：<code>lsof -i :18789</code>（macOS/Linux）</li>
+    <li>审查配置文件：<code>~/.openclaw/openclaw.json</code> 或 <code>~/.clawdbot/moltbot.json</code></li>
+    <li>重新安装：<code>npm install -g openclaw@latest</code></li>
+  </ul>
+
+  <!-- 渠道无法连接 -->
+  <h3>渠道无法连接</h3>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>凭据或 token 不正确</li>
+    <li>缺失环境变量</li>
+    <li>网络连接问题</li>
+    <li>渠道特定配置错误</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>验证凭据正确</li>
+    <li>对于 WhatsApp，确保已完成配对流程</li>
+    <li>检查 <code>~/.clawdbot/credentials</code> 中的存储凭据</li>
+    <li>验证环境变量设置正确</li>
+    <li>查看渠道特定文档</li>
+    <li>启用详细日志：<code>openclaw gateway --verbose</code></li>
+  </ul>
+
+  <!-- 权限错误 -->
+  <h3>权限错误（macOS）</h3>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>系统设置中缺失 macOS 权限</li>
+    <li>未授予屏幕录制权限</li>
+    <li>辅助功能权限缺失</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>打开「系统设置」→「隐私与安全性」</li>
+    <li>授予必要权限：屏幕录制、辅助功能、完全磁盘访问（如果需要）</li>
+    <li>在工具调用中设置 <code>needsScreenRecording: true</code></li>
+    <li>授予权限后重启网关</li>
+  </ul>
+
+  <!-- 模型认证问题 -->
+  <h3>模型认证问题</h3>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>API 密钥无效</li>
+    <li>OAuth token 过期</li>
+    <li>模型配置错误</li>
+    <li>速率限制或配额超出</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>验证 API 密钥或 OAuth token 有效</li>
+    <li>检查 <code>~/.clawdbot/moltbot.json</code> 中的模型配置</li>
+    <li>测试认证：<code>openclaw agent --message "test"</code></li>
+    <li>检查提供商仪表板的速率限制或配额</li>
+    <li>配置模型故障转移以提高可靠性</li>
+  </ul>
+
+  <!-- 技能不工作 -->
+  <h3>技能不工作</h3>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>技能文件语法错误</li>
+    <li>缺失依赖项</li>
+    <li>技能配置错误</li>
+    <li>权限问题</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>检查 <code>~/clawd/skills/</code> 中的技能文件</li>
+    <li>审查技能日志中的错误</li>
+    <li>验证技能依赖项已安装</li>
+    <li>手动测试技能</li>
+    <li>如需要，重新创建技能</li>
+  </ul>
+
+  <!-- Chrome 扩展缺失 -->
+  <h3>错误：绑定的 Chrome 扩展缺失——重新安装 OpenClaw</h3>
+  <p><strong>错误信息：</strong><code>error: bundled chrome extension is missing. reinstall openclaw and try again.</code></p>
+  <p><strong>修复：</strong></p>
+  <ul>
+    <li>重新安装 OpenClaw：<code>npm install -g openclaw@latest</code> 或 <code>pnpm add -g openclaw@latest</code></li>
+    <li>重启终端，如果使用守护进程则运行 <code>openclaw onboard --install-daemon</code></li>
+    <li>重启网关：<code>openclaw gateway restart</code></li>
+    <li>如果错误持续，完全退出 OpenClaw 应用（macOS 菜单栏）或停止服务，然后重新启动</li>
+  </ul>
+
+  <!-- 无法到达浏览器控制服务 -->
+  <h3>无法到达 OpenClaw 浏览器控制服务</h3>
+  <p><strong>错误信息：</strong><code>can't reach the openclaw browser control service. start (or restart) the openclaw gateway</code> 或 <code>chrome extension relay is running, but no tab is connected</code></p>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>Chrome/Chromium 未安装</li>
+    <li>浏览器控制未启用</li>
+    <li>Linux 特定的显示问题</li>
+    <li>Chrome 扩展未连接到标签页</li>
+    <li>网关未运行</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>验证 Chrome/Chromium 已安装</li>
+    <li>在配置中启用浏览器控制：<code>browser.enabled: true</code></li>
+    <li>在 Linux 上，确保显示可用（X11 或 Wayland）</li>
+    <li>检查浏览器控制 URL 配置</li>
+    <li>点击标签页上的 OpenClaw Chrome 扩展图标以附加</li>
+    <li>重启网关：<code>openclaw gateway restart</code></li>
+  </ul>
+
+  <!-- 无输出 -->
+  <h3>无输出 / 无响应</h3>
+  <p><strong>问题：</strong>OpenClaw 无输出或不响应消息</p>
+  <p><strong>可能原因：</strong></p>
+  <ul>
+    <li>网关未运行</li>
+    <li>渠道未连接</li>
+    <li>模型认证失败</li>
+    <li>配置错误</li>
+    <li>网络连接问题</li>
+    <li>工具未启用 — Agent 可以聊天但无法读取文件、运行命令或使用浏览器（见下方）</li>
+  </ul>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>检查网关状态：<code>openclaw gateway status</code></li>
+    <li>重启网关：<code>openclaw gateway restart</code></li>
+    <li>运行诊断：<code>openclaw doctor --fix</code></li>
+    <li>检查渠道连接：<code>openclaw channels list</code></li>
+    <li>验证模型配置和 API 密钥</li>
+    <li>检查日志：<code>openclaw gateway logs</code></li>
+  </ul>
+
+  <div class="alert alert-info">
+    <strong>Agent 回复但不运行工具（读取文件、运行命令、浏览器）？</strong>你的 Agent 可能没有启用工具。OpenClaw 可能默认使用 <code>tools.profile: "messaging"</code>，只允许发送消息——无文件访问、无 exec、无浏览器。<br><br>
+    修复：在配置中设置 <code>"tools": { "profile": "full" }</code>（或如果是编码场景用 <code>"coding"</code>），然后重启网关。如果需要 Agent 无需每次都请求批准就能运行命令（例如在 Telegram 上没有确认弹窗），在工具下添加 <code>"exec": { "security": "full", "ask": "off" }</code>。先设置 profile；exec.ask 只在工具启用时适用。
+  </div>
+
+  <div class="alert alert-info">
+    <strong>账单 / API 错误（2026.2.19+）：</strong>当模型或提供商返回账单或配额错误时，OpenClaw 现在在消息中包含活动模型（例如 OpenAI (gpt-5.3)），这样你可以看到哪个密钥或账户需要充值。
+  </div>
+
+  <!-- 网关 Token 缺失 -->
+  <h3>网关 Token 缺失 / 未授权（1008）</h3>
+  <p><strong>错误信息：</strong><code>disconnected (1008): unauthorized: gateway token missing</code> 或 <code>gateway token missing (open a tokenized dashboard url or paste token in control ui settings)</code></p>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>打开包含 token 的令牌仪表板 URL</li>
+    <li>或在控制 UI 设置中粘贴 token</li>
+    <li>使用 token 重启网关：<code>openclaw gateway --token YOUR_TOKEN</code></li>
+    <li>检查网关配置中的 token 设置</li>
+    <li>生成新 token：<code>openclaw doctor --generate-gateway-token</code>，然后打开令牌仪表板 URL：<code>openclaw dashboard --no-open</code></li>
+  </ul>
+
+  <div class="alert alert-info">
+    <strong>注意（2026.2.19+）：</strong>如果你没有设置网关认证，OpenClaw 现在可以在启动时自动生成并持久化 <code>gateway.auth.token</code>，以便控制 UI 和客户端可以连接。你仍可以显式设置 <code>gateway.auth.mode: "none"</code> 用于本地仅回环设置。
+  </div>
+
+  <!-- 配对需要 -->
+  <h3>断开连接（1008）：需要配对</h3>
+  <p><strong>错误：</strong><code>disconnected (1008): pairing required</code> 或 <code>pairing required openclaw</code></p>
+  <p>控制 UI 或客户端必须在连接前完成配对。打开 OpenClaw 仪表板（或你的令牌 URL），进入设置/设备（或等效位置），完成配对步骤。对于 DM 渠道（如 Telegram、WhatsApp），使用 <code>openclaw pairing approve &lt;channel&gt; &lt;code&gt;</code> 批准新联系人。</p>
+
+  <p>配对 CLI（2026.2.21）：省略时 <code>pairing list</code> 和 <code>pairing approve</code> 默认为唯一的可用配对渠道，无需猜测渠道参数（对纯 TUI 设置很有用）。</p>
+
+  <p>管理配对设备（2026.2.19+）：使用 <code>openclaw devices remove</code> 移除特定设备，或 <code>openclaw devices clear --yes [--pending]</code> 清除配对条目并可选择拒绝待处理请求。配置也支持 <code>device.pair.remove</code> 用于清理流程。</p>
+
+  <!-- PID 锁超时 -->
+  <h3>网关已在运行 / PID 锁超时</h3>
+  <p><strong>错误信息：</strong><code>gateway already running pid lock timeout</code></p>
+  <p><strong>解决方案：</strong></p>
+  <ul>
+    <li>检查运行中的网关进程：<code>ps aux | grep openclaw</code>（Linux/macOS）</li>
+    <li>如果进程未运行，删除锁文件：<code>rm ~/.clawdbot/gateway.lock</code></li>
+    <li>终止任何卡住的进程：<code>killall openclaw</code>（Linux/macOS）</li>
+    <li>重启网关：<code>openclaw gateway restart</code></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 健康检查 -->
+  <h2>🏥 健康检查</h2>
+  <p>运行 <code>openclaw doctor</code> 执行全面健康检查：</p>
+  <ul>
+    <li>检查配置问题</li>
+    <li>发现危险的/配置错误的 DM 策略</li>
+    <li>验证网关状态</li>
+    <li>检查更新</li>
+    <li>验证渠道配置</li>
+    <li>检查工作区完整性</li>
+  </ul>
+  <div class="code-block">openclaw doctor [--fix]</div>
+  <p>使用 <code>openclaw doctor --fix</code> 自动修复常见问题，如权限问题、缺失目录和配置错误。</p>
+
+  <div class="divider"></div>
+
+  <!-- 日志 -->
+  <h2>📋 日志</h2>
+  <p>启用详细日志以诊断问题：</p>
+  <div class="code-block">openclaw gateway --verbose</div>
+  <p>或在配置文件中设置 <code>verboseLevel</code> 以获得持久详细输出。</p>
+  <p><strong>日志位置：</strong></p>
+  <ul>
+    <li>网关日志：检查终端输出或系统日志</li>
+    <li>渠道日志：工作区中的按渠道日志</li>
+    <li>Agent 日志：工作区中的会话日志</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 网关锁 -->
+  <h2>🔒 网关锁</h2>
+  <p>如果网关看起来被锁定或无法启动：</p>
+  <ul>
+    <li>检查锁文件：<code>~/.clawdbot/gateway.lock</code></li>
+    <li>验证没有其他网关实例正在运行</li>
+    <li>如果网关进程未运行，删除锁文件：<code>rm ~/.clawdbot/gateway.lock</code></li>
+    <li>重启网关</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 后台进程 -->
+  <h2>⚙️ 后台进程</h2>
+  <p>如果网关作为后台服务运行：</p>
+  <ul>
+    <li><strong>macOS：</strong>检查 launchd：<code>launchctl list | grep openclaw</code></li>
+    <li><strong>Linux：</strong>检查 systemd：<code>systemctl --user status openclaw-gateway</code></li>
+    <li><strong>查看日志：</strong><code>journalctl --user -u openclaw-gateway</code>（Linux）或检查 Console.app（macOS）</li>
+    <li><strong>重启服务：</strong><code>systemctl --user restart openclaw-gateway</code>（Linux）</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- Linux 浏览器故障排除 -->
+  <h2>🐧 Linux 浏览器故障排除</h2>
+  <p>在 Linux 上，浏览器控制可能需要额外设置：</p>
+  <ul>
+    <li>安装 Chrome/Chromium：<code>sudo apt install chromium-browser</code>（Debian/Ubuntu）</li>
+    <li>确保显示服务器正在运行（X11 或 Wayland）</li>
+    <li>必要时设置 <code>DISPLAY</code> 环境变量</li>
+    <li>如果没有可用显示器，使用无头模式</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 获取帮助 -->
+  <h2>🆘 获取帮助</h2>
+  <p>如果你仍然遇到问题：</p>
+  <ul>
+    <li>运行 <code>openclaw doctor</code> 并审查所有输出</li>
+    <li>启用详细日志并捕获错误信息</li>
+    <li>查看配置指南了解设置</li>
+    <li>查看渠道指南了解渠道特定问题</li>
+    <li>检查工作区文件中的错误</li>
+    <li>打开安装向导并使用「修复问题」从应用内搜索文档</li>
+  </ul>
+
+  <h3>相关文档</h3>
+  <ul>
+    <li><a href="setup.html">安装指南</a> — 如需重新安装</li>
+    <li><a href="security.html">安全指南</a> — 安全配置</li>
+    <li><a href="features.html">功能特性</a> — 了解 OpenClaw 能做什么</li>
+  </ul>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文文档站 · 基于 openclaw-ai.online 翻译 · MIT 开源协议</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

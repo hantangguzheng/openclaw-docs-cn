@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安全指南 - OpenClaw AI 中文文档</title>
+  <meta name="description" content="OpenClaw 安全配置指南：沙箱、DM 配对、工具策略、访问控制等最佳实践。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html">功能特性</a></li>
+      <li><a href="security.html" class="active">安全</a></li>
+      <li><a href="setup.html">安装指南</a></li>
+      <li><a href="alternatives.html">竞品对比</a></li>
+      <li><a href="troubleshooting.html">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header" style="background: linear-gradient(180deg, rgba(239,68,68,0.05) 0%, transparent 100%);">
+  <div class="container">
+    <h1>安全指南</h1>
+    <p>沙箱配置、DM 配对、工具策略和最佳实践</p>
+  </div>
+</header>
+
+<div class="article-content">
+
+  <div class="alert alert-danger">
+    <strong>⚠️ 重要提示：</strong>OpenClaw 连接真实的消息平台。请将入站 DM 视为不可信输入。本文介绍如何保护你的 OpenClaw 安装。
+  </div>
+
+  <p><strong>个人助手信任模型：</strong>OpenClaw 假设每个网关只有一个可信操作员边界（单一用户/个人助手）。它不是一个针对多个对抗性用户共享一个 Agent/网关的敌对多租户安全边界。如需混合信任或对抗性用户操作，请拆分信任边界——单独的网关 + 凭据，最好是单独的 OS 用户/主机。</p>
+
+  <div class="divider"></div>
+
+  <!-- 漏洞报告 -->
+  <h2>🛡️ 报告漏洞与安全公告</h2>
+
+  <p>如果你发现了 OpenClaw 的安全问题，请私下报告，<strong>不要</strong>提交公开 issue。项目的 <a href="https://github.com/openclaw/openclaw/security" target="_blank">GitHub 安全页面</a>描述了如何报告以及需要包含什么（复现步骤、影响，以及如果可能的话最小化 PoC）。</p>
+
+  <p>查看 <a href="https://github.com/openclaw/openclaw/security/advisories" target="_blank">GitHub 安全公告</a>了解过往公告和已修复版本。保持 OpenClaw 更新到已修复版本。</p>
+
+  <h3>CVE 与更新</h3>
+  <p>OpenClaw 会发布已知漏洞的安全公告。Node.js 22.12.0+ 是必需的（包含安全修复，如 CVE-2025-59466、CVE-2026-21636）。</p>
+
+  <h3>验证你的设置</h3>
+  <div class="code-block">openclaw security audit --deep</div>
+  <p>加上 <code>--fix</code> 自动修复。检查项包括：DM 策略、allowFrom、exec 安全、网关绑定、工作区暴露。默认设置是安全的（配对、exec 拒绝、网关认证）。</p>
+
+  <div class="divider"></div>
+
+  <!-- 网关认证 -->
+  <h2>🔑 网关认证与审计</h2>
+
+  <p>对于任何非回环的使用，请保持网关认证已配置。自 2026.2.19 起，当 <code>gateway.auth.mode</code> 为 <code>"none"</code> 时，安全审计会报告 <code>gateway.http.no_auth</code>——回环环境下警告，生产环境下标记为严重级别。</p>
+
+  <h3>基础架构与身份（2026.2.21）</h3>
+  <p>网关锁和工具调用合成 ID 现在使用 SHA-256（而非 SHA-1）。所有者 ID 混淆使用配置中的专用 HMAC 密钥（<code>ownerDisplaySecret</code>），与网关 token 处理解耦，更易控制。</p>
+
+  <div class="divider"></div>
+
+  <!-- 运行时与部署安全 -->
+  <h2>⚙️ 运行时与部署安全</h2>
+
+  <h3>Node.js 版本</h3>
+  <p>OpenClaw 需要 Node.js 22.12.0 或更高版本。使用 <code>node --version</code> 验证。</p>
+
+  <h3>Web 界面</h3>
+  <p>控制 UI / Web 界面仅供本地使用。不要将其绑定到公共互联网——它未针对公开暴露进行加固。</p>
+
+  <h3>Docker</h3>
+  <p>官方镜像以非 root 用户运行。额外加固：</p>
+  <div class="code-block">docker run --read-only --cap-drop=ALL \
+  -v openclaw-data:/app/data \
+  openclaw/openclaw:latest</div>
+
+  <div class="divider"></div>
+
+  <!-- 沙箱实战 -->
+  <h2>📦 沙箱实战</h2>
+
+  <p>许多用户在单独的机器或虚拟机上运行 OpenClaw（如专用 Mac Mini、访客 WiFi），这样 Agent 就无法访问他们的个人账户或凭据。给 Agent 自己的账户（Gmail、GitHub 等）而不是共享你的账户，可以降低风险——即使 Agent 被攻破，你的身份也不会泄露。</p>
+
+  <p>信任是赢来的：即使有了自己的设置，在习惯之前监督 Agent（如在发布内容前批准）是常见做法。</p>
+
+  <div class="divider"></div>
+
+  <!-- 安全模型概览 -->
+  <h2>🔐 安全模型概览</h2>
+  <p>OpenClaw 采用分层安全方法：</p>
+  <ul>
+    <li><strong>DM 配对</strong> — 未知发送者需要明确批准</li>
+    <li><strong>沙箱</strong> — 群组和不信任的会话可在隔离容器中运行</li>
+    <li><strong>工具策略</strong> — 细粒度控制 Agent 可使用哪些工具</li>
+    <li><strong>白名单</strong> — 控制谁可以与你的助手互动</li>
+    <li><strong>本地优先</strong> — 所有数据保留在本地机器上</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 默认 DM 访问 -->
+  <h2>📬 默认 DM 访问（配对）</h2>
+
+  <p>在 Telegram/WhatsApp/Signal/iMessage/Microsoft Teams/Discord/Google Chat/Slack 上：</p>
+  <ul>
+    <li>DM 配对（<code>dmPolicy="pairing"</code>）— 未知发送者收到一个短配对码</li>
+    <li>机器人不处理未配对联系人的消息</li>
+    <li>使用 <code>openclaw pairing approve</code> 批准</li>
+    <li>批准后，发送者被添加到本地白名单</li>
+  </ul>
+
+  <h3>开放 DM 访问</h3>
+  <p>允许公开 DM（不推荐大多数用户）：设置 <code>dmPolicy="open"</code>，在白名单（allowFrom）中包含 <code>"*"</code>。</p>
+
+  <div class="alert alert-danger">
+    <strong>警告：</strong>仅在你了解安全含义并有适当沙箱配置的情况下使用开放 DM 策略。
+  </div>
+
+  <h3>敏感集成：邮箱和 X（Twitter）</h3>
+  <p><strong>邮箱（Gmail 等）：</strong>给 OpenClaw 访问你的主收件箱是一个重要的提示注入和钓鱼风险——入站邮件可能包含意在引导 Agent 的指令或链接。除非你需要邮件自动化，否则避免连接你的主账户；如果需要，使用专用账户或严格过滤器。</p>
+  <p><strong>X（Twitter）：</strong>X 正在加强对机器人的执行力度。不要给 OpenClaw 自己的 X 账户或依赖它进行自动化 X 发布；账户限制很常见。建议使用其他渠道进行自动化。</p>
+
+  <div class="divider"></div>
+
+  <!-- 沙箱配置 -->
+  <h2>🧪 沙箱配置</h2>
+
+  <h3>默认行为</h3>
+  <ul>
+    <li><strong>主会话</strong>：工具在主机上以完全访问权限运行（用于可信使用）</li>
+    <li><strong>非主会话</strong>：可配置为在 Docker 沙箱中运行</li>
+  </ul>
+
+  <h3>启用沙箱</h3>
+  <p>将群聊和非主会话沙箱化：</p>
+  <div class="code-block"><span class="tag">"agents":</span> {
+  <span class="key">"defaults"</span>: {
+    <span class="key">"sandbox"</span>: {
+      <span class="key">"mode"</span>: <span class="string">"non-main"</span>
+    }
+  }
+}</div>
+
+  <h3>沙箱工具策略</h3>
+  <p><strong>默认允许列表：</strong>bash、process、read、write、edit、sessions_list、sessions_history、sessions_send、sessions_spawn</p>
+  <p><strong>默认拒绝列表：</strong>browser、canvas、nodes、cron、discord、gateway</p>
+
+  <div class="divider"></div>
+
+  <!-- 群聊安全 -->
+  <h2>💬 群聊安全</h2>
+  <p>群聊提供多层安全保护：</p>
+  <ul>
+    <li><strong>群组白名单</strong> — 控制机器人可访问哪些群</li>
+    <li><strong>提及门控</strong> — 群中需要 @提及（默认）</li>
+    <li><strong>沙箱</strong> — 群可在隔离的 Docker 容器中运行</li>
+    <li><strong>激活模式</strong> — 控制机器人何时响应</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 认证与访问控制 -->
+  <h2>🔐 认证与访问控制</h2>
+
+  <h3>网关认证</h3>
+  <p>网关可通过以下方式保护：</p>
+  <ul>
+    <li>Token 认证 — 非回环绑定时必需</li>
+    <li>密码认证 — 通过 <code>gateway.auth.mode</code> 设置</li>
+    <li>仅回环 — 默认绑定到 127.0.0.1 供本地访问</li>
+  </ul>
+
+  <h3>远程访问安全</h3>
+  <p>对于远程网关访问：</p>
+  <ul>
+    <li><strong>SSH 隧道</strong> — 加密隧道到本地主机</li>
+    <li><strong>Tailscale</strong> — 带认证的安全 VPN</li>
+    <li><strong>网关 Token</strong> — 非回环访问时必需</li>
+  </ul>
+  <p>在有适当认证之前，切勿将网关直接暴露到互联网。</p>
+
+  <div class="divider"></div>
+
+  <!-- 技能安全 -->
+  <h2>⚠️ 技能安全与恶意技能</h2>
+
+  <p>来自 ClawHub 和其他来源的技能可能存在安全风险。</p>
+
+  <h3>ClawHub 与 VirusTotal 合作</h3>
+  <p>OpenClaw 与 <a href="https://www.virustotal.com" target="_blank">VirusTotal</a> 合作，为 ClawHub 上的技能添加安全扫描。所有发布到 ClawHub 的技能现在都使用 VirusTotal 的威胁情报和 Code Insight（LLM 驱动的代码行为分析）进行扫描。</p>
+  <ul>
+    <li><strong>哈希 + 上传</strong> — 技能包获得 SHA-256 指纹，并在 VirusTotal 进行检查或上传分析</li>
+    <li><strong>Code Insight</strong> — VirusTotal 分析 SKILL.md 和引用脚本的安全相关行为</li>
+    <li><strong>自动批准 / 阻止</strong> — "良性"裁决的技能自动批准；可疑的标记警告；恶意技能被阻止下载</li>
+    <li><strong>每日重新扫描</strong> — 活跃技能每日重新扫描，检测新出现的恶意更新</li>
+  </ul>
+
+  <div class="alert alert-warning">
+    <strong>⚠️ 恶意技能警告：</strong>安装前务必审查技能代码，尤其是来自 ClawHub 或未知来源的。恶意技能可以：
+    <ul style="margin-top: 8px;">
+      <li>窃取加密货币钱包信息</li>
+      <li>访问敏感文件和凭据</li>
+      <li>执行未授权命令</li>
+      <li>将数据泄露到外部服务器</li>
+      <li>危害系统安全</li>
+    </ul>
+  </div>
+
+  <h3>技能安全最佳实践</h3>
+  <ul class="check-list">
+    <li>安装前审查——始终阅读技能代码</li>
+    <li>验证来源——检查技能作者、评分和社区评价</li>
+    <li>使用沙箱——在沙箱环境中运行不受信任的技能</li>
+    <li>监控活动——安装新技能后观察可疑行为</li>
+    <li>限制权限——使用工具策略限制技能可访问的内容</li>
+    <li>定期审计——定期审查已安装的技能</li>
+    <li>报告恶意技能——向 OpenClaw 社区报告可疑技能</li>
+  </ul>
+
+  <h3>安全策略文件（SHIELD.md）</h3>
+  <p>你可以在名为 <code>SHIELD.md</code> 的文件中给 Agent 一个书面安全策略——社区提案，告知 Agent 如何在匹配已知威胁时做出反应（例如阻止此技能、在该工具调用前询问）。记录下来、要求批准或阻止。没有运行时强制执行；模型必须被指示遵循它，所以也继续使用沙箱和工具策略。</p>
+
+  <div class="divider"></div>
+
+  <!-- 数据隐私 -->
+  <h2>🔒 数据隐私</h2>
+  <p>OpenClaw 的设计以隐私为核心：</p>
+  <ul>
+    <li><strong>本地存储</strong> — 所有数据存储在你的机器上</li>
+    <li><strong>无云同步</strong> — 你的对话永不离开你的设备</li>
+    <li><strong>加密凭据</strong> — 渠道凭据安全存储</li>
+    <li><strong>LLM 提供商</strong> — 只有你选择的 LLM 提供商接收消息（Anthropic、OpenAI 等）</li>
+  </ul>
+  <p>你的工作区、记忆和配置以文件形式存储，你可以随时检查、编辑或删除。</p>
+
+  <div class="divider"></div>
+
+  <!-- 最佳实践 -->
+  <h2>✅ 推荐安全配置</h2>
+  <ul class="check-list">
+    <li>使用 DM 配对——保持所有渠道的默认配对策略</li>
+    <li>启用沙箱——为群组沙箱化非主会话</li>
+    <li>配置白名单——明确允许受信任的联系人</li>
+    <li>使用提及门控——群聊中需要 @提及</li>
+    <li>审查技能——安装前始终审查技能代码</li>
+    <li>运行诊断——定期运行 <code>openclaw doctor</code> 检查配置问题</li>
+    <li>审查日志——监控网关日志的可疑活动</li>
+    <li>保持更新——定期更新 OpenClaw 获取安全补丁</li>
+    <li>隔离部署——生产环境使用虚拟机、Docker 容器或专用硬件</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 运行安全检查 -->
+  <h2>🔍 运行安全检查</h2>
+  <div class="code-block">openclaw doctor
+openclaw security audit --deep --fix</div>
+  <p>这些检查帮助你发现：</p>
+  <ul>
+    <li>有风险的 DM 策略</li>
+    <li>配置错误的沙箱设置</li>
+    <li>缺失的认证</li>
+    <li>安全警告</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h2>📚 相关文档</h2>
+  <ul>
+    <li><a href="https://docs.openclaw.ai/gateway/security" target="_blank">网关安全（docs.openclaw.ai）</a> — 完整威胁模型、审计词汇表、加固指南</li>
+    <li><a href="https://github.com/openclaw/openclaw/security" target="_blank">GitHub 安全与公告</a> — 报告漏洞、查看公告</li>
+    <li><a href="https://trust.openclaw.ai" target="_blank">OpenClaw 信任与安全计划</a> — 威胁模型、安全路线图、安全报告</li>
+    <li><a href="setup.html">配置指南</a> — 配置安全设置</li>
+    <li><a href="troubleshooting.html">故障排除</a> — 修复安全问题</li>
+  </ul>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文文档站 · 基于 openclaw-ai.online 翻译 · MIT 开源协议</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

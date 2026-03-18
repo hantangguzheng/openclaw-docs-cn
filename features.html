@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>功能特性 - OpenClaw AI 中文文档</title>
+  <meta name="description" content="OpenClaw 完整功能介绍：浏览器自动化、画布交互、语音对话、长期记忆、多渠道支持、自动化任务等。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🦞</span>
+      <span class="logo-text">OpenClaw</span>
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="features.html" class="active">功能特性</a></li>
+      <li><a href="security.html">安全</a></li>
+      <li><a href="setup.html">安装指南</a></li>
+      <li><a href="alternatives.html">竞品对比</a></li>
+      <li><a href="troubleshooting.html">故障排除</a></li>
+      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <h1>功能特性</h1>
+    <p>OpenClaw 的完整功能一览——本地优先、多渠道、可扩展。</p>
+  </div>
+</header>
+
+<div class="article-content">
+
+  <!-- 集成一览 -->
+  <h2>📡 集成一览</h2>
+  <p>OpenClaw 连接 50+ 渠道、技能和模型提供商。按类别浏览：</p>
+  <ul>
+    <li><strong>渠道</strong> — WhatsApp、Telegram、Discord、Slack、Signal、iMessage、Teams、WebChat、Matrix、Zalo 等</li>
+    <li><strong>技能</strong> — ClawHub 注册表（5000+ 技能）、生产力、开发、媒体、渠道类；使用 <code>npx clawdhub@latest install</code> 安装</li>
+    <li><strong>模型提供商</strong> — Anthropic、OpenAI、Ollama、Gemini 及 40+ 其他；支持分级路由和故障转移</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 核心平台 -->
+  <h2>⚙️ 核心平台</h2>
+
+  <h3>Gateway 网关</h3>
+  <p>WebSocket 管理层，提供会话管理、在线状态跟踪、配置控制、定时任务、Webhook 支持、控制界面、Canvas 托管，以及带有 token 使用量仪表板的 Web UI。</p>
+
+  <h3>命令行界面</h3>
+  <p>网关管理、Agent 控制、消息发送、安装向导和诊断命令。</p>
+
+  <h3>Agent 运行时</h3>
+  <p>以 RPC 模式运行的 Agent 运行时环境，支持工具流式输出和分块流式输出。</p>
+
+  <h3>会话架构</h3>
+  <p>主会话（直接对话）、隔离的群组会话、可配置的激活模式、队列管理和回复处理。</p>
+
+  <h3>主动运行</h3>
+  <p>Agent 可以按计划运行（心跳、定时任务），无需你发起对话即可"醒来"执行任务、简报或检查。参见<a href="#automation">自动化</a>部分。支持非阻塞模式——你发送请求后可以继续工作，Agent 在后台运行。</p>
+
+  <h3>媒体处理</h3>
+  <p>图像、音频和视频处理，带转录集成、文件大小限制和临时文件管理。</p>
+
+  <div class="divider"></div>
+
+  <!-- 工具与自动化 -->
+  <h2>🛠️ 工具与自动化</h2>
+
+  <h3 id="browser">浏览器自动化</h3>
+  <p>独立的 Chrome/Chromium 浏览器实例，提供全面的自动化功能：</p>
+  <ul>
+    <li>自动网页导航和页面交互</li>
+    <li>表单填写和自动提交</li>
+    <li>网站数据提取和解析</li>
+    <li>屏幕截图和快照生成</li>
+    <li>自动化文件上传</li>
+    <li>浏览器配置文件配置和管理</li>
+  </ul>
+
+  <h3>交互式画布 (Canvas)</h3>
+  <p>Agent 使用 A2UI 框架控制的动态可视化工作空间：</p>
+  <ul>
+    <li>A2UI 界面推送和重置操作</li>
+    <li>浏览器内 JavaScript 代码执行</li>
+    <li>画布状态捕获和快照功能</li>
+    <li>Agent 操作的视觉交互环境</li>
+  </ul>
+
+  <h3 id="automation">定时任务与自动化</h3>
+  <ul>
+    <li><strong>Cron 任务</strong> — 安排重复性任务</li>
+    <li><strong>唤醒</strong> — Agent 定时唤醒执行任务</li>
+    <li><strong>Webhook</strong> — 通过 HTTP 端点的外部触发器</li>
+    <li><strong>Gmail Pub/Sub</strong> — 实时邮件触发</li>
+  </ul>
+
+  <h3>技能平台</h3>
+  <ul>
+    <li>内置、管理和工作区技能</li>
+    <li>安装门控和 UI</li>
+    <li>社区技能注册表（ClawHub）</li>
+    <li>自我改进：可编写自己的技能</li>
+  </ul>
+
+  <div class="alert alert-info">
+    实际使用中：我用浏览器自动化来做研究和数据抓取；用定时任务做每日简报和多 Agent 心跳设置。技能是大部分"魔法"所在——浏览 ClawHub 找社区技能，或让 OpenClaw 为你写一个。
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 语音与语音 -->
+  <h2>🎤 语音与语音</h2>
+
+  <h3>语音唤醒</h3>
+  <p>macOS/iOS/Android 始终在线的语音识别：</p>
+  <ul>
+    <li>持续监听</li>
+    <li>唤醒词检测</li>
+    <li>按键说话支持</li>
+    <li>多语言支持</li>
+  </ul>
+
+  <h3>对话模式 (Talk Mode)</h3>
+  <p>使用 ElevenLabs 文字转语音进行持续对话：</p>
+  <ul>
+    <li>语音回复</li>
+    <li>音频消息支持</li>
+    <li>自定义语音配置</li>
+    <li>自然对话流程</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 记忆与上下文 -->
+  <h2>🧠 记忆与上下文</h2>
+
+  <h3>持久记忆</h3>
+  <ul>
+    <li>记住你，成为专属于你的 AI</li>
+    <li>你的偏好、你的上下文、你的助手</li>
+    <li>24/7 全天候跨会话保持上下文</li>
+  </ul>
+
+  <h3>记忆文件</h3>
+  <ul>
+    <li>每日自动生成的 Markdown 格式笔记</li>
+    <li>纯文本交互日志</li>
+    <li>可搜索、可编辑</li>
+    <li>可与 Obsidian、Raycast 或 Hazel 集成</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 技能与扩展 -->
+  <h2>🔌 技能与扩展</h2>
+
+  <h3>技能平台</h3>
+  <p>用社区技能扩展或自己构建：</p>
+  <ul>
+    <li>自我改进：可编写自己的技能</li>
+    <li>告诉它需要什么功能，它来创建代码</li>
+    <li>技能存储在工作区目录</li>
+  </ul>
+
+  <h3>ClawHub</h3>
+  <p>锐利助手的技能码头——OpenClaw 技能社区仓库，拥有 5000+ 社区构建的技能。</p>
+  <ul>
+    <li>浏览和搜索按类别组织的 5000+ 技能</li>
+    <li>一条命令安装：<code>npx clawdhub@latest install</code></li>
+    <li>Agent 可自动搜索技能</li>
+    <li>像 npm 包一样版本管理</li>
+    <li>来自全球开发者的社区贡献技能</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 系统访问 -->
+  <h2>💻 系统访问</h2>
+
+  <h3>完整系统访问</h3>
+  <ul>
+    <li>读写文件</li>
+    <li>运行 Shell 命令</li>
+    <li>执行脚本</li>
+    <li>设置定时任务</li>
+    <li>自动化工作流</li>
+    <li>完全访问或沙箱隔离——由你选择</li>
+    <li>可通过修改自身配置实现自我改进</li>
+  </ul>
+
+  <h3>浏览器控制</h3>
+  <ul>
+    <li>浏览网页</li>
+    <li>填写表单</li>
+    <li>从任何网站提取数据</li>
+    <li>完整自动化能力</li>
+    <li>专用 Chrome/Chromium 实例</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 应用与节点 -->
+  <h2>📱 应用与节点</h2>
+
+  <h3>macOS 应用</h3>
+  <ul>
+    <li>菜单栏控制面板</li>
+    <li>语音唤醒/按键说话</li>
+    <li>对话模式悬浮层</li>
+    <li>WebChat + 调试工具</li>
+    <li>通过 SSH 远程控制网关</li>
+  </ul>
+
+  <h3>iOS 节点</h3>
+  <ul>
+    <li>通过 Bridge 配对为节点</li>
+    <li>画布界面</li>
+    <li>语音唤醒</li>
+    <li>对话模式</li>
+    <li>相机和屏幕录制</li>
+    <li>Bonjour 配对</li>
+  </ul>
+
+  <h3>Android 节点</h3>
+  <ul>
+    <li>通过 Bridge + 配对流程配对（与 iOS 相同）</li>
+    <li>提供画布、相机和屏幕捕获命令</li>
+    <li>对话模式支持</li>
+    <li>可选 SMS 支持</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- 多 Agent 与路由 -->
+  <h2>🤖 多 Agent 与路由</h2>
+  <ul>
+    <li><strong>多 Agent 路由</strong> — 将入站渠道/账户/联系人路由到隔离的 Agent 实例</li>
+    <li><strong>工作区</strong> — 每个 Agent 的独立会话和隔离</li>
+    <li><strong>会话工具</strong> — sessions_list、sessions_history、sessions_send 用于 Agent 间通信</li>
+    <li><strong>群组路由</strong> — 提及门控、回复标签、按渠道分块</li>
+  </ul>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>OpenClaw 中文文档站 · 基于 openclaw-ai.online 翻译 · MIT 开源协议</p>
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="features.html">功能</a>
+      <a href="security.html">安全</a>
+      <a href="setup.html">安装</a>
+      <a href="alternatives.html">竞品</a>
+      <a href="troubleshooting.html">故障排除</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
