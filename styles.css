@@ -965,3 +965,386 @@ li {
 .fade-in-up {
   animation: fadeInUp 0.6s ease forwards;
 }
+
+/* ========================================
+   移动端适配增强
+   ======================================== */
+
+/* 移动端导航优化 */
+@media (max-width: 768px) {
+  /* 导航栏 */
+  .navbar {
+    padding: 0 16px;
+  }
+  
+  .nav-container {
+    height: 56px;
+  }
+  
+  .nav-logo .logo-text {
+    font-size: 18px;
+  }
+  
+  /* 移动端菜单按钮 */
+  .nav-toggle {
+    display: flex !important;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--text-primary);
+  }
+  
+  /* 导航菜单 */
+  .nav-links {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 12px 16px;
+    gap: 4px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .nav-links.open {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .nav-links li {
+    width: 100%;
+  }
+  
+  .nav-links a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+  
+  /* 英雄区域 */
+  .hero {
+    padding: 90px 16px 40px;
+    min-height: auto;
+  }
+  
+  .hero h1 {
+    font-size: 28px !important;
+    line-height: 1.3;
+  }
+  
+  .hero p {
+    font-size: 15px !important;
+  }
+  
+  .hero-emoji {
+    font-size: 60px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+    text-align: center;
+  }
+  
+  /* 特性卡片网格 */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  /* 集成图标网格 */
+  .integrations-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 16px;
+  }
+  
+  /* 统计数据 */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  .stat-number {
+    font-size: 28px;
+  }
+  
+  /* 区块标题 */
+  .section-title {
+    font-size: 24px;
+    padding: 0 16px;
+  }
+  
+  .section-subtitle {
+    font-size: 14px;
+    padding: 0 16px;
+  }
+  
+  /* 底部 */
+  .footer-content {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 16px;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .footer-bottom {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  /* 内容页面 */
+  .article-content {
+    padding: 80px 16px 40px;
+  }
+  
+  .article-content h1 {
+    font-size: 26px;
+  }
+  
+  .article-content h2 {
+    font-size: 20px;
+    margin-top: 32px;
+  }
+  
+  .article-content h3 {
+    font-size: 17px;
+  }
+  
+  .article-content p {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  
+  /* 代码块 */
+  .code-block {
+    padding: 16px;
+    font-size: 13px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 对比表格 */
+  .comparison-table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 8px;
+    min-width: 80px;
+  }
+  
+  /* Prompt 工具 */
+  .prompt-form {
+    padding: 16px;
+  }
+  
+  .prompt-form label {
+    font-size: 14px;
+  }
+  
+  .prompt-form select,
+  .prompt-form textarea,
+  .prompt-form input {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
+  .prompt-result {
+    padding: 16px;
+    font-size: 14px;
+  }
+  
+  /* 案例卡片 */
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  .case-card {
+    padding: 16px;
+  }
+  
+  /* 行业应用 */
+  .industry-section {
+    padding: 16px;
+  }
+  
+  /* Tab 切换 */
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+  
+  .tab {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  /* 统计卡片 */
+  .analytics-card {
+    padding: 16px;
+  }
+  
+  /* 评论区域 */
+  .comments-section {
+    padding: 16px;
+  }
+  
+  .comment-form textarea {
+    font-size: 15px;
+    padding: 12px;
+  }
+  
+  /* FAQ */
+  .faq-item {
+    padding: 16px;
+  }
+  
+  .faq-question {
+    font-size: 15px;
+  }
+}
+
+/* 超小屏幕 */
+@media (max-width: 375px) {
+  .hero h1 {
+    font-size: 24px !important;
+  }
+  
+  .integrations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-links a {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* 平板横屏 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .nav-links a {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* 触摸友好 */
+@media (hover: none) and (pointer: coarse) {
+  /* 移除悬停效果，使用点击效果 */
+  .feature-card:hover,
+  .integration-item:hover,
+  .case-card:hover {
+    transform: none;
+  }
+  
+  /* 添加点击反馈 */
+  .feature-card:active,
+  .integration-item:active,
+  .case-card:active,
+  .btn-primary:active,
+  .btn-secondary:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  
+  /* 增大触摸目标 */
+  .nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  button, a {
+    min-height: 44px;
+  }
+}
+
+/* 安全区域适配 (iPhone刘海屏) */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  
+  .article-content {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+}
+
+/* 深色模式优化 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* 减少动画 (无障碍) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 滚动条美化 */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
