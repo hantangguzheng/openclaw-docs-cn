@@ -1,0 +1,14 @@
+# robots.txt for ai-openclaw.info
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ai-openclaw.info/sitemap.xml
+
+# Crawl-delay (optional)
+Crawl-delay: 1
+
+# Disallow unnecessary paths
+Disallow: /scripts/
+Disallow: /api/

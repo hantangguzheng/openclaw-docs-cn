@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>OpenClaw中文网</title>
+    <link>https://ai-openclaw.info</link>
+    <description>OpenClaw私有化部署的个人AI助手中文教程、技巧和最新资讯</description>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0800</lastBuildDate>
+    <item>
+      <title>OpenClaw v2026.3.13 新版本发布</title>
+      <link>https://ai-openclaw.info/tutorial.html</link>
+      <description>OpenClaw最新版本带来Telegram/Discord修复、安全修复和新功能</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 +0800</pubDate>
+    </item>
+    <item>
+      <title>如何在Windows上安装OpenClaw</title>
+      <link>https://ai-openclaw.info/setup.html</link>
+      <description>完整指南：在Windows系统上安装和配置OpenClaw AI助手</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 +0800</pubDate>
+    </item>
+    <item>
+      <title>OpenClaw vs 其他AI助手对比</title>
+      <link>https://ai-openclaw.info/pages/compare.html</link>
+      <description>详细对比OpenClaw与ChatGPT Desktop、Claude Desktop等竞品的优劣</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 +0800</pubDate>
+    </item>
+  </channel>
+</rss>
