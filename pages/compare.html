@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>对比评测 - OpenClaw AI 中文站</title>
-  <meta name="description" content="OpenClaw 与 Veo 3、Runway、Sora 等竞品的详细对比评测，突出音视频同步、物理模拟等核心优势。">
+  <title>OpenClaw vs ChatGPT vs Claude vs Copilot | 自托管AI助手对比评测</title>
+  <meta name="description" content="OpenClaw 与 ChatGPT Desktop、Claude Desktop、GitHub Copilot、Cursor 等主流 AI 助手的深度对比。自托管 AI 的隐私优势、本地运行、多平台集成全面解析。">
+  <meta name="keywords" content="OpenClaw对比,ChatGPT替代品,Claude本地部署,自托管AI助手,本地AI,AI助手对比,Copilot替代,Cursor对比,私有化AI">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ai-openclaw.info/pages/compare.html">
+  <meta property="og:title" content="OpenClaw vs ChatGPT vs Claude vs Copilot | 自托管AI助手全面对比">
+  <meta property="og:description" content="为什么越来越多的开发者和用户选择 OpenClaw 而非 ChatGPT Desktop？本文从隐私、功能、成本、扩展性四个维度深度对比主流 AI 助手。">
+  <meta property="og:url" content="https://ai-openclaw.info/pages/compare.html">
   <link rel="stylesheet" href="../styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
   <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
@@ -21,22 +27,26 @@
     .cons h4{color:#ef4444;margin-bottom:12px;font-size:15px}
     .pros li,.cons li{color:var(--text-secondary);margin-bottom:6px}
     .comparison-hero{background:linear-gradient(135deg,rgba(255,107,53,0.1),rgba(167,139,250,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:40px;margin:32px 0;text-align:center}
-    .vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin:40px 0}
-    .vs-item{padding:24px;background:var(--bg-card);border-radius:var(--radius);text-align:center}
-    .vs-item h3{font-size:20px;margin-bottom:8px}
-    .vs-item p{color:var(--text-secondary);font-size:14px}
-    .vs-badge{font-size:28px;font-weight:800;color:var(--primary)}
-    .feature-comp{margin-top:32px}
-    .feature-row{display:grid;grid-template-columns:200px repeat(4,1fr);gap:0;border-bottom:1px solid var(--border)}
-    .feat-label{padding:14px 16px;font-weight:600;font-size:14px;color:var(--text-primary);background:var(--bg-card)}
-    .feat-cell{padding:14px 12px;font-size:13px;color:var(--text-secondary);text-align:center;display:flex;align-items:center;justify-content:center}
-    .feat-header{font-weight:700;font-size:14px;padding:16px;text-align:center;background:rgba(255,107,53,0.08)}
-    .feat-header:first-child{color:var(--text-muted)}
-    .check{color:var(--accent-green);font-size:18px}
-    .cross{color:#ef4444;font-size:18px}
+    .feature-comp{margin-top:32px;overflow-x:auto}
+    .feature-table{width:100%;border-collapse:collapse;font-size:14px}
+    .feature-table th{padding:14px 16px;text-align:center;background:rgba(255,107,53,0.08);font-weight:700;color:var(--text-primary);border-bottom:2px solid var(--border)}
+    .feature-table th:first-child{text-align:left}
+    .feature-table td{padding:13px 16px;border-bottom:1px solid var(--border);text-align:center;color:var(--text-secondary)}
+    .feature-table td:first-child{text-align:left;font-weight:600;color:var(--text-primary);background:var(--bg-card)}
+    .feature-table tr:hover td{background:rgba(255,107,53,0.04)}
+    .feature-table td.openclaw-col{background:rgba(255,107,53,0.05)}
     .highlight-box{background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(251,191,36,0.1));border:1px solid rgba(255,107,53,0.3);border-radius:var(--radius);padding:32px;margin:32px 0}
     .highlight-box h3{color:var(--primary);margin-bottom:16px}
-    @media(max-width:768px){.feature-row{grid-template-columns:1fr}.feat-cell{text-align:left;justify-content:flex-start}.pros-cons{grid-template-columns:1fr}.vs-grid{grid-template-columns:1fr}.vs-badge{display:none}}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:24px 0}
+    .score-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+    .score-card.top{border-top:3px solid var(--accent-green)}
+    .score-num{font-size:40px;font-weight:800;margin:8px 0}
+    .score-label{font-size:13px;color:var(--text-muted)}
+    .vs-section{margin:48px 0}
+    .vs-section h2{font-size:22px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .verdict-box{background:var(--bg-card);border:1px solid var(--accent-green);border-radius:var(--radius);padding:24px;margin:24px 0}
+    .verdict-box h4{color:var(--accent-green);margin-bottom:10px}
+    @media(max-width:768px){.pros-cons{grid-template-columns:1fr}.score-grid{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
@@ -52,8 +62,8 @@
       <li><a href="prompt-tool.html">Prompt工具</a></li>
       <li><a href="showcase.html">案例展示</a></li>
       <li><a href="compare.html" class="active">对比评测</a></li>
-      <li><a href="industry.html">行业应用</a>
-      <li><a href="pages/industry.html">社区论坛</a></li></li>
+      <li><a href="industry.html">行业应用</a></li>
+      <li><a href="../forum/index.html">社区论坛</a></li>
       <li><a href="../security.html">安全</a></li>
       <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
     </ul>
@@ -63,212 +73,315 @@
 <div class="page-header">
   <div class="container">
     <h1>⚔️ 对比评测</h1>
-    <p>OpenClaw 与主流 AI 视频生成工具的详细对比</p>
+    <p>OpenClaw 与 ChatGPT、Claude Desktop、Copilot、Cursor 等 AI 助手的深度横评</p>
   </div>
 </div>
 
 <div class="compare-page article-content">
 
-  <h2>🦞 OpenClaw vs Runway Gen-3 vs Sora vs Veo 3</h2>
-
   <div class="comparison-hero">
     <div style="font-size:48px;margin-bottom:16px;">🦞</div>
-    <h3 style="margin-bottom:8px;">OpenClaw Video 模型</h3>
-    <p style="color:var(--text-secondary);">完全开源 · 本地运行 · MIT 协议</p>
-    <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <span style="background:rgba(74,222,128,0.15);color:var(--accent-green);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 完全开源</span>
-      <span style="background:rgba(77,166,255,0.15);color:var(--accent-blue);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 本地部署</span>
-      <span style="background:rgba(167,139,250,0.15);color:var(--accent-purple);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 隐私保护</span>
-      <span style="background:rgba(255,107,53,0.15);color:var(--primary);padding:4px 12px;border-radius:6px;font-size:13px;">✅ 音视频同步</span>
+    <h2 style="margin-bottom:8px;">为什么选择自托管 AI 助手？</h2>
+    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto 20px;">OpenClaw 是唯一一款真正在本地运行、数据不离开设备、支持 50+ 平台的开源 AI 个人助手。</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <span style="background:rgba(74,222,128,0.15);color:var(--accent-green);padding:4px 14px;border-radius:6px;font-size:13px;">✅ 完全开源 MIT</span>
+      <span style="background:rgba(77,166,255,0.15);color:var(--accent-blue);padding:4px 14px;border-radius:6px;font-size:13px;">✅ 本地运行不联云</span>
+      <span style="background:rgba(167,139,250,0.15);color:var(--accent-purple);padding:4px 14px;border-radius:6px;font-size:13px;">✅ 50+ 平台集成</span>
+      <span style="background:rgba(255,107,53,0.15);color:var(--primary);padding:4px 14px;border-radius:6px;font-size:13px;">✅ 长期记忆学习</span>
     </div>
   </div>
 
-  <div class="vs-grid">
-    <div class="vs-item">
-      <div style="font-size:40px;margin-bottom:12px;">🦞</div>
-      <h3>OpenClaw</h3>
-      <p>本地运行，完全可控</p>
-    </div>
-    <div class="vs-badge">VS</div>
-    <div class="vs-item">
-      <div style="font-size:40px;margin-bottom:12px;">🎬</div>
-      <h3>Runway Gen-3</h3>
-      <p>云端服务，需付费订阅</p>
-    </div>
-  </div>
+  <!-- 综合对比表格 -->
+  <h2>📊 核心功能全面对比</h2>
+  <p style="color:var(--text-secondary);margin-bottom:24px;">以下对比覆盖隐私保护、平台集成、扩展能力、成本等关键维度（数据截至 2026 年 3 月）</p>
 
   <div class="feature-comp">
-    <div class="feature-row" style="background:var(--bg-card);border-radius:var(--radius) var(--radius) 0 0;">
-      <div class="feat-header">功能对比</div>
-      <div class="feat-header">OpenClaw</div>
-      <div class="feat-header">Runway</div>
-      <div class="feat-header">Sora</div>
-      <div class="feat-header">Veo 3</div>
+    <table class="feature-table">
+      <thead>
+        <tr>
+          <th style="min-width:160px;">功能维度</th>
+          <th style="min-width:130px;">🦞 OpenClaw</th>
+          <th style="min-width:130px;">ChatGPT Desktop</th>
+          <th style="min-width:130px;">Claude Desktop</th>
+          <th style="min-width:130px;">GitHub Copilot</th>
+          <th style="min-width:130px;">Cursor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>开源免费</td>
+          <td class="openclaw-col winner">✅ MIT 完全开源</td>
+          <td class="loser">❌ 闭源付费</td>
+          <td class="loser">❌ 闭源付费</td>
+          <td class="loser">❌ 闭源付费</td>
+          <td class="partial">⚠️ 部分开源</td>
+        </tr>
+        <tr>
+          <td>本地运行</td>
+          <td class="openclaw-col winner">✅ 完全本地</td>
+          <td class="loser">❌ 云端处理</td>
+          <td class="loser">❌ 云端处理</td>
+          <td class="loser">❌ 云端处理</td>
+          <td class="loser">❌ 云端处理</td>
+        </tr>
+        <tr>
+          <td>隐私保护</td>
+          <td class="openclaw-col winner">✅ 数据不离设备</td>
+          <td class="loser">❌ 数据上传 OpenAI</td>
+          <td class="loser">❌ 数据上传 Anthropic</td>
+          <td class="loser">❌ 数据上传 GitHub</td>
+          <td class="partial">⚠️ 可选关闭遥测</td>
+        </tr>
+        <tr>
+          <td>消息平台集成</td>
+          <td class="openclaw-col winner">✅ 50+ 平台</td>
+          <td class="partial">⚠️ 仅 ChatGPT App</td>
+          <td class="partial">⚠️ 仅 Claude App</td>
+          <td class="loser">❌ 仅编辑器</td>
+          <td class="loser">❌ 仅编辑器</td>
+        </tr>
+        <tr>
+          <td>长期记忆</td>
+          <td class="openclaw-col winner">✅ Markdown 持久记忆</td>
+          <td class="partial">⚠️ 有限记忆（Plus）</td>
+          <td class="loser">❌ 无长期记忆</td>
+          <td class="loser">❌ 无记忆</td>
+          <td class="partial">⚠️ 项目内上下文</td>
+        </tr>
+        <tr>
+          <td>浏览器自动化</td>
+          <td class="openclaw-col winner">✅ 完整支持</td>
+          <td class="partial">⚠️ 有限（Plus）</td>
+          <td class="loser">❌ 不支持</td>
+          <td class="loser">❌ 不支持</td>
+          <td class="loser">❌ 不支持</td>
+        </tr>
+        <tr>
+          <td>技能/插件扩展</td>
+          <td class="openclaw-col winner">✅ 5000+ 社区技能</td>
+          <td class="partial">⚠️ GPT Store</td>
+          <td class="partial">⚠️ MCP 插件</td>
+          <td class="partial">⚠️ 编辑器插件</td>
+          <td class="partial">⚠️ 内置工具集</td>
+        </tr>
+        <tr>
+          <td>AI 自编程技能</td>
+          <td class="openclaw-col winner">✅ AI 自动生成技能</td>
+          <td class="loser">❌ 不支持</td>
+          <td class="loser">❌ 不支持</td>
+          <td class="loser">❌ 不支持</td>
+          <td class="loser">❌ 不支持</td>
+        </tr>
+        <tr>
+          <td>系统命令执行</td>
+          <td class="openclaw-col winner">✅ 完整系统访问</td>
+          <td class="loser">❌ 沙箱受限</td>
+          <td class="loser">❌ 沙箱受限</td>
+          <td class="loser">❌ 仅代码建议</td>
+          <td class="partial">⚠️ 终端执行</td>
+        </tr>
+        <tr>
+          <td>多模型支持</td>
+          <td class="openclaw-col winner">✅ Claude/GPT/本地模型</td>
+          <td class="loser">❌ 仅 OpenAI</td>
+          <td class="loser">❌ 仅 Anthropic</td>
+          <td class="loser">❌ 仅 Copilot</td>
+          <td class="partial">⚠️ 多模型可选</td>
+        </tr>
+        <tr>
+          <td>群组/团队使用</td>
+          <td class="openclaw-col winner">✅ 群聊集成</td>
+          <td class="partial">⚠️ Teams 版</td>
+          <td class="loser">❌ 个人使用</td>
+          <td class="partial">⚠️ 企业版</td>
+          <td class="partial">⚠️ 团队版</td>
+        </tr>
+        <tr>
+          <td>月费成本（最低）</td>
+          <td class="openclaw-col winner" style="color:var(--accent-green);font-weight:700;">免费（+API 费用）</td>
+          <td class="loser">$20/月</td>
+          <td class="loser">$20/月</td>
+          <td class="loser">$10/月</td>
+          <td class="loser">$20/月</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 综合评分 -->
+  <h2 style="margin-top:60px;">🏆 综合评分（自托管场景）</h2>
+  <div class="score-grid">
+    <div class="score-card top">
+      <div style="font-size:36px;">🦞</div>
+      <h3 style="margin:8px 0;">OpenClaw</h3>
+      <div class="score-num" style="color:var(--accent-green);">9.4</div>
+      <div class="score-label">自托管 · 隐私优先 · 极高扩展性</div>
     </div>
-    <div class="feature-row">
-      <div class="feat-label">开源免费</div>
-      <div class="feat-cell winner">✅ 完全开源</div>
-      <div class="feat-cell loser">❌ 付费订阅</div>
-      <div class="feat-cell loser">❌ 付费内测</div>
-      <div class="feat-cell loser">❌ Google 独占</div>
+    <div class="score-card">
+      <div style="font-size:36px;">🤖</div>
+      <h3 style="margin:8px 0;">ChatGPT Desktop</h3>
+      <div class="score-num" style="color:var(--accent-yellow);">8.2</div>
+      <div class="score-label">功能完善 · 付费订阅 · 云端依赖</div>
     </div>
-    <div class="feature-row">
-      <div class="feat-label">本地部署</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell loser">❌ 仅云端</div>
-      <div class="feat-cell loser">❌ 仅云端</div>
-      <div class="feat-cell loser">❌ 仅云端</div>
+    <div class="score-card">
+      <div style="font-size:36px;">🔮</div>
+      <h3 style="margin:8px 0;">Claude Desktop</h3>
+      <div class="score-num" style="color:var(--accent-yellow);">8.0</div>
+      <div class="score-label">质量高 · 上下文长 · 功能有限</div>
     </div>
-    <div class="feature-row">
-      <div class="feat-label">隐私保护</div>
-      <div class="feat-cell winner">✅ 数据不离本地</div>
-      <div class="feat-cell partial">⚠️ 云端处理</div>
-      <div class="feat-cell loser">❌ 云端处理</div>
-      <div class="feat-cell loser">❌ 云端处理</div>
+    <div class="score-card">
+      <div style="font-size:36px;">💻</div>
+      <h3 style="margin:8px 0;">GitHub Copilot</h3>
+      <div class="score-num" style="color:var(--accent-blue);">7.8</div>
+      <div class="score-label">代码场景强 · 通用性弱</div>
     </div>
-    <div class="feature-row">
-      <div class="feat-label">音视频同步</div>
-      <div class="feat-cell winner">✅ 优秀</div>
-      <div class="feat-cell partial">⚠️ 基础支持</div>
-      <div class="feat-cell partial">⚠️ 基础支持</div>
-      <div class="feat-cell partial">⚠️ 基础支持</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">物理模拟</div>
-      <div class="feat-cell winner">✅ 优秀</div>
-      <div class="feat-cell partial">⚠️ 一般</div>
-      <div class="feat-cell partial">⚠️ 一般</div>
-      <div class="feat-cell partial">⚠️ 一般</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">文字转视频</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">图片转视频</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">API 接口</div>
-      <div class="feat-cell winner">✅ 完整开放</div>
-      <div class="feat-cell partial">⚠️ 付费 API</div>
-      <div class="feat-cell loser">❌ 未开放</div>
-      <div class="feat-cell loser">❌ 未开放</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">可定制性</div>
-      <div class="feat-cell winner">✅ 完全可定制</div>
-      <div class="feat-cell loser">❌ 受限</div>
-      <div class="feat-cell loser">❌ 受限</div>
-      <div class="feat-cell loser">❌ 受限</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">响应速度</div>
-      <div class="feat-cell winner">✅ 本地极速</div>
-      <div class="feat-cell partial">⚠️ 依赖网络</div>
-      <div class="feat-cell partial">⚠️ 依赖网络</div>
-      <div class="feat-cell partial">⚠️ 依赖网络</div>
-    </div>
-    <div class="feature-row">
-      <div class="feat-label">多模态支持</div>
-      <div class="feat-cell winner">✅ 全面支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-      <div class="feat-cell winner">✅ 支持</div>
-    </div>
-    <div class="feature-row" style="border-radius:0 0 var(--radius) var(--radius);">
-      <div class="feat-label">商业授权</div>
-      <div class="feat-cell winner">✅ MIT 自由使用</div>
-      <div class="feat-cell loser">⚠️ 需购买许可</div>
-      <div class="feat-cell loser">⚠️ 需购买许可</div>
-      <div class="feat-cell loser">⚠️ 需购买许可</div>
+    <div class="score-card">
+      <div style="font-size:36px;">↗️</div>
+      <h3 style="margin:8px 0;">Cursor</h3>
+      <div class="score-num" style="color:var(--accent-blue);">8.1</div>
+      <div class="score-label">开发工具优秀 · 仅限编程场景</div>
     </div>
   </div>
 
-  <h2 style="margin-top:60px;">🏆 OpenClaw 核心优势</h2>
+  <!-- 各场景深度对比 -->
+  <div class="vs-section">
+    <h2>🦞 OpenClaw vs ChatGPT Desktop</h2>
+    <p style="color:var(--text-secondary);margin-bottom:24px;">ChatGPT Desktop 是目前最知名的 AI 助手，但 OpenClaw 在隐私保护和平台集成上具有明显优势。</p>
+
+    <div class="highlight-box">
+      <h3>OpenClaw 核心优势</h3>
+      <ul style="color:var(--text-secondary);line-height:2;">
+        <li><strong style="color:var(--text-primary);">数据主权：</strong>所有对话、记忆完全存储在本地，不经过任何第三方服务器。ChatGPT 默认会将对话用于模型训练（除非手动关闭）。</li>
+        <li><strong style="color:var(--text-primary);">跨平台集成：</strong>在 WhatsApp、Telegram、Discord 等 50+ 平台直接使用，无需切换 App。ChatGPT 需要单独打开应用。</li>
+        <li><strong style="color:var(--text-primary);">长期记忆更可靠：</strong>以 Markdown 文件方式存储记忆，可手动编辑、搜索、与 Obsidian 同步。ChatGPT 的记忆功能在免费版中受限。</li>
+        <li><strong style="color:var(--text-primary);">零订阅费用：</strong>OpenClaw 本身完全免费，只需支付所选 AI 模型的 API 费用（按量计费，通常比 $20/月 订阅便宜）。</li>
+      </ul>
+    </div>
+
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>✅ 选择 OpenClaw 的理由</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>· 数据永远不离开你的设备</li>
+          <li>· 在 Telegram/Discord 等直接使用</li>
+          <li>· AI 自编写新功能技能</li>
+          <li>· 浏览器自动化、系统命令</li>
+          <li>· 自由选择 Claude / GPT / 本地模型</li>
+          <li>· 无月费，按使用付费</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>⚠️ ChatGPT Desktop 的优势</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>· 界面更精致，上手更快</li>
+          <li>· DALL·E 图像生成集成</li>
+          <li>· 语音模式体验更流畅</li>
+          <li>· 无需配置，开箱即用</li>
+          <li>· 大量现成的 GPT Store 插件</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <h4>🎯 结论</h4>
+      <p style="color:var(--text-secondary);">如果你在意数据隐私、需要多平台集成、或想要无限扩展 AI 能力，OpenClaw 是更好的选择。如果你只是偶尔使用 AI 聊天，不想折腾配置，ChatGPT Desktop 更省心。</p>
+    </div>
+  </div>
+
+  <div class="vs-section">
+    <h2>🦞 OpenClaw vs Claude Desktop</h2>
+    <p style="color:var(--text-secondary);margin-bottom:24px;">Claude Desktop 借助 MCP（Model Context Protocol）提供了强大的工具调用能力，但 OpenClaw 的架构更加开放和灵活。</p>
+
+    <div class="highlight-box">
+      <h3>关键差异对比</h3>
+      <ul style="color:var(--text-secondary);line-height:2;">
+        <li><strong style="color:var(--text-primary);">模型选择自由度：</strong>OpenClaw 同时支持 Claude、GPT、Gemini 及本地模型（Ollama），而 Claude Desktop 只能使用 Anthropic 的模型。</li>
+        <li><strong style="color:var(--text-primary);">消息平台接入：</strong>OpenClaw 可以在 WhatsApp、Telegram 等平台工作，Claude Desktop 只是一个独立桌面应用。</li>
+        <li><strong style="color:var(--text-primary);">技能市场：</strong>ClawHub 提供 5000+ 社区技能，Claude 的 MCP 工具生态虽在成长但相对有限。</li>
+        <li><strong style="color:var(--text-primary);">长期记忆：</strong>OpenClaw 有成熟的持久化记忆系统，Claude Desktop 目前缺乏跨会话记忆。</li>
+      </ul>
+    </div>
+
+    <div class="verdict-box">
+      <h4>🎯 结论</h4>
+      <p style="color:var(--text-secondary);">两者并非完全竞争关系——OpenClaw 甚至可以调用 Claude API 作为后端模型。如果你喜欢 Claude 的质量，但想要更强的扩展性和多平台集成，OpenClaw + Claude API 是最佳组合。</p>
+    </div>
+  </div>
+
+  <div class="vs-section">
+    <h2>🦞 OpenClaw vs GitHub Copilot / Cursor</h2>
+    <p style="color:var(--text-secondary);margin-bottom:24px;">Copilot 和 Cursor 是面向开发者的专业编程工具，而 OpenClaw 是通用型个人 AI 助手，两者定位不同但有一定重叠。</p>
+
+    <div class="highlight-box">
+      <h3>场景对比</h3>
+      <ul style="color:var(--text-secondary);line-height:2;">
+        <li><strong style="color:var(--text-primary);">代码补全：</strong>Copilot 和 Cursor 在 IDE 内嵌代码补全体验更流畅。但 OpenClaw 可通过 GitHub 技能批量管理仓库、自动提 PR、代码审查。</li>
+        <li><strong style="color:var(--text-primary);">工作流自动化：</strong>OpenClaw 可以跨越编辑器边界，整合 GitHub + Slack + Email + Calendar，实现完整的工作流自动化。</li>
+        <li><strong style="color:var(--text-primary);">学习曲线：</strong>Copilot/Cursor 几乎零配置。OpenClaw 需要初始设置，但配置完成后能力更全面。</li>
+      </ul>
+    </div>
+
+    <div class="verdict-box">
+      <h4>🎯 结论</h4>
+      <p style="color:var(--text-secondary);">OpenClaw 和 Copilot/Cursor 可以共存：用编程专属工具完成代码编写，用 OpenClaw 处理超出编辑器范畴的任务（沟通协调、文件管理、跨平台自动化）。对于开发者来说，两者互补而非替代。</p>
+    </div>
+  </div>
+
+  <!-- 自托管 AI 优势说明 -->
+  <h2 style="margin-top:60px;">🔒 自托管 AI 的五大核心优势</h2>
 
   <div class="highlight-box">
-    <h3>🎵 1. 音视频完美同步</h3>
-    <p style="color:var(--text-secondary);">OpenClaw 在业界领先的音视频同步技术上投入了大量研发资源。与其他工具简单的配音方案不同，OpenClaw 的视频生成能够根据画面内容自动匹配音效、BGM 和环境音，确保视听体验高度一致。这在体育视频、游戏CG 和电影预告片等场景中尤为重要。</p>
+    <h3>1. 真正的数据隐私</h3>
+    <p style="color:var(--text-secondary);">使用 ChatGPT、Claude 等云端服务时，你的每一条对话都会经过服务商的服务器。即便他们承诺不用于训练，数据依然暴露在潜在的安全风险中。OpenClaw 运行在你的设备上，对话数据从不离开本地。对于处理商业机密、个人隐私、医疗健康信息的用户来说，这是不可妥协的底线。</p>
   </div>
 
   <div class="highlight-box">
-    <h3>⚽ 2. 真实物理模拟</h3>
-    <p style="color:var(--text-secondary);">OpenClaw 内置了先进的物理引擎，能够理解重力、碰撞、光影反射等物理规律。这意味着生成的人物跳跃、物体坠落、水花飞溅等场景都符合真实物理法则，画面不会穿帮。这在体育训练分析、机械演示等需要精确物理表现的应用中具有决定性优势。</p>
+    <h3>2. 无限制的系统集成</h3>
+    <p style="color:var(--text-secondary);">云端 AI 服务受到安全沙箱的严格限制——它们无法访问你的本地文件、执行系统命令、或与本地应用深度集成。OpenClaw 作为本地进程运行，可以读写文件、执行脚本、监听系统事件、与本地应用（Obsidian、Spotify、日历等）实现真正的双向集成。</p>
   </div>
 
   <div class="highlight-box">
-    <h3>🔒 3. 真正的隐私保护</h3>
-    <p style="color:var(--text-secondary);">所有竞品都是云端处理——你的创意和数据都会经过第三方服务器。OpenClaw 支持完全本地运行，数据永远不会离开你的设备。这对于商业机密、广告创意、个人隐私内容等敏感场景至关重要。企业用户可以完全控制数据流向，满足合规要求。</p>
+    <h3>3. 模型选择自由</h3>
+    <p style="color:var(--text-secondary);">你不需要被某一家 AI 公司绑定。OpenClaw 支持 Anthropic Claude、OpenAI GPT、Google Gemini，以及通过 Ollama 运行的任意本地开源模型（Llama、Mistral 等）。当某个模型更新表现更好或价格更优惠时，你可以随时切换，而不需要更换整个 AI 助手平台。</p>
   </div>
 
   <div class="highlight-box">
-    <h3>💰 4. 零成本使用</h3>
-    <p style="color:var(--text-secondary);">OpenClaw 采用 MIT 开源协议，完全免费使用。你只需要支付 AI 模型的 API 费用（如使用 Claude 或 GPT），而无需支付额外的平台费用。相比 Runway 每月 $35 起的订阅费，长期使用 OpenClaw 可以节省大量成本。</p>
+    <h3>4. 持续学习的长期记忆</h3>
+    <p style="color:var(--text-secondary);">OpenClaw 会随着使用逐渐了解你：你的工作习惯、偏好的回答风格、常用的项目和联系人。这些记忆以纯文本 Markdown 文件的形式存储在本地，你可以随时查看、编辑、备份，甚至用 Obsidian 构建个人知识库。这与云端 AI 偶尔遗忘上下文的体验截然不同。</p>
   </div>
 
   <div class="highlight-box">
-    <h3>🔌 5. 无限可扩展</h3>
-    <p style="color:var(--text-secondary);">通过 ClawHub 技能市场，你可以安装 5000+ 社区开发的扩展。同时，OpenClaw 支持 AI 自己编写新技能——只需描述你的需求，AI 就会自动生成并安装对应的技能。这种自我进化的能力是其他平台无法提供的。</p>
+    <h3>5. 社区驱动的无限扩展</h3>
+    <p style="color:var(--text-secondary);">超过 5000 个社区开发的技能覆盖从生产力工具到娱乐的方方面面。更独特的是，OpenClaw 可以让 AI 根据你的需求自动编写新技能——只需描述你想实现的功能，AI 就会生成并安装对应的代码。没有任何其他 AI 助手能做到这种程度的自我进化。</p>
   </div>
 
-  <h2 style="margin-top:60px;">📊 综合评分</h2>
-
-  <div class="card-grid" style="margin-top:24px;">
-    <div class="card" style="border-top:3px solid var(--accent-green);">
-      <div style="font-size:36px;margin-bottom:12px;">🦞</div>
-      <h3 style="margin-bottom:8px;">OpenClaw</h3>
-      <div style="font-size:32px;font-weight:800;color:var(--accent-green);margin-bottom:4px;">9.2</div>
-      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
-      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">开源免费 · 本地运行 · 高可定制 · 隐私保护</div>
+  <!-- CTA -->
+  <div style="text-align:center;margin-top:60px;">
+    <h2 style="margin-bottom:16px;">准备好体验真正私有化的 AI 助手了吗？</h2>
+    <p style="color:var(--text-secondary);margin-bottom:32px;">5 分钟完成安装，立即感受不同</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="../setup.html" class="btn-primary">⚡ 立即安装 OpenClaw</a>
+      <a href="../features.html" class="btn-secondary">📖 查看全部功能</a>
     </div>
-    <div class="card">
-      <div style="font-size:36px;margin-bottom:12px;">🎬</div>
-      <h3 style="margin-bottom:8px;">Runway Gen-3</h3>
-      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.5</div>
-      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
-      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">云端服务 · 功能丰富 · 付费订阅</div>
-    </div>
-    <div class="card">
-      <div style="font-size:36px;margin-bottom:12px;">🌊</div>
-      <h3 style="margin-bottom:8px;">Sora</h3>
-      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.7</div>
-      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
-      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">OpenAI 技术 · 付费内测 · 需等待</div>
-    </div>
-    <div class="card">
-      <div style="font-size:36px;margin-bottom:12px;">🎥</div>
-      <h3 style="margin-bottom:8px;">Veo 3</h3>
-      <div style="font-size:32px;font-weight:800;color:var(--accent-yellow);margin-bottom:4px;">8.6</div>
-      <div style="font-size:13px;color:var(--text-muted);">综合评分</div>
-      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);">Google 技术 · 云端独占 · 需申请</div>
-    </div>
-  </div>
-
-  <div class="alert alert-info" style="margin-top:40px;">
-    <strong>结论：</strong>如果你需要开源免费、本地部署、隐私保护和高度可定制，OpenClaw 是最佳选择。如果你只需要快速生成视频且不介意付费，Runway 和 Sora 也是不错的选项。但从长期价值来看，OpenClaw 的优势会随着使用时间的增长而越发明显。
+    <p style="margin-top:20px;font-size:13px;color:var(--text-muted);">完全免费 · MIT 开源 · 无需注册</p>
   </div>
 
 </div>
 
 <footer class="footer">
   <div class="footer-content">
-    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <p>© 2026 OpenClaw 中文站 · MIT 开源协议 · 联系邮箱：contact@ai-openclaw.info</p>
     <div class="footer-links">
       <a href="../index.html">首页</a>
+      <a href="../features.html">功能</a>
       <a href="info.html">综合信息</a>
       <a href="prompt-tool.html">Prompt工具</a>
       <a href="showcase.html">案例展示</a>
       <a href="compare.html">对比评测</a>
       <a href="industry.html">行业应用</a>
-      <li><a href="pages/industry.html">社区论坛</a></li>
+      <a href="../forum/index.html">社区论坛</a>
       <a href="../pricing.html">价格</a>
+      <a href="../alternatives.html">替代品</a>
       <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
     </div>
   </div>

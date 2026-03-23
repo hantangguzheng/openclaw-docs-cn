@@ -3,9 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>综合信息 - OpenClaw AI 中文站</title>
-  <meta name="description" content="OpenClaw AI 最新模型更新、核心功能汇总、使用教程、案例库和常见问题解答。">
-  <link rel="stylesheet" href="styles.css">
+  <title>OpenClaw 综合信息 | v2026.3 最新更新、功能汇总与使用教程</title>
+  <meta name="description" content="OpenClaw v2026.3 最新版本更新详情、全功能汇总、快速入门教程、真实使用案例和常见问题解答。自托管 AI 助手的完整参考中心。">
+  <meta name="keywords" content="OpenClaw更新,OpenClaw教程,自托管AI,本地AI助手,OpenClaw功能,AI助手使用案例">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ai-openclaw.info/pages/info.html">
+  <meta property="og:title" content="OpenClaw 综合信息 | v2026.3 最新动态与完整教程">
+  <meta property="og:description" content="一站式了解 OpenClaw 最新更新、核心功能、入门教程和使用案例。">
+  <meta property="og:url" content="https://ai-openclaw.info/pages/info.html">
+  <link rel="stylesheet" href="../styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
   <!-- Umami Analytics -->
   <script defer src="https://analytics.openclaw.info/script.js" data-website-id="openclaw-docs-cn" charset="utf-8"></script>
@@ -14,22 +20,22 @@
 
 <nav class="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo">
+    <a href="../index.html" class="nav-logo">
       <span class="logo-icon">🦞</span>
       <span class="logo-text">OpenClaw</span>
     </a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <ul class="nav-links">
-      <li><a href="index.html">首页</a></li>
-      <li><a href="features.html">功能特性</a></li>
-      <li><a href="pages/info.html" class="active">综合信息</a></li>
-      <li><a href="pages/prompt-tool.html">Prompt工具</a></li>
-      <li><a href="pages/showcase.html">案例展示</a></li>
-      <li><a href="pages/compare.html">对比评测</a></li>
-      <li><a href="pages/industry.html">行业应用</a>
-      <li><a href="forum/index.html">社区论坛</a></li></li>
-      <li><a href="security.html">安全</a></li>
-      <li><a href="setup.html" class="nav-cta">快速安装</a></li>
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../features.html">功能特性</a></li>
+      <li><a href="info.html" class="active">综合信息</a></li>
+      <li><a href="prompt-tool.html">Prompt工具</a></li>
+      <li><a href="showcase.html">案例展示</a></li>
+      <li><a href="compare.html">对比评测</a></li>
+      <li><a href="industry.html">行业应用</a></li>
+      <li><a href="../forum/index.html">社区论坛</a></li>
+      <li><a href="../security.html">安全</a></li>
+      <li><a href="../setup.html" class="nav-cta">快速安装</a></li>
     </ul>
   </div>
 </nav>
@@ -53,7 +59,63 @@
 
   <!-- 新模型介绍 -->
   <div id="tab-new-models" class="tab-content">
-    <h2>🆕 最新 AI 模型更新</h2>
+    <h2>🆕 最新版本更新</h2>
+
+    <!-- v2026.3.13 版本更新 -->
+    <div class="card" style="margin: 24px 0; border-left: 4px solid var(--accent-green); background: rgba(74,222,128,0.04);">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+        <span style="background: var(--accent-green); color: #000; padding: 2px 10px; border-radius: 50px; font-size: 12px; font-weight: 700;">🆕 v2026.3.13</span>
+        <strong style="font-size: 18px;">OpenClaw v2026.3.13 正式发布</strong>
+        <span style="color: var(--text-muted); font-size: 13px;">2026-03-13</span>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 16px;">
+        本次更新带来多项重要改进，包括性能提升、新平台支持和用户体验优化，是 2026 年迄今最重要的版本更新。
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 16px;">
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">⚡</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">启动速度提升 40%</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">冷启动时间从平均 2.8 秒降至 1.7 秒，后台驻留模式响应接近即时。</p>
+        </div>
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">🧠</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">记忆系统 2.0</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">记忆文件支持自动压缩与去重，超长对话历史不再影响性能。</p>
+        </div>
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">🔌</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">新增 Microsoft Teams 支持</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">企业用户现可在 Teams 频道和个人聊天中直接使用 OpenClaw。</p>
+        </div>
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">🌐</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">浏览器自动化升级</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">新增对 Firefox 的完整支持，验证码识别成功率提升至 95%+。</p>
+        </div>
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">🤖</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">Gemini 2.0 Flash 集成</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">正式支持 Google Gemini 2.0 Flash，100 万 token 超长上下文窗口。</p>
+        </div>
+        <div style="background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px;">
+          <div style="font-size: 20px; margin-bottom: 6px;">🛡️</div>
+          <strong style="font-size: 14px; color: var(--text-primary);">安全沙箱增强</strong>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">新增细粒度权限控制，可为每个技能单独设置文件系统访问范围。</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span style="background: rgba(74,222,128,0.15); color: var(--accent-green); padding: 4px 12px; border-radius: 6px; font-size: 13px;">⚡ 性能提升</span>
+        <span style="background: rgba(77,166,255,0.15); color: var(--accent-blue); padding: 4px 12px; border-radius: 6px; font-size: 13px;">🔌 新平台支持</span>
+        <span style="background: rgba(167,139,250,0.15); color: var(--accent-purple); padding: 4px 12px; border-radius: 6px; font-size: 13px;">🧠 记忆优化</span>
+        <span style="background: rgba(251,191,36,0.15); color: var(--accent-yellow); padding: 4px 12px; border-radius: 6px; font-size: 13px;">🛡️ 安全增强</span>
+      </div>
+      <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);">
+        <strong style="font-size: 13px; color: var(--text-muted);">升级命令：</strong>
+        <code style="background: var(--bg-dark); padding: 4px 10px; border-radius: 4px; font-size: 13px; color: var(--accent-green);">openclaw update</code>
+      </div>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; color: var(--text-secondary); font-size: 16px;">新集成的 AI 模型</h3>
 
     <div class="card" style="margin: 24px 0; border-left: 4px solid var(--primary);">
       <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
@@ -314,17 +376,17 @@ openclaw platform test telegram</div>
 
 <footer class="footer">
   <div class="footer-content">
-    <p>OpenClaw 中文站 · MIT 开源协议 · 免费使用</p>
+    <p>© 2026 OpenClaw 中文站 · MIT 开源协议 · 联系邮箱：contact@ai-openclaw.info</p>
     <div class="footer-links">
-      <a href="index.html">首页</a>
-      <a href="features.html">功能</a>
-      <a href="pages/info.html">综合信息</a>
-      <a href="pages/prompt-tool.html">Prompt工具</a>
-      <a href="pages/showcase.html">案例展示</a>
-      <a href="pages/compare.html">对比评测</a>
-      <a href="pages/industry.html">行业应用</a>
-      <li><a href="forum/index.html">社区论坛</a></li>
-      <a href="pricing.html">价格</a>
+      <a href="../index.html">首页</a>
+      <a href="../features.html">功能</a>
+      <a href="info.html">综合信息</a>
+      <a href="prompt-tool.html">Prompt工具</a>
+      <a href="showcase.html">案例展示</a>
+      <a href="compare.html">对比评测</a>
+      <a href="industry.html">行业应用</a>
+      <a href="../forum/index.html">社区论坛</a>
+      <a href="../pricing.html">价格</a>
       <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
     </div>
   </div>
